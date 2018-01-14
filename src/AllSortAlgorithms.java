@@ -96,7 +96,37 @@ public class AllSortAlgorithms implements SortingAlgorithms {
     }
 
     public void QuickSort() {
+        quicksort( 0, array.length -1);
+    }
 
+    public void quicksort( int left, int right) {
+        if(left < right) {
+            int partitionIndex = partition( left, right);
+            quicksort(left, partitionIndex-1);
+            quicksort(partitionIndex, right);
+        }
+    }
+
+    public int partition(int left, int right) {
+        int pivot = array[(left + right)/2];
+        int i = left;
+        int j = right;
+        while(i <= j) {
+            while(array[i] < pivot) {
+                i++;
+            }
+            while(array[j] > pivot) {
+                j--;
+            }
+            if(i <= j) {
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                i++;
+                j--;
+            }
+        }
+        return i;
     }
 
     public void display() {
@@ -110,7 +140,8 @@ public class AllSortAlgorithms implements SortingAlgorithms {
         // ss.BubbleSort();
         // ss.InsertionSort();
         // ss.SelectionSort();
-        ss.MergeSort();
+        // ss.MergeSort();
+        ss.QuickSort();
         ss.display();
     }
 }
