@@ -18,10 +18,29 @@ public class AllSortAlgorithms implements SortingAlgorithms {
     }
 
     public void SelectionSort(){
-
+        int min = 0;
+        int temp = 0;
+        for(int i = 0; i < array.length; i++) {
+            min = i;
+            for(int j = i + 1; j < array.length; j++) {
+                if(array[min] > array[j]) {
+                    min = j;
+                }
+            }
+            temp = array[i];
+            array[i] = array[min];
+            array[min] = temp;
+        }
     }
 
     public void InsertionSort() {
+        /*
+        Worst Case Time Complexity : O(n2)
+        Best Case Time Complexity : O(n2)
+        Average Time Complexity : O(n2)
+        Space Complexity : O(1)
+        */
+
         int j = 0;
         int temp = 0;
         for(int i = 1; i < array.length; i++) {
@@ -36,7 +55,44 @@ public class AllSortAlgorithms implements SortingAlgorithms {
     }
 
     public void MergeSort() {
+        int[] temp = new int[array.length];
+        for(int i = 0; i < array.length; i++) {
+            temp[i] = array[i];
+        }
+        mergeSort(array, temp, 0, array.length -1);
 
+    }
+
+    public void mergeSort(int[] array,int[] temp,  int startindex, int endindex) {
+        if(startindex < endindex) {
+            int middle = (startindex + endindex )/ 2;
+            mergeSort(array,temp, startindex, middle);
+            mergeSort(array,temp, middle + 1, endindex);
+            domerge(array,temp, startindex, middle + 1, endindex);
+        }
+    }
+
+    public void domerge(int[] array,int[] temp, int left, int right, int rightEnd) {
+
+        int leftEnd = right - 1;
+        int counter = left;
+
+        while(left <= leftEnd && right <= rightEnd ) {
+            if(array[left] <= array[right]) {
+                temp[counter++] = array[left++];
+            }else {
+                temp[counter++] = array[right++];
+            }
+        }
+        while(left <= leftEnd) {
+            temp[counter++] = array[left++];
+        }
+        while(right <= rightEnd) {
+            temp[counter++] = array[right++];
+        }
+        for(int  i = 0; i < array.length; i++) {
+            array[i] = temp[i];
+        }
     }
 
     public void QuickSort() {
@@ -52,7 +108,9 @@ public class AllSortAlgorithms implements SortingAlgorithms {
     public static void main(String[] args) {
         AllSortAlgorithms ss = new AllSortAlgorithms();
         // ss.BubbleSort();
-        ss.InsertionSort();
+        // ss.InsertionSort();
+        // ss.SelectionSort();
+        ss.MergeSort();
         ss.display();
     }
 }
