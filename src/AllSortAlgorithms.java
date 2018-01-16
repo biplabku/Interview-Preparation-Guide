@@ -1,6 +1,6 @@
 public class AllSortAlgorithms implements SortingAlgorithms {
 
-    public int[] array = new int[] {5,4,3,2,8,7,6,9,0};
+    public int[] array = new int[] {1,4,2,2,8,7,5,9,5};
 
 
     // Bubble sort - Time Complexity O(N2)
@@ -129,11 +129,61 @@ public class AllSortAlgorithms implements SortingAlgorithms {
         return i;
     }
 
+
+
+    public void CountingSort() {
+        int max = findMax();
+        int[] countArray = new int[max];
+        for(int i = 0; i < max; i++) {
+            countArray[i] = 0;
+        }
+        for(int i = 0; i < array.length; i++) {
+            ++countArray[array[i]];
+        }
+
+        // modify the count array by adding the previois counts
+        for(int i = 1; i < max; i++) {
+            countArray[i] = countArray[i] + countArray[i - 1];
+        }
+
+        // Create an array of given input array size
+        int[] temp = new int[array.length] ;
+        for(int i = 0; i < array.length; i++) {
+            temp[countArray[array[i]] - 1] = array[i];
+            --countArray[array[i]];
+        }
+
+        // move the elements to original array
+        for(int i =0; i < array.length; i++) {
+            array[i] = temp[i];
+        }
+    }
+
+    public int findMax() {
+        int max = 0;
+        for(int i =0; i < array.length; i++) {
+            if(max < array[i]) {
+                max = array[i];
+            }
+        }
+        return 1 + max;
+    }
+
+    public void RadixSort() {
+
+    }
+
+    public void HeapSort() {
+
+    }
+
     public void display() {
         for(int i = 0; i < array.length; i++) {
             System.out.println(array[i]);
         }
     }
+
+
 
     public static void main(String[] args) {
         AllSortAlgorithms ss = new AllSortAlgorithms();
@@ -141,7 +191,8 @@ public class AllSortAlgorithms implements SortingAlgorithms {
         // ss.InsertionSort();
         // ss.SelectionSort();
         // ss.MergeSort();
-        ss.QuickSort();
+        // ss.QuickSort();
+        ss.CountingSort();
         ss.display();
     }
 }

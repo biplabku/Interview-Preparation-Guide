@@ -14,6 +14,12 @@ public interface SortingAlgorithms {
 
     public void QuickSort();
 
+    public void CountingSort();
+
+    public void RadixSort();
+
+    public void HeapSort();
+
     public void display();
 
 }
