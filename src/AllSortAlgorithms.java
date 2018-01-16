@@ -1,6 +1,8 @@
+import java.util.Arrays;
+
 public class AllSortAlgorithms implements SortingAlgorithms {
 
-    public int[] array = new int[] {1,4,2,2,8,7,5,9,5};
+    public int[] array = new int[] {170, 45, 75, 90, 802, 24, 2, 66};
 
 
     // Bubble sort - Time Complexity O(N2)
@@ -130,6 +132,9 @@ public class AllSortAlgorithms implements SortingAlgorithms {
     }
 
 
+    // it can sort in O(n + k) in case of when elements are in the range from 1 to k.
+    /// from elements ranging from 1 to n2, counting sort will take O(n2) which
+    // is worse than comparison based sort
 
     public void CountingSort() {
         int max = findMax();
@@ -170,7 +175,10 @@ public class AllSortAlgorithms implements SortingAlgorithms {
     }
 
     public void RadixSort() {
-
+        int max = findMax();
+        for(int i = 1 ; max/i > 0; i = i*10 ) {
+            CountingSort();
+        }
     }
 
     public void HeapSort() {
@@ -192,7 +200,8 @@ public class AllSortAlgorithms implements SortingAlgorithms {
         // ss.SelectionSort();
         // ss.MergeSort();
         // ss.QuickSort();
-        ss.CountingSort();
+        // ss.CountingSort();
+        ss.RadixSort();
         ss.display();
     }
 }
