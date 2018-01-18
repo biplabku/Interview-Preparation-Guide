@@ -37,20 +37,7 @@ public class MinHeap {
         return getparentIndex(childIndex) >= 0;
     }
 
-    public void add(int item) {
-        ensureCapacity();
-        items[size] = item;
-        size++;
-        heapifyUp();
-    }
 
-    public void heapifyUp() {
-        int index = size - 1;
-        while(hasParent(index) && getParent(index) > items[index]) {
-            swap(getparentIndex(index), index);
-            index = getparentIndex(index);
-        }
-    }
 
     public void swap(int i, int j) {
         int temp = items[i];
@@ -73,6 +60,20 @@ public class MinHeap {
         }
     }
 
+    public void add(int item) {
+        ensureCapacity();
+        items[size] = item;
+        size++;
+        heapifyUp();
+    }
+
+    public void heapifyUp() {
+        int index = size - 1;
+        while(hasParent(index) && getParent(index) > items[index]) {
+            swap(getparentIndex(index), index);
+            index = getparentIndex(index);
+        }
+    }
 
     public int poll() {
         if(size == 0)  throw new IllegalStateException();
@@ -101,29 +102,61 @@ public class MinHeap {
         }
     }
 
+    public void display() {
+        for(int i = 0; i < 5; i++) {
+            System.out.println(items[i]);
+        }
+    }
+
+
+    public void minHeap () {
+        for(int index = size/2; index >= 1; index-- ) {
+            minheapifyUp(index);
+        }
+    }
 
 
 
+    public void minheapifyUp(int index) {
+        while(hasParent(index) && getParent(index) > items[index]) {
+            swap(getparentIndex(index), index);
+            index = getparentIndex(index);
+        }
+    }
+
+    public void maxHeap() {
+        for(int index = (size/2); index >= 1; index--) {
+            maxheapifyDown(index);
+        }
+    }
 
 
+    public void maxheapifyDown(int index) {
+        while(hasLeftChild(index)) {
+            int smallerChildIndex = getLeftChildIndex(index);
+            if(hasLeftChild(index) && getRightChild(index) < getLeftChild(index)) {
+                smallerChildIndex = getRightChildIndex(index);
+            }
 
+            if(items[index] < items[smallerChildIndex]) {
+                break;
+            }else {
+                swap(index, smallerChildIndex);
+            }
+            index = smallerChildIndex;
+        }
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public static void main(String[] args) {
+        MinHeap mm = new MinHeap();
+        mm.add(5);
+        mm.add(4);
+        mm.add(3);
+        mm.add(2);
+        mm.add(1);
+        mm.minHeap();
+        mm.display();
+    }
 
 
 
