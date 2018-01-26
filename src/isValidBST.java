@@ -7,13 +7,14 @@ public class isValidBST {
         if(root == null) {
             return true;
         }
-        if(root.left.data > root.data || root.right.data < root.data) {
+        if(root.leftChild.data > root.data || root.rightChild.data < root.data) {
             return false;
         }
-        return (isValidBST(root.left) && isValidBST(root.right));
+        return (isValidBST(root.leftChild) && isValidBST(root.rightChild));
     }
 
     public static void main(String[] args) {
+        TreeNode root = new TreeNode(12);
         System.out.println(isValidBST(root));
     }
 }
