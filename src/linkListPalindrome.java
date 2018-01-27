@@ -1,29 +1,31 @@
+import java.util.Stack;
+
 public class linkListPalindrome {
 
-    public static boolean linkListPalindrome(LinkNode head) {
-        StringBuilder sb = new StringBuilder();
+    public static boolean linkListPalindrome(LinkList list) {
+        Stack<Integer> stack = new Stack<>();
+        LinkNode head = list.head;
         while(head != null) {
-            sb.append(head.data);
+            stack.push(head.data);
             head = head.next;
         }
-        return isPalindrome(sb.toString());
-    }
-
-    public static boolean isPalindrome(String str) {
-        int i = 0;
-        while(i < str.length()/2) {
-            if(str.charAt(i) != str.charAt(str.length() - i - 1)){
+        head = list.head;
+        while(!stack.isEmpty()) {
+            if(stack.pop() != head.data) {
                 return false;
             }
-            i++;
+            head = head.next;
         }
         return true;
     }
 
 
     public static void main(String[] args) {
-        String str = "aba";
-        System.out.println(isPalindrome(str));
+        LinkList list = new LinkList();
+        list.add(-1);
+        list.add(-1);
+
+        System.out.println(linkListPalindrome(list));
     }
 
 }
