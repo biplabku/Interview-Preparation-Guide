@@ -22,8 +22,8 @@ public class linkListPalindrome {
 
 
     public static void main(String[] args) {
-        String str = "aab";
-        System.out.println(linkListPalindrome(str));
+        String str = "aba";
+        System.out.println(isPalindrome(str));
     }
 
 }
