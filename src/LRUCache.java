@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Queue;
 import java.util.Stack;
-
+// Implement an LRU cache
 public class LRUCache {
 
     int capacity;
@@ -21,7 +21,6 @@ public class LRUCache {
             setHead(node);
             return node.value;
         }
-
         return -1;
     }
 
@@ -61,8 +60,8 @@ public class LRUCache {
             Node created = new Node(key, value);
             if(map.size()>=capacity){
                 map.remove(end.key);
-                remove(end);
-                setHead(created);
+                remove(end); /// remove the last element
+                setHead(created); // Add the new element at the head
 
             }else{
                 setHead(created);
