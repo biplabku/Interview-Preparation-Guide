@@ -19,6 +19,6 @@ public class isSumPairBST {
     }
 
     public static void main(String[] args) {
-        
+
     }
 }
