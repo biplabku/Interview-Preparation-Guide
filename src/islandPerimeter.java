@@ -1,6 +1,6 @@
 public class islandPerimeter {
 
-    public static int[][] array = new int[][] {{0, 0 ,0, 0, 0 ,0}, {0, 0, 1, 0, 0, 0},{0, 0, 1, 1, 1, 0},{0, 0, 1, 0, 0, 0},{0, 1, 1, 0, 0 ,0 },{0, 0 ,0, 0, 0 ,0}};
+    public static int[][] array = new int[][] {{ 0, 1, 0, 0},{0, 1, 1, 1},{0, 1, 0, 0},{1, 1, 0, 0 }};
 
     public static int getPerimeter() {
         int count = 0;
@@ -15,18 +15,18 @@ public class islandPerimeter {
     }
 
     public static int calcPerimeter(int i, int j) {
-        int c = 0;
-        if(array[i - 1][j]  == 0){
-            ++c;
+        int c = 4;
+        if(((i - 1) >= 0) && array[i - 1][j]  == 1){
+            c--;
         }
-        if(array[i+1][j] == 0) {
-            ++c;
+        if(((i + 1) < array.length) && array[i+1][j] == 1) {
+            c--;
         }
-        if(array[i][j - 1] == 0) {
-            ++c;
+        if(((j -1) >= 0) && array[i][j - 1] == 1) {
+            c--;
         }
-        if(array[i][j +1] == 0) {
-            ++c;
+        if(((j + 1) < array.length) && array[i][j +1] == 1) {
+            c--;
         }
         return c;
     }
