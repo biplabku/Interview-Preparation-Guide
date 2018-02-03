@@ -14,17 +14,18 @@ public class guessNumber {
         return number;
     }
 
-    public static int guessNumberMethod2(int number) {
+    public static int guessNumberMethod1(int number) {
         int  low = 1;
         int high = number;
-        while(low < high){
-            int mid = (low + high)/2;
-            if(guess(mid) == 0) {
+        while(low <= high){
+            int mid = low + (high - low) / 2;
+            int out = guess(mid);
+            if(out == 0) {
                 return mid;
-            }else if(guess(mid) < 0) {
+            }else if(out < 0) {
                 high = mid - 1;
             }else {
-                low = mid + 1;
+                low = mid  + 1;
             }
         }
         return -1;
