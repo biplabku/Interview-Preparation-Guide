@@ -49,17 +49,42 @@ public class searchForRange {
         return list;
     }
 
-    public static ArrayList<Integer> searchRangeMethod3(int[] array, int target) {
-        ArrayList<Integer> list= new ArrayList<>();
-        list.add(-1);
-        list.add(-1);
-        int low = getFirstMatch(array, target);
+    private static int extremeInsertionIndex(int[] nums, int target, boolean left) {
+        int lo = 0;
+        int hi = nums.length;
+
+        while (lo < hi) {
+            int mid = (lo+hi)/2;
+            if (nums[mid] > target || (left && target == nums[mid])) { // selecting the left side when there is a match
+                hi = mid;
+            }
+            else {
+                lo = mid+1;
+            }
+        }
+
+        return lo;
     }
 
+    public static ArrayList<Integer> searchRangeMethod3(int[] nums, int target) {
+        ArrayList<Integer> targetRange  = new ArrayList<>();
+        targetRange.add(-1);
+        targetRange.add(-1);
+
+        int leftIdx = extremeInsertionIndex(nums, target, true);
+        if (leftIdx == nums.length || nums[leftIdx] != target) {
+            return targetRange;
+        }
+        targetRange.clear();
+        targetRange.add(leftIdx);
+        targetRange.add(extremeInsertionIndex(nums, target, false)-1);
+
+        return targetRange;
+    }
 
     public static void main(String[] args) {
-       int[] array = new int[] {5, 7, 7, 8, 8, 10} ;
-       int target = 8;
+       int[] array = new int[] {5, 7, 9, 6, 6, 10} ;
+       int target = 7;
 
        System.out.println(searhRangeMethod2(array, target));
     }
