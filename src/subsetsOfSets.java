@@ -29,18 +29,16 @@ public class subsetsOfSets {
         } else {
             allsubsets = getSubsets(set, index + 1);
             int item = set.get(index);
-            System.out.println(item +  " my name is" + allsubsets);
-
             ArrayList<ArrayList<Integer>> moresubsets = new ArrayList<ArrayList<Integer>>();
             for (ArrayList<Integer> subset : allsubsets) {
                 ArrayList<Integer> newsubset = new ArrayList<Integer>();
                 newsubset.addAll(subset);
                 newsubset.add(item);
                 moresubsets.add(newsubset);
-            }
+            } // end of for statement
             allsubsets.addAll(moresubsets);
 
-        }
+        } // end of else statement
         return allsubsets;
     }
 
