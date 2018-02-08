@@ -22,11 +22,26 @@ public class fibonacci {
         return fib[number];
     }
 
+    public static int getFibonaciMethod3(int number) {
+        if(number == 0 || number == 1) {
+            return 1;
+        }
+        int f1 = 1;
+        int f2 = 1;
+        int res = 0;
+        for(int  i = 2; i < number; i++) {
+            res = f1 + f2;
+            f2 = f1;
+            f1 = res;
+        }
+        return f1 + f2;
+    }
 
     public static void main(String[] args) {
 
         int number = 5;
         System.out.println(getFibonaciMethod1(number));
         System.out.println(getFibonaciMethod2(number));
+        System.out.println(getFibonaciMethod3(number));
     }
 }
