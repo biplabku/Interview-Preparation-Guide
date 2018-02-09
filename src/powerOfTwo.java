@@ -17,8 +17,12 @@ public class powerOfTwo {
         return false;
     }
 
+    public static boolean isPowerOfTwo(int n) {//if n is power  of  2 ,n just has one bit is 1
+        return n>0 && (n&(n-1))==0;
+    }
+
     public static void main(String[] args) {
-        int number = 2147483647s;
-        System.out.println(getPowerOfTwo(number));
+        int number = 2147483647;
+        System.out.println(isPowerOfTwo(number));
     }
 }
