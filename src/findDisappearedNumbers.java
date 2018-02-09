@@ -9,19 +9,26 @@ public class findDisappearedNumbers {
     // this array.
     public static ArrayList<Integer> findDisappearedNumbers(int[] array) {
         //
-        Arrays.sort(array);
         ArrayList<Integer> list = new ArrayList<>();
         int n = array.length;
-        for(int  i = 0; i < array.length; i++) {
-            if(array[i] < n && !list.contains(array[i])) {
-                list.add(i);
+        for(int i = 0 ;i < array.length; i++) {
+            if(!list.contains(array[i])) {
+                list.add(array[i]);
             }
         }
-        return list;
+        ArrayList<Integer> list1  = new ArrayList<>();
+        for(int  i = 1; i <= array.length; i++) {
+            if(!list.contains(i)) {
+                list1.add(i);
+            }
+        }
+        return list1;
     }
 
+    
+
     public static void main(String[] args) {
-        int[] arr = new int[]{4,3,2,7,8,2,3,1};
+        int[] arr = new int[]{1,1};
         System.out.println(findDisappearedNumbers(arr));
     }
 }
