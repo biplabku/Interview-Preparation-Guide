@@ -43,8 +43,11 @@ public class validAnagram {
             return false;
         }
         int[] count = new int[26];
+        // Adding and subtracting at the same time based on the values
+        // and finally checking at the last whether all values are zero or not
         for (int i = 0; i < s.length(); i++) {
             count[s.charAt(i) - 'a']++;
+            System.out.println(s.charAt(i) - 'a');
             count[t.charAt(i) - 'a']--;
         }
         for (int i = 0; i < 26; i++) {
