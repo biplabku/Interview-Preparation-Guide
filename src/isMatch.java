@@ -1,14 +1,11 @@
 public class isMatch {
 
+    // the algorithm is to start from the left and move towards left from there on
+    public static boolean isMatch(String str1, String str2){
 
-    public isMatch(){
-
+        return true;
     }
-
-    public static boolean isMatch(String str1, String str2) {
-        return false;
-    }
-
+    
     public static void main(String[] args) {
         String str1 = "";
         String str2 = "";
