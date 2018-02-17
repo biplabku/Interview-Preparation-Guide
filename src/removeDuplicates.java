@@ -47,7 +47,6 @@ public class removeDuplicates {
         ListIterator<Integer> iter = nums.listIterator();
         while(iter.hasNext()) {
             if(!nums.contains(nums.element())) {
-                nums.
             }else {
 
             }
@@ -66,6 +65,7 @@ public class removeDuplicates {
         list1.add(8);
         list1.add(6);
         list1.add(3);
+
         // System.out.println(removeDuplicates(array));
         System.out.println(removeDuplicates3(list1));
     }
