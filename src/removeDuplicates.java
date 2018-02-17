@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class removeDuplicates {
 
@@ -40,17 +42,31 @@ public class removeDuplicates {
         return list;
     }
 
+    public static LinkedList<Integer> removeDuplicates3(LinkedList<Integer> nums) {
+        int i = -1;
+        ListIterator<Integer> iter = nums.listIterator();
+        while(iter.hasNext()) {
+            if(!nums.contains(nums.element())) {
+                nums.
+            }else {
+
+            }
+        }
+        return nums;
+    }
+
     public static void main(String[] args) {
         int[] array = new int[] {1,1,2,2,8,6,3};
         ArrayList<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(1);
-        list.add(2);
-        list.add(2);
-        list.add(8);
-        list.add(6);
-        list.add(3);
+        LinkedList<Integer> list1 = new LinkedList<>();
+        list1.add(1);
+        list1.add(1);
+        list1.add(2);
+        list1.add(2);
+        list1.add(8);
+        list1.add(6);
+        list1.add(3);
         // System.out.println(removeDuplicates(array));
-        System.out.println(removeDuplicates2(list));
+        System.out.println(removeDuplicates3(list1));
     }
 }
