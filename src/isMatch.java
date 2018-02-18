@@ -36,7 +36,7 @@ public class isMatch {
                 int len = s.length();
 
                 int i = -1;
-                while(i<len && (i < 0 || p.charAt(0) == '.' || p.charAt(0) == s.charAt(i))){
+                while(i < len && (i < 0 || p.charAt(0) == '.' || p.charAt(0) == s.charAt(i))){
                     if(isMatch(s.substring(i+1), p.substring(2)))
                         return true;
                     i++;
@@ -49,6 +49,8 @@ public class isMatch {
     public static void main(String[] args) {
         String str1 = "";
         String str2 = ".*";
+        String st = "abcd";
+        System.out.println(st.substring(1));
         System.out.println(isMatch(str1,str2));
     }
 }
