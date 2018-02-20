@@ -31,12 +31,14 @@ public class findIndexSortedArray {
                 }
             }
         }
-        if (leftIndex == rightIndex && target != array[leftIndex]) return -1;
+        if (leftIndex == rightIndex && target != array[leftIndex]) {
+            return -1;
+        }
         return leftIndex;
     }
 
     public static void main(String[] args) {
         int[] array = new int[] {4,5,6,7,0,1,2};
-        System.out.println(findIndexArray(array, 0, array.length-1, 1));
+        System.out.println(findIndexArray(array, 0, array.length-1, 4));
     }
 }
