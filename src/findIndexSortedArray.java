@@ -15,6 +15,9 @@ public class findIndexSortedArray {
     }
 
     public static int findIndexArray(int[] array, int leftIndex, int rightIndex, int target) {
+        if(array.length == 0) {
+            return -1;
+        }
         while (leftIndex < rightIndex) {
             int mid = (leftIndex + rightIndex) / 2;
             if (array[mid] > array[rightIndex]) {  // eg. 3,4,5,6,1,2
