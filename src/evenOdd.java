@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class evenOdd {
 
 
-    public static int[] setTheElements(int[] array) {
+    public static void setTheElements(int[] array) {
         int nextEven = 0;
         int nextOdd = array.length - 1;
         while(nextEven < nextOdd) {
@@ -16,11 +16,11 @@ public class evenOdd {
                 nextOdd--;
             }
         }
-        return array;
+        System.out.println(array);
     }
 
     public static void main(String[] args) {
         int[] array = new int[] {1,2,3,4,5,6,7};
-        System.out.println(setTheElements(array));
+        setTheElements(array);
     }
 }
