@@ -34,12 +34,24 @@ public class longestPalindrome {
         return true;
     }
 
+    public static String getLongestPalindromeSubstringMethod2(String str) {
+        String res = "";
+        for(int i = 0; i < str.length(); i++) {
+            for(int j = i + 1; j <= str.length(); j++) {
+                if(isPalindrome1(str.substring(i, j))) {
+                    res = res.length() < str.substring(i, j).length() ? str.substring(i, j) : res;
+                }
+            }
+        }
+        return res;
+    }
 
     public static void main(String[] args) {
-        String str = "aa";
+        String str = "ab";
         // System.out.println(getLongestPalindromeSubstring(str));
         // System.out.println(isPalindrome(str, 0, 5));
 
-        System.out.println(isPalindrome1(str));
+        //System.out.println(isPalindrome1(str));
+        System.out.println(getLongestPalindromeSubstringMethod2(str));
     }
 }
