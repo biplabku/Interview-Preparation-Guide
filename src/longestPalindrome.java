@@ -2,10 +2,13 @@ public class longestPalindrome {
 
 
     public static String getLongestPalindromeSubstring(String str) {
+        if(str.length() < 2) {
+            return str;
+        }
         String res = "";
-        for(int i =0; i < str.length(); i++) {
+        for(int i = 0; i < str.length(); i++) {
             for(int j = i+1; j < str.length(); j++) {
-                if(isPalindrome(str, i, j) && (res.length() < (j - i))) {
+                if(isPalindrome(str, i, j) && (res.length() <= (j - i))) {
                     res = str.substring(i, j);
                 }
             }
@@ -22,9 +25,21 @@ public class longestPalindrome {
         return true;
     }
 
+    public static boolean isPalindrome1(String str) {
+        for(int i = 0; i < str.length()/2; i++) {
+            if(str.charAt(i) != str.charAt(str.length() - 1 - i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
     public static void main(String[] args) {
-        String str = "bababa";
-        System.out.println(getLongestPalindromeSubstring(str));
-        //System.out.println(isPalindrome(str, 0, 5));
+        String str = "aa";
+        // System.out.println(getLongestPalindromeSubstring(str));
+        // System.out.println(isPalindrome(str, 0, 5));
+
+        System.out.println(isPalindrome1(str));
     }
 }
