@@ -17,9 +17,24 @@ public class appleStocks {
         return maxProfit;
     }
 
+    public static int getMaxProfitMethod2(int[] stockPrices) {
+        int maxProfit = 0;
+        int laterSell = 0;
+        int earlierBuy = 0;
+        for(int i = 0; i < stockPrices.length; i++) {
+            earlierBuy = stockPrices[i];
+            for(int j = i + 1; j < stockPrices.length; j++) {
+                laterSell = stockPrices[j];
+                maxProfit = Math.max(maxProfit, (laterSell - earlierBuy));
+            }
+        }
+        return maxProfit;
+    }
+
 
     public static void main(String[] args) {
         int[] stockPricesYesterday = new int[] {10, 7, 5, 8, 11, 9};
         System.out.println(getMaxProfitMethod1(stockPricesYesterday));
+        System.out.println(getMaxProfitMethod2(stockPricesYesterday));
     }
 }
