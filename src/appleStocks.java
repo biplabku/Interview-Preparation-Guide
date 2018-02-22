@@ -42,10 +42,28 @@ public class appleStocks {
         return maxProfit;
     }
 
+    public static int getMaxProfitMethod4(int[] stockPrices) {
+        if(stockPrices.length < 2) {
+            throw new IllegalArgumentException("Need atleast 2 entries for getting max profit");
+        }
+        int minPrice = stockPrices[0];
+        int maxProfit = stockPrices[1] - stockPrices[0];
+        for(int i = 1; i < stockPrices.length; i++) {
+            int currentPrice = stockPrices[i];
+            int currentMaxProfit = currentPrice - minPrice;
+            maxProfit = Math.max(maxProfit, currentMaxProfit);
+            minPrice = Math.min(currentPrice, minPrice);
+        }
+        return maxProfit;
+    }
+
+
     public static void main(String[] args) {
         int[] stockPricesYesterday = new int[] {10, 7, 5, 8, 11, 9};
         System.out.println(getMaxProfitMethod1(stockPricesYesterday));
         System.out.println(getMaxProfitMethod2(stockPricesYesterday));
         System.out.println(getMaxProfitMethod3(stockPricesYesterday));
+        System.out.println(getMaxProfitMethod4(stockPricesYesterday));
     }
 }
+
