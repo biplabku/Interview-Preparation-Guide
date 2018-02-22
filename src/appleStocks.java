@@ -31,10 +31,21 @@ public class appleStocks {
         return maxProfit;
     }
 
+    public static int getMaxProfitMethod3(int[] stockPrices) {
+        int maxProfit = 0;
+        int laterSell = 0;
+        int earlierBuy = stockPrices[0];
+        for(int i = 0; i < stockPrices.length; i++) {
+            earlierBuy = Math.min(earlierBuy, stockPrices[i]);
+            maxProfit = Math.max(maxProfit, (stockPrices[i] - earlierBuy));
+        }
+        return maxProfit;
+    }
 
     public static void main(String[] args) {
         int[] stockPricesYesterday = new int[] {10, 7, 5, 8, 11, 9};
         System.out.println(getMaxProfitMethod1(stockPricesYesterday));
         System.out.println(getMaxProfitMethod2(stockPricesYesterday));
+        System.out.println(getMaxProfitMethod3(stockPricesYesterday));
     }
 }
