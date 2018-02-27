@@ -1,5 +1,9 @@
 public class meetingCalculator {
 
+    public static void manageCalendar(meeting[] array, meeting m1) {
+
+    }
+
     public static void main(String[] args) {
         meeting m1 = new meeting(1,2);
         meeting m2 = new meeting(3,4);
@@ -7,6 +11,6 @@ public class meetingCalculator {
         meeting m4 = new meeting(8,9);
 
         meeting[] array = new meeting[] {m1, m2,m3, m4};
-        
+
     }
 }
