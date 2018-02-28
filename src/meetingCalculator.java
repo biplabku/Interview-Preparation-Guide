@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 public class meetingCalculator {
 
@@ -41,6 +44,28 @@ public class meetingCalculator {
         }
     }
 
+
+    public static void mergeCalendar(ArrayList<meeting> list) {
+        ArrayList<meeting> sortedTimings = new ArrayList<>();
+        // copying the original
+        for(meeting m : list) {
+            sortedTimings.add(new meeting(m.getStartTime(), m.getEndTime()));
+        }
+        // sort the meeting times based on the start times
+        Collections.sort(sortedTimings, new Comparator<meeting>(){
+            @Override
+            public int compare(meeting o1, meeting o2) {
+                return o1.getStartTime() - o2.getStartTime();
+            }
+        });
+
+        for(int i = 0; i < list.size(); i++) {
+            
+        }
+
+    }
+
+
     public static void main(String[] args) {
         meeting m1 = new meeting(1,2);
         meeting m2 = new meeting(3,4);
@@ -48,6 +73,12 @@ public class meetingCalculator {
         meeting m4 = new meeting(8,9);
 
         meeting[] array = new meeting[] {m1, m2,m3, m4};
+        ArrayList<meeting> list = new ArrayList<>();
+        list.add(m1);
+        list.add(m2);
+        list.add(m3);
+        list.add(m4);
+
 
     }
 }
