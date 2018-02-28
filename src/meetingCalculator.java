@@ -25,9 +25,20 @@ public class meetingCalculator {
 
 
 
-    public static void manageCalendarMethod2(meeting[] array, meeting m1) {
+    public static void manageCalendarMethod2(meeting[] array) {
         ArrayList<meeting> list = new ArrayList<>();
-        
+        for(int i =0 ; i < array.length - 1; i++) {
+            for(int j = i + 1; j < array.length; j++) {
+                meeting mstart = array[i].startTime < array[j].startTime ? array[i] : array[j];
+                meeting mend = array[i].startTime > array[j].startTime ? array[j] : array[i];
+                if(mstart.endTime >= mend.startTime) {
+                    list.add(new meeting(mstart.getStartTime(), mend.getEndTime()));
+                }else {
+                    list.add(mstart);
+                    list.add(mend);
+                }
+            }
+        }
     }
 
     public static void main(String[] args) {
