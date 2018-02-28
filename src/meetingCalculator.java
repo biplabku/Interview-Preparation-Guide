@@ -32,7 +32,7 @@ public class meetingCalculator {
                 meeting mstart = array[i].startTime < array[j].startTime ? array[i] : array[j];
                 meeting mend = array[i].startTime > array[j].startTime ? array[j] : array[i];
                 if(mstart.endTime >= mend.startTime) {
-                    list.add(new meeting(mstart.getStartTime(), mend.getEndTime()));
+                    list.add(new meeting(mstart.getStartTime(), Math.max(mstart.getEndTime(), mend.getEndTime())));
                 }else {
                     list.add(mstart);
                     list.add(mend);
