@@ -52,6 +52,7 @@ public class meetingCalculator {
             sortedTimings.add(new meeting(m.getStartTime(), m.getEndTime()));
         }
         // sort the meeting times based on the start times
+        // so this step itself is gona take O(nlog n) time
         Collections.sort(sortedTimings, new Comparator<meeting>(){
             @Override
             public int compare(meeting o1, meeting o2) {
@@ -60,7 +61,7 @@ public class meetingCalculator {
         });
 
         for(int i = 0; i < list.size(); i++) {
-            
+
         }
 
     }
