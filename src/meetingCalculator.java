@@ -28,7 +28,7 @@ public class meetingCalculator {
 
 
 
-    public static void manageCalendarMethod2(meeting[] array) {
+    public static ArrayList<meeting> manageCalendarMethod2(meeting[] array) {
         ArrayList<meeting> list = new ArrayList<>();
         for(int i =0 ; i < array.length - 1; i++) {
             for(int j = i + 1; j < array.length; j++) {
@@ -42,6 +42,7 @@ public class meetingCalculator {
                 }
             }
         }
+        return list;
     }
 
 
@@ -80,6 +81,10 @@ public class meetingCalculator {
         list.add(m3);
         list.add(m4);
 
+        // System.out.println(manageCalendarMethod2(array));
+        int a = -1;
+        int b = 5;
+        System.out.println(a%b + " That's the value you seek");
 
     }
 }

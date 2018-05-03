@@ -8,7 +8,6 @@ public class genericLinkList<T> {
         if(list == null) {
             list.add(value);
         }else {
-            while( != null)
         }
     }
 
