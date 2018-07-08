@@ -1,4 +1,4 @@
-public class BSTClass<T> {
+public class BSTClass {
 
     public BSTNode root;
 
@@ -6,7 +6,7 @@ public class BSTClass<T> {
         root = null;
     }
 
-    public void insertNode(T value) {
+    public void insertNode(int value) {
         if(root == null) {
             root.data = value;
             return;

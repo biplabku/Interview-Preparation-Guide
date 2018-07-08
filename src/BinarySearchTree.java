@@ -1,6 +1,6 @@
 public class BinarySearchTree {
 
-    public Node root;
+    public BSTNode root;
     public int nelms;
 
     public BinarySearchTree() {
@@ -9,9 +9,9 @@ public class BinarySearchTree {
     }
 
 
-    public void insertNode(int val, Node  cur) {
+    public void insertNode(int val, BSTNode  cur) {
         if(root == null) {
-            root = new Node(val);
+            root = new BSTNode(val);
         }else {
             if(cur.data <= val) {
                 insertNode(val, cur.rightChild);
@@ -22,7 +22,7 @@ public class BinarySearchTree {
     }
 
 
-    public void inOrderTraversal(Node node) {
+    public void inOrderTraversal(BSTNode node) {
         if(node != null) {
             System.out.println(node.data);
             inOrderTraversal(node.leftChild);

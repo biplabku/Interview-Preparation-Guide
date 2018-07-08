@@ -1,10 +1,10 @@
 public class BSTNode<T> {
 
-    public T data;
-    public BSTNode<T> leftChild;
-    public BSTNode<T> rightChild;
+    public int data;
+    public BSTNode leftChild;
+    public BSTNode rightChild;
 
-    public  BSTNode(T value) {
+    public  BSTNode(int value) {
         data = value;
         leftChild = null;
         rightChild = null;

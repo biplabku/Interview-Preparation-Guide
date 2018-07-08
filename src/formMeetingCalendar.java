@@ -5,31 +5,31 @@ import java.util.Comparator;
 
 public class formMeetingCalendar {
 
-    public ArrayList<Meeting> list;
+    public ArrayList<meeting> list;
 
     public formMeetingCalendar() {
 
     }
 
     // merge Meeting times
-    public static ArrayList<Meeting> mergeMeetingTimes(ArrayList<Meeting> theList) {
-        ArrayList<Meeting> sortedList = new ArrayList<>();
+    public static ArrayList<meeting> mergeMeetingTimes(ArrayList<meeting> theList) {
+        ArrayList<meeting> sortedList = new ArrayList<>();
         for(int i = 0; i < theList.size(); i++) {
             sortedList.add(theList.get(i));
         }
 
-        Collections.sort(sortedList, new Comparator<Meeting>() {
+        Collections.sort(sortedList, new Comparator<meeting>() {
             @Override
-            public int compare(Meeting o1, Meeting o2) {
+            public int compare(meeting o1, meeting o2) {
                 return o1.getStartTime() - o2.getStartTime();
             }
         });
 
-        ArrayList<Meeting> mergeMeetings = new ArrayList<>();
+        ArrayList<meeting> mergeMeetings = new ArrayList<>();
         mergeMeetings.add(sortedList.get(0));
 
-        for(Meeting currentMeeting : sortedList) {
-            Meeting lastMergedMeeting = mergeMeetings.get(mergeMeetings.size() - 1);
+        for(meeting currentMeeting : sortedList) {
+            meeting lastMergedMeeting = mergeMeetings.get(mergeMeetings.size() - 1);
 
             if(currentMeeting.getStartTime() <= lastMergedMeeting.getEndTime()) {
                 lastMergedMeeting.setEndTime(Math.max(lastMergedMeeting.getEndTime(), currentMeeting.getEndTime()));
@@ -41,12 +41,12 @@ public class formMeetingCalendar {
     }
 
     public static void main(String[] args) {
-        ArrayList<Meeting> thelist = new ArrayList<>();
-        thelist.add(new Meeting(0,1));
-        thelist.add(new Meeting(3,5));
-        thelist.add(new Meeting(4,8));
-        thelist.add(new Meeting(10,12));
-        thelist.add(new Meeting(9,10));
+        ArrayList<meeting> thelist = new ArrayList<>();
+        thelist.add(new meeting(0,1));
+        thelist.add(new meeting(3,5));
+        thelist.add(new meeting(4,8));
+        thelist.add(new meeting(10,12));
+        thelist.add(new meeting(9,10));
         System.out.println(mergeMeetingTimes(thelist));
     }
 }
