@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class memoFib {
 
@@ -18,8 +21,27 @@ public class memoFib {
         return fib(result);
     }
 
+    // bottom up approach for dynamic programming
+    public  int multiple(int number) {
+        int result = 1;
+        for(int i = 1; i < number; i++) {
+            result *= i;
+        }
+        return result;
+    }
+
+    // permutations of the string
+    public HashSet<String> permutationString(String str) {
+        HashSet<String> hset = new HashSet<>();
+        if(str.length() <= 1) {
+            return new HashSet<>(Collections.singletonList(str));
+        }
+        return hset;
+    }
+
     public static void main(String[] args) {
         memoFib ms = new memoFib();
-        System.out.println(ms.fib(3));
+        System.out.println(ms.fib(1));
+        System.out.println(ms.multiple(4));
     }
 }
