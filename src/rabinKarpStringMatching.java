@@ -12,10 +12,24 @@ public class rabinKarpStringMatching {
         return false;
     }
 
+    public int BruteForceAlgo(String text, String pattern) {
+        for(int i = 0; i < (text.length() - pattern.length() + 1); i++) {
+            int j = 0;
+            while(j < pattern.length() && (text.charAt(i + j) == pattern.charAt(j))) {
+                j++;
+            }
+            if(j == pattern.length()) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
         String str = "pattern";
         String pattern = "ern";
         rabinKarpStringMatching rs = new rabinKarpStringMatching();
-        System.out.println(rs.NaiveSearch(str, pattern));
+        // System.out.println(rs.NaiveSearch(str, pattern));
+        System.out.println(rs.BruteForceAlgo("abababcdababababd", "abababab"));
     }
 }
