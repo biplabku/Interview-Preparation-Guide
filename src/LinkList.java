@@ -19,15 +19,16 @@ public class LinkList {
         }
     }
 
+    public LinkNode getHead() {
+        return head;
+    }
+
     public void display() {
         LinkNode cur = head;
         while(cur != null) {
             System.out.print(cur.data + " ") ;
             cur = cur.next;
         }
-    }
-    public static void main(String[] args) {
-
     }
 }
 
