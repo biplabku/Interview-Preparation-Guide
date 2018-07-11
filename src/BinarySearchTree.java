@@ -33,8 +33,11 @@ public class BinarySearchTree {
         }
     }
 
+    public TreeNode getRoot() {
+        return root;
+    }
 
-    public void inOrderTraversal(BSTNode node) {
+    public void inOrderTraversal(TreeNode node) {
         if(node != null) {
             System.out.println(node.data);
             inOrderTraversal(node.leftChild);
@@ -44,6 +47,14 @@ public class BinarySearchTree {
 
     public static void main(String[] args) {
         BinarySearchTree bs = new BinarySearchTree();
+        bs.insertNode(12);
+        bs.insertNode(8);
+        bs.insertNode(7);
+        bs.insertNode(9);
+        bs.insertNode(18);
+        bs.insertNode(15);
+        bs.insertNode(13);
+        bs.inOrderTraversal(bs.root);
     }
 
 }
