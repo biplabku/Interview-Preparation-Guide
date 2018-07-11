@@ -51,21 +51,35 @@ public class mergeList {
             cur2 = cur2.next;
         }
         */
-        list.display();
+        // list.display();
+    }
+
+    public void mergKlistIm(LinkList[] lists) {
+        LinkList result = new LinkList();
+        for(int i = 0; i < lists.length; i++) {
+            mergeKLists(lists[i], result);
+        }
+        result.display();
     }
 
     public static void main(String[] args) {
         LinkList l2 = new LinkList();
         LinkList l1 = new LinkList();
+        LinkList l3 = new LinkList();
         l1.add(1);
         l1.add(2);
         l1.add(4);
         l2.add(1);
         l2.add(3);
-        //l2.add(4);
+        l2.add(4);
+        l3.add(1);
+        l3.add(3);
+        l3.add(4);
+        LinkList[] lists = new LinkList[]{l1, l2, l3};
         mergeList ms = new mergeList();
         // desired output should be
         // 1 -- 1 -- 2 -- 3 -- 4 -- 4
         ms.mergeKLists(l1,l2);
+        ms.mergKlistIm(lists);
     }
 }
