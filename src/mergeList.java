@@ -17,6 +17,14 @@ public class mergeList {
         return head.next;
     }
 
+    public LinkNode mergeKListImplementation(LinkNode[] lists) {
+        LinkNode node = new LinkNode(0);
+        for(int i = 0; i < lists.length; i++) {
+            node.next = mergeKList(node, lists[i]);
+        }
+        return node.next;
+    }
+
     public void mergeKLists(LinkList l1, LinkList l2) {
         LinkNode cur1 = l1.head;
         LinkNode cur2 = l2.head;
