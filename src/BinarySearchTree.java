@@ -1,6 +1,6 @@
 public class BinarySearchTree {
 
-    public BSTNode root;
+    public TreeNode root;
     public int nelms;
 
     public BinarySearchTree() {
@@ -9,14 +9,26 @@ public class BinarySearchTree {
     }
 
 
-    public void insertNode(int val, BSTNode  cur) {
+    public void insertNode(int val) {
+        TreeNode node = new TreeNode(val);
         if(root == null) {
-            root = new BSTNode(val);
+            root = node;
         }else {
-            if(cur.data <= val) {
-                insertNode(val, cur.rightChild);
-            }else {
-                insertNode(val, cur.leftChild);
+            TreeNode cur = root;
+            TreeNode prev = null;
+            while(cur != null) {
+                prev = cur;
+                if(node.data <= cur.data) {
+                    cur = cur.leftChild;
+                    if(cur == null) {
+                        prev.leftChild = node;
+                    }
+                }else {
+                    cur = cur.rightChild;
+                    if(cur == null) {
+                        prev.rightChild = node;
+                    }
+                }
             }
         }
     }
