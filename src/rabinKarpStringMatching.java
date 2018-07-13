@@ -26,6 +26,11 @@ public class rabinKarpStringMatching {
         return -1;
     }
 
+    // Introduction to algorithms
+    // String matching algorithms theory and implementation
+    // pattern P = abaa , T = abcabaabcabac
+    
+
 
     public static void main(String[] args) {
         String str = "pattern";
