@@ -33,6 +33,10 @@ public class BinarySearchTree {
         }
     }
 
+    public int getMaxHeight() {
+        return -1;
+    }
+
     public TreeNode getRoot() {
         return root;
     }
