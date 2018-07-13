@@ -33,8 +33,14 @@ public class BinarySearchTree {
         }
     }
 
-    public int getMaxHeight() {
-        return -1;
+    public int getMaxHeight(TreeNode node) {
+        if(node == null) {
+            return 0;
+        }
+        int left = getMaxHeight(node.leftChild);
+        int right = getMaxHeight(node.rightChild);
+
+        return left >= right ? left + 1: right+1;
     }
 
     public TreeNode getRoot() {
