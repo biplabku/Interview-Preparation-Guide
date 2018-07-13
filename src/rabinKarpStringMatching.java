@@ -29,14 +29,23 @@ public class rabinKarpStringMatching {
     // Introduction to algorithms
     // String matching algorithms theory and implementation
     // pattern P = abaa , T = abcabaabcabac
-    
+
+    public boolean naiveStringMatch(String text, String pattern) {
+        for(int i = 0; i < (text.length() - pattern.length() + 1); i++) {
+                if(text.substring(i, pattern.length() + i ).equals(pattern)) {
+                    return true;
+            }
+        }
+        return false;
+    }
 
 
     public static void main(String[] args) {
-        String str = "pattern";
-        String pattern = "ern";
+        String str = "abcabaabcabac";
+        String pattern = "abaa";
         rabinKarpStringMatching rs = new rabinKarpStringMatching();
         // System.out.println(rs.NaiveSearch(str, pattern));
-        System.out.println(rs.BruteForceAlgo("abababcdababababd", "abababcdababababd"));
+        // System.out.println(rs.BruteForceAlgo("abababcdababababd", "abababcdababababd"));
+        System.out.println(rs.naiveStringMatch(str, pattern));
     }
 }
