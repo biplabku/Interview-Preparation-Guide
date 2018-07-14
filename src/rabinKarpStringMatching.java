@@ -12,6 +12,12 @@ public class rabinKarpStringMatching {
         return false;
     }
 
+    // Theory of Rabin Karp algorithm
+    // rabin karp algorithtm implementation
+    // It uses O(m) preprocessing time. Its run time similar to naive
+    // complexity - O((n- m + 1)m), where n = length of the string, m =length of the pattern
+    // average running time is always better than naive pattern matching
+
     public int BruteForceAlgo(String text, String pattern) {
         if(pattern.length() > text.length()) return -1;
         for(int i = 0; i < (text.length() - pattern.length() + 1); i++) {
@@ -30,6 +36,7 @@ public class rabinKarpStringMatching {
     // String matching algorithms theory and implementation
     // pattern P = abaa , T = abcabaabcabac
     // complexity - O((n- m + 1)m), where n = length of the string, m =length of the pattern
+    // substring functionality involves the O(m) time. Depending on the length of the string
     public boolean naiveStringMatch(String text, String pattern) {
         for(int i = 0; i < (text.length() - pattern.length() + 1); i++) {
                 if(text.substring(i, pattern.length() + i ).equals(pattern)) {
