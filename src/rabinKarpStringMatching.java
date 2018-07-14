@@ -29,7 +29,7 @@ public class rabinKarpStringMatching {
     // Introduction to algorithms
     // String matching algorithms theory and implementation
     // pattern P = abaa , T = abcabaabcabac
-
+    // complexity - O((n- m + 1)m), where n = length of the string, m =length of the pattern
     public boolean naiveStringMatch(String text, String pattern) {
         for(int i = 0; i < (text.length() - pattern.length() + 1); i++) {
                 if(text.substring(i, pattern.length() + i ).equals(pattern)) {
