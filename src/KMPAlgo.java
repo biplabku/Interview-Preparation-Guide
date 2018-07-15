@@ -1,5 +1,17 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class KMPAlgo {
 
+
+    // find anagrams
+    public List<String> findAnagrams(List<String> anagrams) {
+        List<String> List = new ArrayList<>();
+
+
+
+        return List;
+    }
 
     // Knuth morris pratt algorithm
     public  boolean KMPalgo(String txt, String ptr) {
