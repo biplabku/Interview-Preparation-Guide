@@ -1,16 +1,33 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class KMPAlgo {
 
 
     // find anagrams
     public List<String> findAnagrams(List<String> anagrams) {
+        HashMap<String, List<String>> sortedStrings = new HashMap<>();
+        for(String s: anagrams) {
+            char[] arr = s.toCharArray();
+            Arrays.sort(arr);
+            String str = arr.toString();
+            if(!sortedStrings.containsKey(str)) {
+                sortedStrings.put(str, new ArrayList<>());
+            }else {
+                sortedStrings.get(str).add(s);
+            }
+        }
         List<String> List = new ArrayList<>();
-
-
-
         return List;
+    }
+
+    // compress and decompress string
+    // Input String  == 3[abc]4[ab]c
+    // Output String == abcabcabcababababc
+    // I have to start from the right side instead of the left side of the string
+    // Since it gives how many times the character or String needs to be repeated
+    // I can use recursion here
+    public String compressDecompress(String inputString) {
+
     }
 
     // Knuth morris pratt algorithm
