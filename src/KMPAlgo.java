@@ -27,7 +27,12 @@ public class KMPAlgo {
     // Since it gives how many times the character or String needs to be repeated
     // I can use recursion here
     public String compressDecompress(String inputString) {
-
+        for(int i = 0; i < inputString.length(); i++) {
+            if(Character.isDigit(inputString.charAt(i))) {
+                System.out.println(inputString.charAt(i));
+            }
+        }
+        return "Done";
     }
 
     // Knuth morris pratt algorithm
@@ -81,6 +86,9 @@ public class KMPAlgo {
         KMPAlgo kmp = new KMPAlgo();
         String str = "abcxabcdabcdabcy";
         String ptr = "abcdabcs";
-        System.out.println(kmp.KMPalgo(str, ptr));
+        // System.out.println(kmp.KMPalgo(str, ptr));
+        String str1 = "3[abs]4[ab]c";
+        String str2 = "2[3[a]b]";
+        System.out.println(kmp.compressDecompress(str2));
     }
 }
