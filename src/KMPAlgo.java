@@ -47,32 +47,22 @@ public class KMPAlgo {
 
     public String doCompress(String str) {
         StringBuilder sb1 = new StringBuilder();
+        /*
         int len = str.length() - 1;
+        int counter = len;
         while(len != 1) {
             StringBuilder sb = new StringBuilder();
             while(str.charAt(len) != '[') {
                 sb.append(str.charAt(len));
-                len = len - 1;
+                counter = counter - 1;
             }
+            len = counter;
             System.out.println(len);
-            int right = len;
-            int left = len;
-            while(len != 0 && Character.isDigit(str.charAt(len))) {
-                left = len;
-
-                len = len - 1;
-            }
-            String countStr = str.substring(left, right);
-
-            System.out.println(countStr  + " Stromg" + left  + " " + right);
-
-            String temp = sb.toString();
-            /*
-            while(count != 0) {
-                sb1.append(sb.toString());
-            }
-            */
+            len = len -1;
         }
+        */
+        String[] arr = new String[]{};
+        arr = str.split("[");
         return sb1.toString();
     }
 
@@ -131,6 +121,6 @@ public class KMPAlgo {
         String str1 = "3[abs]4[ab]c";
         String str2 = "2[3[a]b]";
         // System.out.println(kmp.compressDecompress(str2));
-        System.out.println("The compress value -- > " + kmp.doCompress("3[abc"));
+        System.out.println("The compress value -- > " + kmp.doCompress("33[abc"));
     }
 }
