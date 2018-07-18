@@ -7,6 +7,13 @@ public class memoFib {
 
     public static HashMap<Integer, Integer> hmap = new HashMap<>();
 
+    public int checkSortedArray(int[] array, int number) {
+        if(number == 1 ) {
+            return 1;
+        }
+        return (array[number - 1] < array[number - 2] ? 0:checkSortedArray(array, number - 1));
+    }
+
     public int fib(int number) {
         if(number == 0 || number == 1) {
             return 1;
@@ -38,6 +45,8 @@ public class memoFib {
         }
         return hset;
     }
+
+
 
     public static void main(String[] args) {
         memoFib ms = new memoFib();
