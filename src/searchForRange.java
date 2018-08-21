@@ -1,11 +1,11 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class searchForRange {
 
 
     public static ArrayList<Integer> searchRange(int[] nums, int target) {
         ArrayList<Integer> list = new ArrayList<>();
+
         int low = 1;
         int high = nums.length;
         while(low <= high) {
