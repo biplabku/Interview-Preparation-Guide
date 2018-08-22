@@ -19,14 +19,14 @@ public class redundantBraces {
                 }
                 stack.pop();
                 if(elementInside < 2) {
-                    return 1;
+                    return false;
                 }
 
             }else{
                 stack.push(ch);
             }
         }
-
+        return true;
     }
 
     public static void main(String[] args) {

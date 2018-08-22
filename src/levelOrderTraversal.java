@@ -36,11 +36,6 @@ public class levelOrderTraversal {
         return theList;
     }
 
-    public List<List<Integer>> getLevelDFS(BSTNode node) {
-        List<List<Integer>> thelist = new ArrayList<>();
-        
-    }
-
 
     public static void main(String[] args) {
 

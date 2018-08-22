@@ -57,6 +57,7 @@ public class LRUCacheImp {
         after.pre = n;
     }
 
+    /*
     public int getKey(int key) {
         Node nnode = hmap.get(new Integer(key));
         if(nnode == null) {
@@ -64,6 +65,7 @@ public class LRUCacheImp {
         }
         return 1;
     }
+    */
 
     public static void main(String[] args) {
         LRUCacheImp lp = new LRUCacheImp(3);
