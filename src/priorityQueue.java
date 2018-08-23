@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class priorityQueue {
 
     // priority queue can be ascending and descending type.
@@ -52,6 +54,11 @@ public class priorityQueue {
         }
         return false;
     }
+
+    //implmenting maxHeap
+    // it will be same as priority queue
+
+
 
 
     public static void main(String[] args) {
