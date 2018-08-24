@@ -16,7 +16,7 @@ public class nonNegMaxSum {
                 if((curSum > max) || (curSum == max) && (curLen > maxLen)) {
                     max = curSum;
                     maxStartIndex = curStartIndex;
-                    maxLen = curLen;
+                    maxLen = curLen -1;
                 }
                 curStartIndex = i + 1;
                 curSum = 0;
@@ -26,12 +26,14 @@ public class nonNegMaxSum {
                 ++curLen;
             }
         }
+        System.out.println(maxStartIndex + " " + maxLen + " " + max + " " + curSum);
         if((curSum > max) || (curSum == max) && (curLen > maxLen)) {
             max = curSum;
             maxStartIndex = curStartIndex;
-            maxLen = curLen;
+            maxLen = curLen - 1;
         }
-        return new ArrayList<>(list.subList(maxStartIndex, ));
+        System.out.println(maxStartIndex + " " + (maxLen + maxStartIndex));
+        return new ArrayList<>(list.subList(maxStartIndex, maxLen));
     }
 
 
