@@ -2,6 +2,39 @@ import java.util.ArrayList;
 
 public class nonNegMaxSum {
 
+    // A : [1, 2, 3, -7, 2, 3]
+    // [1, 2, 5] [2, 3]
+    public ArrayList<Integer> maxNonNegSubArray(ArrayList<Integer> list) {
+        int curSum = 0;
+        int curStartIndex = 0;
+        int curLen = 0;
+        int max = 0;
+        int maxStartIndex = 0;
+        int maxLen = 0;
+        for(int i = 0; i < list.size(); i++) {
+            if(list.get(i) < 0) {
+                if((curSum > max) || (curSum == max) && (curLen > maxLen)) {
+                    max = curSum;
+                    maxStartIndex = curStartIndex;
+                    maxLen = curLen;
+                }
+                curStartIndex = i + 1;
+                curSum = 0;
+                curLen = 0;
+            }else {
+                curSum += list.get(i);
+                ++curLen;
+            }
+        }
+        if((curSum > max) || (curSum == max) && (curLen > maxLen)) {
+            max = curSum;
+            maxStartIndex = curStartIndex;
+            maxLen = curLen;
+        }
+        return new ArrayList<>(list.subList(maxStartIndex, ));
+    }
+
+
     public ArrayList<Integer> maxset(ArrayList<Integer> A) {
         int index = 0;
         int sum = 0;
@@ -38,7 +71,8 @@ public class nonNegMaxSum {
         list.add(5);
         list.add(-7);
         list.add(2);
-        list.add(6);
-        System.out.println(ms.maxset(list));
+        list.add(9);
+        // System.out.println(ms.maxset(list));
+        System.out.println(ms.maxNonNegSubArray(list));
     }
 }
