@@ -1,3 +1,4 @@
+/*
 public class Solution {
     public ArrayList<Integer> maxset(ArrayList<Integer> list) {
         long sum = 0;
@@ -31,3 +32,5 @@ public class Solution {
         return new ArrayList<>(list.subList(curStartIndex, curEndIndex));
     }
 }
+
+*/
