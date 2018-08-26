@@ -29,6 +29,53 @@ public class maxUnsortedArray {
         return res;
     }
 
+    public ArrayList<Integer> getMaxArray(ArrayList<Integer> list) {
+        ArrayList<Integer> res = new ArrayList<>();
+        int startIndex = -1;
+        int endIndex = -1;
+        for(int i = 1; i < list.size(); i++) {
+            if(list.get(i - 1) > list.get(i)) {
+                startIndex = i - 1;
+                break;
+            }
+        }
+        if(startIndex == -1) {
+            res.add(-1);
+            return res;
+        }
+        for(int i = list.size()-1; i > 0; i--) {
+            if(list.get(i - 1) > list.get(i)) {
+                endIndex = i -1;
+            }
+        }
+        int min = list.get(startIndex);
+        int max = list.get(startIndex);
+        for(int i = startIndex + 1; i < endIndex; i++) {
+            if(list.get(i) < min) {
+                min = list.get(i);
+            }else if(list.get(i) > max) {
+                max = list.get(i);
+            }
+        }
+
+        for(int i = 0; i < startIndex; i++) {
+            if(list.get(i) > min) {
+                startIndex = i;
+                break;
+            }
+        }
+
+        for(int i = list.size() - 1; i  > endIndex; i--) {
+            if(list.get(i) < max) {
+                endIndex = i;
+                break;
+            }
+        }
+        res.add(startIndex);
+        res.add(endIndex);
+        return res;
+    }
+
 
     public static void main(String[] args) {
         ArrayList<Integer> list = new ArrayList<>();
@@ -46,5 +93,6 @@ public class maxUnsortedArray {
         list.add(15);
         maxUnsortedArray ms = new maxUnsortedArray();
         System.out.println(ms.getMaxUnsorted(list));
+        System.out.println(ms.getMaxArray(list));
     }
 }

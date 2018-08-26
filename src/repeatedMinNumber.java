@@ -1,4 +1,4 @@
- public int repeatedNumber(final ArrayList<Integer> list) {
+/* public int repeatedNumber(final ArrayList<Integer> list) {
         int min = Integer.MAX_VALUE;
         HashSet<Integer> hset = new HashSet<>();
         for(int i = 0; i < list.size(); i++) {
@@ -11,3 +11,4 @@
         }
         return min == Integer.MAX_VALUE ? Integer.MAX_VALUE:min;
     }
+*/
