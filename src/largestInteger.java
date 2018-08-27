@@ -7,6 +7,8 @@ class MyComparator implements Comparator<String> {
     public int compare(String o1, String o2) {
         String first = o1 + o2;
         String second = o2 +  o1;
+        System.out.println(first +  " " + second);
+
         return second.compareTo(first);
     }
 }
@@ -34,6 +36,35 @@ public class largestInteger {
         return strBuild.toString();
     }
 
+    // number of times repeated comes first and then the actual number
+    public int getLargestInteger(int number) {
+        if(number == 1) {
+            return 1;
+        }
+        String str = String.valueOf(number);
+        StringBuilder sb = new StringBuilder();
+        int count = 1;
+        for(int i = 1; i < str.length(); i++) {
+            if(str.charAt(i) == str.charAt(i - 1)) {
+                count++;
+            }else {
+                sb.append(count);
+                sb.append(str.charAt(i - 1));
+                count = 1;
+            }
+        }
+        if(count == 1) {
+            sb.append(count);
+            sb.append(str.charAt(str.length() - 1));
+        }else {
+            sb.append(count);
+            sb.append(str.charAt(str.length() - 1));
+        }
+        return  Integer.valueOf(sb.toString());
+        // getting the size of number
+    }
+
+
 
 
     public static void main(String[] args) {
@@ -44,6 +75,7 @@ public class largestInteger {
         list.add(34);
         list.add(5);
         list.add(9);
-        System.out.println(ls.getLargestInteger(list));
+        // System.out.println(ls.getLargestInteger(list));
+        System.out.println(ls.getLargestInteger(31));
     }
 }
