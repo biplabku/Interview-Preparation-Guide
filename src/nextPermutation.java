@@ -4,22 +4,34 @@ public class nextPermutation {
 
 
     public static ArrayList<Integer> nextPermutation(ArrayList<Integer> list) {
-        for(int i = list.size() - 1; i > 0; i--) {
-            if(list.get(i) > list.get(i - 1)) {
-                int temp = list.get(i - 1);
-                list.set(i - 1, list.get(i));
-                list.set(i, temp);
-                return list;
+        int i = list.size() - 2;
+        while (i >= 0 && list.get(i + 1) <= list.get(i)) {
+            i--;
+        }
+        if (i >= 0) {
+            int j = list.size() - 1;
+            while (j >= 0 && list.get(j) <= list.get(i) ){
+                j--;
             }
+            swap(list, i, j);
         }
-        // return the smallest if the highest does not occur
-        int len = list.size() - 1;
-        for(int i = 0; i < list.size()/2; i++) {
-            int temp = list.get(i);
-            list.set(i, list.get(len - i));
-            list.set(len - i, temp);
-        }
+        reverse(list, i + 1);
         return list;
+    }
+
+    private static void reverse(ArrayList<Integer> list, int start) {
+        int i = start, j = list.size() - 1;
+        while (i < j) {
+            swap(list, i, j);
+            i++;
+            j--;
+        }
+    }
+
+    public static void swap(ArrayList<Integer> list, int i, int j ) {
+        int temp = list.get(i);
+        list.set(i, list.get(j));
+        list.set(j, temp);
     }
 
     public static void main(String[] args) {
