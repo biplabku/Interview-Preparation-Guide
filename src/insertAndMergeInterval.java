@@ -3,7 +3,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class mergeIntervals {
+public class insertAndMergeInterval {
+
+
 
     public ArrayList<Interval> mergeIntervals(ArrayList<Interval> intervals, Interval newInterval) {
         // add the new interval
@@ -96,7 +98,7 @@ public class mergeIntervals {
     }
 
     public static void main(String[] args) {
-        mergeIntervals ms = new mergeIntervals();
+        insertAndMergeInterval ms = new insertAndMergeInterval();
         Interval temp = new Interval(2,5);
 
     }
