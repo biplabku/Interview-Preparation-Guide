@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class makePalindrome {
 
     // You are given a string. The only operation allowed is to insert characters in the beginning of the string.
@@ -21,8 +23,16 @@ public class makePalindrome {
         return 0;
     }
 
+
+
     public static void main(String[] args) {
         makePalindrome ms   = new makePalindrome();
         System.out.println(ms.makePalindromicString("aaaaa"));
+
+        ArrayList<String> list = new ArrayList<>();
+        list.add("abcdefgh");
+        list.add("aefghijk");
+        list.add("abcefgh");
+
     }
 }
