@@ -5,7 +5,7 @@ public class longCommPrefix {
     // completing the implementation for finding the long common prefix among the list of strings
     // Comparing it with the first string everytime for all the strings
     // Time complexity - O(N2)
-    // 
+    //
     public  String longCommPrefix1(ArrayList<String> str) {
         StringBuilder finalR = new StringBuilder();
         for(int i = 0; i < str.size(); i++) {

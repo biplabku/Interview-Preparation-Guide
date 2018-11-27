@@ -80,9 +80,26 @@ public class CountAndSay {
         return str1;
     }
 
+    public static String countSay(int number) {
+        if(number == 1) {
+            return "1";
+        } else if(number == 0) {
+            return "0";
+        }
+        StringBuilder sb = new StringBuilder("11");
+        String str = sb.toString();
+        for(int i = 2; i < number; i++) {
+            int len = sb.length();
+            int count = 1;
+            while(len != 0) {
+            }
+        }
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         String str = "123";
-        int number  = 123;
+        int number  = 2;
         System.out.println(CountAndSay(str));
         System.out.println(CountAndSayMethod2(number));
     }
