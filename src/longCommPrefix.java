@@ -15,6 +15,7 @@ public class longCommPrefix {
                 if(str.get(i).charAt(i) == str.get(j).charAt(i)) {
                     count = j;
                     continue;
+                    
                 }else {
                     break;
                 }
