@@ -51,31 +51,31 @@ public class longCommPrefix {
     }
 
 
-    public String longCommonPrefix(ArrayList<String> list) {
-        if(list.size() == 1) {
-            return list.get(0);
+    public String reverse(String str) {
+        if(str.length() == 1) {
+            return str;
         }
-        int len = Integer.MAX_VALUE;
-        for(int k = 0; k < list.size(); k++) {
-            len = Math.min(list.get(k).length(), len);
-        }
-        StringBuilder finalString = new StringBuilder();
-        for(int i = 0; i < len; i++) {
-            for(int j = 0; j < list.size() - 1; j++) {
-                String left = list.get(j);
-                String right = list.get(j + 1);
-                if((i >= left.length()) || (i >= right.length())) {
-                    return finalString.toString();
-                }
-                if(left.charAt(i) != right.charAt(i)) {
-                    return finalString.toString();
-                }
+        StringBuilder sb =new StringBuilder(str);
+        str = sb.reverse().toString();
+
+        sb.setLength(0);
+        String[] ar = str.split("\\s+");
+
+        for(int i = 0; i < ar.length -1; i++) {
+            if(ar[i] != "") {
+                StringBuilder sb1 = new StringBuilder(ar[i]);
+                sb.append(sb1.reverse());
+                sb.append(" ");
             }
-            finalString.append(list.get(i).charAt(i));
         }
-        return finalString.toString();
+        if(ar[ar.length - 1] != "") {
+            StringBuilder sb1 = new StringBuilder(ar[ar.length - 1]);
+            sb.append(sb1.reverse());
+        }
+        return  sb.toString();
     }
 
+    
     public String longestCommonPrefix(ArrayList<String> A) {
         if (A == null || A.size() == 0){
             return null;
