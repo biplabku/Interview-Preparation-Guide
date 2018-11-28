@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class longCommPrefix {
 
@@ -51,11 +52,21 @@ public class longCommPrefix {
 
 
     public String longCommonPrefix(ArrayList<String> list) {
+        if(list.size() == 1) {
+            return list.get(0);
+        }
+        int len = Integer.MAX_VALUE;
+        for(int k = 0; k < list.size(); k++) {
+            len = Math.min(list.get(k).length(), len);
+        }
         StringBuilder finalString = new StringBuilder();
-        for(int i = 0; i < list.size(); i++) {
+        for(int i = 0; i < len; i++) {
             for(int j = 0; j < list.size() - 1; j++) {
                 String left = list.get(j);
                 String right = list.get(j + 1);
+                if((i >= left.length()) || (i >= right.length())) {
+                    return finalString.toString();
+                }
                 if(left.charAt(i) != right.charAt(i)) {
                     return finalString.toString();
                 }
@@ -65,15 +76,66 @@ public class longCommPrefix {
         return finalString.toString();
     }
 
+    public String longestCommonPrefix(ArrayList<String> A) {
+        if (A == null || A.size() == 0){
+            return null;
+        }
+        StringBuilder sb = new StringBuilder();
+        int minLen = Integer.MAX_VALUE;
+        for (String S : A) {
+            if (S == null || S.length() == 0) {
+                return null;
+            }
+            if (S.length() < minLen) {
+                minLen = S.length();
+            }
+        }
+        System.out.println(minLen);
+        for (int j = 0; j < minLen; j++) {
+            int count = 0;
+            char c = A.get(0).charAt(j);
+            for (int i = 0; i < A.size(); i++) {
+                if (A.get(i).charAt(j) != c){
+                    break;
+                }
+                count++;
+            }
+            if (count != A.size()){
+                return sb.toString();
+            }
+            sb.append(c);
+        }
+
+        return sb.toString();
+    }
+
 
 
     public static void main(String[] args) {
         longCommPrefix ms   = new longCommPrefix();
-        ArrayList<String> list = new ArrayList<>();
-        list.add("abcd");
-        list.add("abde");
-        list.add("abch");
-        System.out.println(ms.longCommonPrefix(list));
+        String[] array = new String[]{
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" };
+
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(array));
+
+        System.out.println(ms.longestCommonPrefix(list));
 
     }
 
