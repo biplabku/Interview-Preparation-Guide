@@ -10,7 +10,7 @@ public class longCommPrefix {
         StringBuilder finalR = new StringBuilder();
         for(int i = 0; i < str.size(); i++) {
             for(int j = i; j < str.size(); j++) {
-                String first = str.get(0);
+                String first = str.get(i);
                 String second = str.get(j);
                 if(first.charAt(i) != second.charAt(i)) {
                     return finalR.toString();
@@ -49,13 +49,31 @@ public class longCommPrefix {
         return finalR.toString();
     }
 
+
+    public String longCommonPrefix(ArrayList<String> list) {
+        StringBuilder finalString = new StringBuilder();
+        for(int i = 0; i < list.size(); i++) {
+            for(int j = 0; j < list.size() - 1; j++) {
+                String left = list.get(j);
+                String right = list.get(j + 1);
+                if(left.charAt(i) != right.charAt(i)) {
+                    return finalString.toString();
+                }
+            }
+            finalString.append(list.get(i).charAt(i));
+        }
+        return finalString.toString();
+    }
+
+
+
     public static void main(String[] args) {
         longCommPrefix ms   = new longCommPrefix();
         ArrayList<String> list = new ArrayList<>();
-        list.add("qbcd");
-        list.add("acde");
+        list.add("abcd");
+        list.add("abde");
         list.add("abch");
-        System.out.println(ms.longCommPrefix1(list));
+        System.out.println(ms.longCommonPrefix(list));
 
     }
 
