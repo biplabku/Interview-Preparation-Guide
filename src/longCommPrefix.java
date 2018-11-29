@@ -75,7 +75,7 @@ public class longCommPrefix {
         return  sb.toString();
     }
 
-    
+
     public String longestCommonPrefix(ArrayList<String> A) {
         if (A == null || A.size() == 0){
             return null;
