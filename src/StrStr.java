@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class StrStr {
 
     public int getStrStr(String str, String otherStr) {
@@ -8,6 +10,18 @@ public class StrStr {
             }
         }
         return -1;
+    }
+
+    // StringoHolics implementation
+    public int stringOHolics(ArrayList<String> list) {
+        int max = 0;
+        for(int i = 0; i < list.size(); i++) {
+            max = Math.max(list.get(i).length(), max);
+        }
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < max; i++) {
+            
+        }
     }
 
     public static void main(String[] args) {
