@@ -41,6 +41,42 @@ public class ConvertToInt {
         return Integer.valueOf(sb.toString());
     }
 
+    public int Convert(final String str) {
+        StringBuilder sb = new StringBuilder();
+        int lower  =47;
+        int higher = 58;
+        boolean neg = false;
+        for(int i = 0; i < str.length(); i++) {
+            int val = Integer.valueOf(str.charAt(i));
+            if(val > lower && val < higher) {
+                sb.append(str.charAt(i));
+            }else if(str.charAt(i) == '+') {
+                continue;
+            }else if(str.charAt(i) == '-') {
+                neg = true;
+            }else {
+                break;
+            }
+        }
+        if(sb.length() == 0) {
+            return 0;
+        }
+        if(neg) {
+            if(sb.length() == 0) {
+                return 0;
+            }else if(Double.valueOf(sb.toString()) > Integer.MAX_VALUE) {
+                return -(Integer.MAX_VALUE+1);
+            }else {
+                return -Integer.valueOf(sb.toString());
+            }
+        }
+        if(Double.valueOf(sb.toString()) > Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE ;
+        }
+        return Integer.valueOf(sb.toString());
+    }
+    }
+
     public static void main(String[] args) {
         ConvertToInt conve = new ConvertToInt();
         String str = "-54332872018247709407 4 54";
