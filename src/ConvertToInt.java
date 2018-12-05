@@ -1,5 +1,26 @@
 public class ConvertToInt {
 
+    public int convertToIntLeetcode(final String str) {
+        String string = str.trim();
+        if(string.length() == 0) {
+            return 0;
+        }
+        if((Integer.valueOf(string.charAt(0)) < 47) || (Integer.valueOf(string.charAt(0)) > 57)) {
+            return 0;
+        }
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < string.length(); i++) {
+            if(Integer.valueOf(string.charAt(i)) > 47 && Integer.valueOf(string.charAt(i)) < 57) { // select only the numbers
+                sb.append(string.charAt(i));
+            }else if(string.charAt(i) == ' ' || (Integer.valueOf(string.charAt(0)) < 47) || (Integer.valueOf(string.charAt(0)) > 57)) {
+                break;
+            }
+        }
+        System.out.println(sb.toString());
+        return 1;
+    }
+
+
     public int converToInt(final String str){
         if(str == null || str.length() == 0) {
             return 0;
@@ -75,12 +96,14 @@ public class ConvertToInt {
         }
         return Integer.valueOf(sb.toString());
     }
-    }
+
+
 
     public static void main(String[] args) {
         ConvertToInt conve = new ConvertToInt();
-        String str = "-54332872018247709407 4 54";
-        System.out.println(conve.converToInt(str));
+        String str = "1222zz  d 323";
+        // System.out.println(conve.converToInt(str));
+        System.out.println(conve.convertToIntLeetcode(str));
     }
 
 }
