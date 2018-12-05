@@ -14,6 +14,8 @@ public class ConvertToInt {
                 sb.append(string.charAt(i));
             }else if(string.charAt(i) == ' ' || (Integer.valueOf(string.charAt(0)) < 47) || (Integer.valueOf(string.charAt(0)) > 57)) {
                 break;
+            }else if(string.charAt(i) == '+' || string.charAt(i) == '-') {
+                sb.append(string.charAt(i));
             }
         }
         System.out.println(sb.toString());
@@ -101,7 +103,7 @@ public class ConvertToInt {
 
     public static void main(String[] args) {
         ConvertToInt conve = new ConvertToInt();
-        String str = "1222zz  d 323";
+        String str = "+12";
         // System.out.println(conve.converToInt(str));
         System.out.println(conve.convertToIntLeetcode(str));
     }
