@@ -13,28 +13,38 @@ public class validNumber {
 
     //        return [“255.255.11.135”, “255.255.111.35”]. (Make sure the returned
     // strings are sorted in order)
-
+// comparng every section and then checkjjng if its valid and only after every section is verfified we add it
+    // to the container list.
     public ArrayList<String> restoreIpAddresses(String str) {
         ArrayList<String> list = new ArrayList<>();
-        if(str.length() > 12) {
-            return null;
+        if(str.length() < 4 || str.length() > 12) {
+            return list;
         }
+        int len = str.length();
+        for(int i = 1; i < 4 && i < len - 2; i++) {
+            for(int j = i + 1; j < i + 4 && j < len -1; j++) {
+                for(int k = j + 1; k < j + 4 && k < len; k++) {
+                    String first = str.substring(0, i);
+                    String second = str.substring(i, j);
+                    String third = str.substring(j, k);
+                    String fourth = str.substring(k);
+                    System.out.println(first + " "  + second + " " + third +  " " + fourth);
+                    if(checkValidity(first) && checkValidity(second) && checkValidity(third) && checkValidity(fourth)) {
+                        list.add(first + '.' + second + '.' + third + '.' + fourth) ;
+                    }
 
-        return null;
+                }
+            }
+        }
+        return list;
     }
 
 
-    public String getValidIp(String str) {
-        int count = 3;
-        StringBuilder sb  = new StringBuilder();
-
-        StringBuilder s = new StringBuilder();
-        for(int j = 0; j <= count; j++) {
-            s.append(str.substring(j, j + 3));
-            s.append('.');
+    public boolean checkValidity(String str) {
+        if((str.length() > 1 && str.charAt(0) == '0') || Integer.parseInt(str) > 255) {
+            return false;
         }
-        sb.append(s.toString().substring(0, s.length() -2));
-        return sb.toString();
+        return true;
     }
 
 
@@ -85,10 +95,8 @@ public class validNumber {
         // -1e-13
         // 1e12
         String str1 = "1.1e-10";
-        System.out.println(vs.isValidNumber(str));
+        // System.out.println(vs.isValidNumber(str));
 
-        ArrayList<String> list = new ArrayList<String>(Arrays.asList("stsdfd", "dfdad"));
-
-        System.out.println(vs.restoreIpAddresses("25525511135"));
+        System.out.println(vs.restoreIpAddresses("25511135"));
     }
 }
