@@ -23,16 +23,50 @@ public class makePalindrome {
         return 0;
     }
 
-
+    // Be careful about the edge cases for implementing this solution
+    // XXXIV
+    public int romanToInt(String str) {
+        int result = 0;
+        // final length should define how the values should be added
+        int len = str.length();
+        boolean seenD = false;
+        for(int i = 0; i < str.length(); i++) {
+            if(str.charAt(i) == 'X') {
+                result += 10;
+            }else if(str.charAt(i) == 'M') {
+                result += 10;
+            }else if(str.charAt(i) == 'C') {
+                result += 100;
+            }else if(str.charAt(i) == 'L') {
+                result += 10;
+            }else if(str.charAt(i) == 'I') {
+                if(i < str.length() -1) {
+                    if(str.charAt(i + 1) == 'V') {
+                        result += -1;
+                    }else if(str.charAt(i -1) == 'V'){
+                        result += 1;
+                    }
+                }else if(i == str.length() -1) {
+                    result += 1;
+                }
+            }else if(str.charAt(i) == 'V') {
+                result += 5;
+            }
+        }
+        return result;
+    }
 
     public static void main(String[] args) {
         makePalindrome ms   = new makePalindrome();
+        /*
         System.out.println(ms.makePalindromicString("aaaaa"));
 
         ArrayList<String> list = new ArrayList<>();
         list.add("abcdefgh");
         list.add("aefghijk");
         list.add("abcefgh");
-
+        */
+        String str = "VIII";
+        System.out.println(ms.romanToInt(str));
     }
 }
