@@ -28,34 +28,57 @@ public class makePalindrome {
 
     // I = 1
     // V = 5
+
     // X = 10
     // L = 50
+
     // C = 100
     // D = 500
+
     // M = 1000
 
-    // 421 = CD
-
+    // 421 = CDXXI
+    // CDXXI = 100 - 500 = 400
+    // DCXXI = 500 + 100 = 600
+    // 51 = LI
     public int doRomanToInt(String str) {
         int result = 0;
-        for(int i = 0; i < str.length(); i++) {
-            char ch = str.charAt(i);
-            if(ch == 'X') {
-                result += 10;
-            }else if(ch == 'I') {
-
-            }else if(ch == 'V') {
-
-            }else if(ch == 'D') {
-
-            }else if(ch == 'M') {
-                result += 1000;
-            }else if(ch == 'L') {
-
-            }else if(ch == 'C') {
-                result += 100;
+        int i = 0;
+        for(i = 0; i < str.length() -1; i = i +2) {
+            char firstChar = str.charAt(i);
+            char seconChar = str.charAt(i + 1);
+            if(getValue(firstChar) > getValue(seconChar)) {
+                result += getValue(firstChar) + getValue(seconChar);
+            }else if(getValue(firstChar) == getValue(seconChar)) {
+                result += 2*getValue(firstChar);
+            }else {
+                result += getValue(seconChar) - getValue(firstChar);
             }
         }
+
+        // result += getValue(str.charAt(str.length() - 1));
+        // result = Math.abs(result);
+        if(i <= str.length() - 1) {
+            result += getValue(str.charAt(i));
+        }
+        return result;
+    }
+
+    public int getValue(char ch) {
+        if(ch == 'V') {
+            return 5;
+        }else if(ch == 'X') {
+            return 10;
+        }else if(ch == 'L') {
+            return 50;
+        }else if(ch == 'C') {
+            return 100;
+        }else if(ch == 'D') {
+            return 500;
+        }else if(ch == 'M') {
+            return 1000;
+        }
+        return 1;
     }
 
 
@@ -98,7 +121,8 @@ public class makePalindrome {
         list.add("aefghijk");
         list.add("abcefgh");
         */
-        String str = "VIII";
-        System.out.println(ms.romanToInt(str));
+        String str = "MDCCCIV";
+        // System.out.println(ms.romanToInt(str));
+        System.out.println(ms.doRomanToInt(str));
     }
 }
