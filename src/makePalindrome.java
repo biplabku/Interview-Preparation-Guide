@@ -44,22 +44,25 @@ public class makePalindrome {
     public int doRomanToInt(String str) {
         int result = 0;
         int i = 0;
-        for(i = 0; i < str.length() -1; i = i +2) {
+        for(i = 0; i < str.length() -1; i = i + 2) {
             char firstChar = str.charAt(i);
             char seconChar = str.charAt(i + 1);
-            if(getValue(firstChar) > getValue(seconChar)) {
+            if(getValue(firstChar) >= getValue(seconChar)) {
                 result += getValue(firstChar) + getValue(seconChar);
-            }else if(getValue(firstChar) == getValue(seconChar)) {
-                result += 2*getValue(firstChar);
-            }else {
+            } else {
                 result += getValue(seconChar) - getValue(firstChar);
             }
+            System.out.println(result + " Va " + firstChar + seconChar + "  i  value " + i);
         }
 
         // result += getValue(str.charAt(str.length() - 1));
         // result = Math.abs(result);
-        if(i <= str.length() - 1) {
-            result += getValue(str.charAt(i));
+        System.out.println(i + " value " ) ;
+
+         if(getValue(str.charAt(i -1)) >= getValue(str.charAt(i))) {
+            result += getValue(str.charAt(i -1)) + getValue(str.charAt(i));
+        }else {
+            result += getValue(str.charAt(i)) - getValue(str.charAt(i -1));
         }
         return result;
     }
