@@ -73,7 +73,6 @@ public class mulString {
         int base = 0;
         int len = 0;
 
-        System.out.println(small + " df " + big);
         int[] pos = new int[str1.length() + str2.length()];
         Arrays.fill(pos, 0);
         for(int i = 0; i < big.length(); i++) {
@@ -92,7 +91,6 @@ public class mulString {
                 carry = 0;
             }
         }
-
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i <= len + 1 ; i++) {
             sb.append(pos[i]);
@@ -106,8 +104,14 @@ public class mulString {
 
     public static void main(String[] args) {
         mulString ms = new mulString();
-        String str1 = "5";
-        String str2 = "7";
-        System.out.println(ms.mulString(str1, str2));
+        String str1 = "100";
+        String str2 = "100";
+        System.out.println("");
+        System.out.println("First number --> " + str1);
+        System.out.println("");
+        System.out.println("Second number -->" + str2);
+        System.out.println("");
+
+        System.out.println("Result = " + ms.mulString(str1, str2));
     }
 }
