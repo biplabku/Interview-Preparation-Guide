@@ -25,11 +25,43 @@ public class makePalindrome {
 
     // Be careful about the edge cases for implementing this solution
     // XXXIV
+
+    // I = 1
+    // V = 5
+    // X = 10
+    // L = 50
+    // C = 100
+    // D = 500
+    // M = 1000
+
+    // 421 = CD
+
+    public int doRomanToInt(String str) {
+        int result = 0;
+        for(int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if(ch == 'X') {
+                result += 10;
+            }else if(ch == 'I') {
+
+            }else if(ch == 'V') {
+
+            }else if(ch == 'D') {
+
+            }else if(ch == 'M') {
+                result += 1000;
+            }else if(ch == 'L') {
+
+            }else if(ch == 'C') {
+                result += 100;
+            }
+        }
+    }
+
+
     public int romanToInt(String str) {
         int result = 0;
-        // final length should define how the values should be added
         int len = str.length();
-        boolean seenD = false;
         for(int i = 0; i < str.length(); i++) {
             if(str.charAt(i) == 'X') {
                 result += 10;
