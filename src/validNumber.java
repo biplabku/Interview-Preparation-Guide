@@ -21,14 +21,17 @@ public class validNumber {
             return list;
         }
         int len = str.length();
-        for(int i = 1; i < 4 && i < len - 2; i++) {
-            for(int j = i + 1; j < i + 4 && j < len -1; j++) {
+        for(int i = 1; i < 4 && i < len - 2; i++) {            // end for the first loop
+
+            for(int j = i + 1; j < i + 4 && j < len -1; j++) { // end for the second loop
+
                 for(int k = j + 1; k < j + 4 && k < len; k++) {
+
                     String first = str.substring(0, i);
                     String second = str.substring(i, j);
                     String third = str.substring(j, k);
                     String fourth = str.substring(k);
-                    System.out.println(first + " "  + second + " " + third +  " " + fourth);
+                    System.out.println(first + " " + second + " " + third + " " + fourth);
                     if(checkValidity(first) && checkValidity(second) && checkValidity(third) && checkValidity(fourth)) {
                         list.add(first + '.' + second + '.' + third + '.' + fourth) ;
                     }
@@ -57,7 +60,8 @@ public class validNumber {
         boolean seenNeg = false;
         String str = input.trim();
         for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == ' ' || (Character.isDigit(str.charAt(i)) && str.charAt(i) != 'e' && str.charAt(i) != '.' || str.charAt(i) == '-')) {
+            if (str.charAt(i) == ' ' || (Character.isDigit(str.charAt(i)) && str.charAt(i) !=
+                    'e' && str.charAt(i) != '.' || str.charAt(i) == '-')) {
                 return false;
             } else if (str.charAt(i) == '.') {
                 if (seenExp) {
@@ -76,16 +80,13 @@ public class validNumber {
         return result;
     }
 
-
+    // inputs - containing only digits
     public boolean isValidNumber2(final String input) {
         String str = input.trim();
-        for(int i =0; i < str.length(); i++) {
-            for(int j = i + 1; j < str.length(); j++) {
 
-            }
-        }
         return true;
     }
+    
 
     public static void main(String[] args) {
         validNumber vs = new validNumber();
@@ -96,7 +97,6 @@ public class validNumber {
         // 1e12
         String str1 = "1.1e-10";
         // System.out.println(vs.isValidNumber(str));
-
-        System.out.println(vs.restoreIpAddresses("25511135"));
+        System.out.println(vs.restoreIpAddresses("25525511135"));
     }
 }
