@@ -31,7 +31,6 @@ public class validNumber {
                     String second = str.substring(i, j);
                     String third = str.substring(j, k);
                     String fourth = str.substring(k);
-                    System.out.println(first + " " + second + " " + third + " " + fourth);
                     if(checkValidity(first) && checkValidity(second) && checkValidity(third) && checkValidity(fourth)) {
                         list.add(first + '.' + second + '.' + third + '.' + fourth) ;
                     }
@@ -82,11 +81,34 @@ public class validNumber {
 
     // inputs - containing only digits
     public boolean isValidNumber2(final String input) {
-        String str = input.trim();
-
+        String str = input.trim();      // Removing the trailing white spaces from the string
+        int expIndex = -1;
+        int dotIndex = -1;
+        if(str.length() ==0) {
+            return false;
+        }
+        for(int i = 0; i < str.length(); i++) {
+            if(str.charAt(i) == '.') {
+                dotIndex = i;
+                continue;
+            }else if(str.charAt(i) == 'e') {
+                expIndex = i;
+                continue;
+            }else if(Character.isAlphabetic(str.charAt(i))) {
+                return false;
+            }else if(str.charAt(i) == '+') {
+                return false;
+            }
+        }
+        if(dotIndex == -1 && expIndex == -1) {
+            return true;
+        }
+        if(dotIndex == 0 || dotIndex + 1 == expIndex || expIndex + 1 == dotIndex) {
+            return false;
+        }
         return true;
     }
-    
+
 
     public static void main(String[] args) {
         validNumber vs = new validNumber();
@@ -97,6 +119,7 @@ public class validNumber {
         // 1e12
         String str1 = "1.1e-10";
         // System.out.println(vs.isValidNumber(str));
-        System.out.println(vs.restoreIpAddresses("25525511135"));
+        // System.out.println(vs.restoreIpAddresses("25525511135"));
+        System.out.println(vs.isValidNumber2("3."));
     }
 }
