@@ -110,6 +110,59 @@ public class validNumber {
     }
 
 
+    public boolean checkPalindrome(String str) {
+        StringBuilder sb = new StringBuilder(str);
+        return sb.reverse().toString().equalsIgnoreCase(str);
+    }
+
+    public String longPalindrome(String str) {
+        String res = "";
+        for(int i = 0; i < str.length(); i++) {
+            for(int j = i; j <= str.length(); j++) {
+                String temp = str.substring(i, j);
+                if(checkPalindrome(temp)) {
+                    if(res.length() < temp.length()) {
+                        res = temp;
+                    }
+                }
+            }
+        }
+        return res;
+    }
+
+
+    public String longPalindromeMethod2(String str) {
+        int n = str.length();
+        int start = 0;
+        int maxlength = 1;
+        int low;
+        int high;
+        for(int i = 1; i < n; i++) {
+            low = i-1;
+            high = i;
+            while(low >= 0 && high < n && str.charAt(low) == str.charAt(high)){
+                if(high - low + 1 > maxlength) {
+                    start = low;
+                    maxlength = high - low + 1;
+                }
+                --low;
+                ++high;
+            }
+
+            low = i -1;
+            high = i + 1;
+            while(low >= 0 && high < n && str.charAt(low) == str.charAt(high)) {
+                if(high - low + 1 > maxlength) {
+                    start = low;
+                    maxlength = high - low + 1;
+                }
+                --low;
+                ++high;
+            }
+        }
+        return str.substring(start, start + maxlength);
+    }
+
     public static void main(String[] args) {
         validNumber vs = new validNumber();
         String str  = "";
@@ -120,6 +173,7 @@ public class validNumber {
         String str1 = "1.1e-10";
         // System.out.println(vs.isValidNumber(str));
         // System.out.println(vs.restoreIpAddresses("25525511135"));
-        System.out.println(vs.isValidNumber2("3."));
+        // System.out.println(vs.isValidNumber2("3."));
+        System.out.println(vs.longPalindromeMethod2("aaaabaaa"));
     }
 }
