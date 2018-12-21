@@ -109,6 +109,34 @@ public class validNumber {
         return true;
     }
 
+    // This solution will experience runtime error for larger values
+    public int compareVersionNumbers(String str1, String str2) {
+        String[] arr1 = str1.split("\\.");
+        String[] arr2 = str2.split("\\.");
+        int len = Math.min(arr1.length, arr2.length);
+
+        int i;
+        int j;
+        for( i = 0, j = 0; i < len; i++, j++) {
+            int val1 = Integer.parseInt(arr1[i]);
+            int val2 = Integer.parseInt(arr2[j]);
+            if(Integer.parseInt(arr1[i]) > Integer.parseInt(arr2[i])){
+                return 1;
+            }else if(Integer.parseInt(arr1[i]) < Integer.parseInt(arr2[i])){
+                return -1;
+            }else if(Integer.parseInt(arr1[i]) == Integer.parseInt(arr2[i])){
+                continue;
+            }
+        }
+
+        if(j < arr2.length) {
+            return -1;
+        }else if(i < arr1.length) {
+            return 1;
+        }
+        return 0;
+    }
+
 
     public boolean checkPalindrome(String str) {
         StringBuilder sb = new StringBuilder(str);
@@ -166,14 +194,9 @@ public class validNumber {
     public static void main(String[] args) {
         validNumber vs = new validNumber();
         String str  = "";
-        // 1.1e13
-        // e-13
-        // -1e-13
-        // 1e12
         String str1 = "1.1e-10";
-        // System.out.println(vs.isValidNumber(str));
-        // System.out.println(vs.restoreIpAddresses("25525511135"));
-        // System.out.println(vs.isValidNumber2("3."));
-        System.out.println(vs.longPalindromeMethod2("aaaabaaa"));
+        // System.out.println(Integer.valueOf("1"));
+        // System.out.println(vs.longPalindromeMethod2("aaaabaaa"));
+        System.out.println(vs.compareVersionNumbers("13.0", "13.0"));
     }
 }
