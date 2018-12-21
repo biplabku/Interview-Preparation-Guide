@@ -1,3 +1,4 @@
+import javax.swing.text.MutableAttributeSet;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -109,6 +110,78 @@ public class validNumber {
         return true;
     }
 
+    public int compareStringVersions(String str1, String str2) {
+        str1 = str1.trim();
+        str2 = str2.trim();
+
+        String[] arr1 = str1.split("\\.");
+        String[] arr2 = str2.split("\\.");
+
+        int i;
+        int j;
+        int len1 = arr1.length;
+        int len2 = arr2.length;
+        if(arr1[arr1.length - 1].equalsIgnoreCase("0")) {
+            len1 = arr1.length - 2;
+        }else if(arr2[arr2.length - 1].equalsIgnoreCase("0")){
+            len2 = arr2.length - 2;
+        }
+        int comLength = Math.min(len1, len2);
+        for(i = 0, j =0; i < comLength && j < comLength; i++, j++  ) {
+            String s1 = arr1[i];
+            String s2 = arr2[j];
+            if(s1.equalsIgnoreCase("0") && s2.equalsIgnoreCase("0")) {
+                continue;
+            }
+            int val = comparison(s1, s2);
+            if(val == 1) {
+                return 1;
+            }else if(val == -1) {
+                return -1;
+            }else if(val == 0) {
+                continue;
+            }
+        }
+
+        if(i < arr1.length) {
+            return 1;
+        }else if(j < arr2.length) {
+            return -1;
+        }
+        return 0;
+    }
+    public int comparison(String str1, String str2) {
+        int i = 0;
+        int j = 0;
+        int count = 0;
+        while(str1.charAt(count) == '0' && count < str1.length()) {
+            count++;
+        }
+        i = count;
+        count = 0;
+        while(str2.charAt(count) == '0' && count < str2.length()) {
+            count++;
+        }
+        j = count;
+        while(i < str1.length() && j < str2.length()) {
+            if(str1.charAt(i) == str2.charAt(j)) {
+                i++;
+                j++;
+            }else if(Character.getNumericValue(str1.charAt(i)) > Character.getNumericValue(str2.charAt(j))) {
+                return 1;
+            }else if(Character.getNumericValue(str1.charAt(i)) < Character.getNumericValue(str2.charAt(j))) {
+                return -1;
+            }
+        }
+        if(i < str1.length()) {
+            return 1;
+        }else if(j < str2.length()){
+            return -1;
+        }
+        return 0;
+    }
+
+
     // This solution will experience runtime error for larger values
     public int compareVersionNumbers(String str1, String str2) {
         String[] arr1 = str1.split("\\.");
@@ -118,8 +191,18 @@ public class validNumber {
         int i;
         int j;
         for( i = 0, j = 0; i < len; i++, j++) {
-            int val1 = Integer.parseInt(arr1[i]);
-            int val2 = Integer.parseInt(arr2[j]);
+            // remove the zeros from the string
+            String s1 = getString(arr1[i]);
+            String s2 = getString(arr2[j]);
+            int val = s1.compareTo(s2);
+            if(val == 0) {
+                continue;
+            }else if(val == 1) {
+                return 1;
+            }else if(val == -1) {
+                return -1;
+            }
+            /*
             if(Integer.parseInt(arr1[i]) > Integer.parseInt(arr2[i])){
                 return 1;
             }else if(Integer.parseInt(arr1[i]) < Integer.parseInt(arr2[i])){
@@ -127,6 +210,7 @@ public class validNumber {
             }else if(Integer.parseInt(arr1[i]) == Integer.parseInt(arr2[i])){
                 continue;
             }
+            */
         }
 
         if(j < arr2.length) {
@@ -135,6 +219,19 @@ public class validNumber {
             return 1;
         }
         return 0;
+    }
+
+    public String getString(String str){
+        int i = 0;
+        while(str.charAt(i) == '0') {
+            i++;
+        }
+        if(i > str.length()) {
+            return "0";
+        }else if(i > 0 && i <str.length()) {
+            return str.substring(i, str.length());
+        }
+        return str;
     }
 
 
@@ -197,6 +294,6 @@ public class validNumber {
         String str1 = "1.1e-10";
         // System.out.println(Integer.valueOf("1"));
         // System.out.println(vs.longPalindromeMethod2("aaaabaaa"));
-        System.out.println(vs.compareVersionNumbers("13.0", "13.0"));
+        System.out.println(vs.compareStringVersions("4444371174137455", "5.168"));
     }
 }
