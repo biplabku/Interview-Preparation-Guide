@@ -1,4 +1,5 @@
 import javax.swing.text.MutableAttributeSet;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -189,34 +190,25 @@ public class validNumber {
         int len = Math.min(arr1.length, arr2.length);
 
         int i;
-        int j;
-        for( i = 0, j = 0; i < len; i++, j++) {
+        for( i = 0; i < len; i++) {
             // remove the zeros from the string
             String s1 = getString(arr1[i]);
-            String s2 = getString(arr2[j]);
-            int val = s1.compareTo(s2);
-            if(val == 0) {
-                continue;
-            }else if(val == 1) {
+            String s2 = getString(arr2[i]);
+            BigInteger b1 = BigInteger.valueOf(Long.parseLong(s1));
+            BigInteger b2 = BigInteger.valueOf(Long.parseLong(s2));
+            int val = b1.compareTo(b2);
+            if(val == 1){
                 return 1;
-            }else if(val == -1) {
+            }else if(val == -1){
                 return -1;
-            }
-            /*
-            if(Integer.parseInt(arr1[i]) > Integer.parseInt(arr2[i])){
-                return 1;
-            }else if(Integer.parseInt(arr1[i]) < Integer.parseInt(arr2[i])){
-                return -1;
-            }else if(Integer.parseInt(arr1[i]) == Integer.parseInt(arr2[i])){
+            }else if(val == 0){
                 continue;
             }
-            */
         }
-
-        if(j < arr2.length) {
-            return -1;
-        }else if(i < arr1.length) {
+        if(i < arr1.length) {
             return 1;
+        }else if(i < arr2.length) {
+            return -1;
         }
         return 0;
     }
@@ -294,6 +286,6 @@ public class validNumber {
         String str1 = "1.1e-10";
         // System.out.println(Integer.valueOf("1"));
         // System.out.println(vs.longPalindromeMethod2("aaaabaaa"));
-        System.out.println(vs.compareStringVersions("4444371174137455", "5.168"));
+        System.out.println(vs.compareVersionNumbers("0001", "1"));
     }
 }
