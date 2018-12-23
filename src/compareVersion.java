@@ -1,4 +1,5 @@
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,10 +26,20 @@ public class compareVersion {
         return res;
     }
 
+
+    public int compareVersionSimplified(final String str1, final String str2) {
+        List<BigInteger> list1 = Arrays.stream(str1.split("\\.")).
+                map(s -> new BigInteger(s)).collect(Collectors.toList());
+        List<BigInteger> list2 = Arrays.stream(str2.split("\\.")).
+                map(s -> new BigInteger(s)).collect(Collectors.toList());
+        int res = solve(list1, list2, 0);
+        return res;
+    }
+
     public static void main(String[] args) {
         compareVersion cm = new compareVersion();
-        String str1 = "13.0.8";
+        String str1 = "1111111111111111111111111.0.0";
         String str2 = "13.0";
-        System.out.println(cm.compareVersion(str1, str2));
+        System.out.println(cm.compareVersionSimplified(str1, str2));
     }
 }
