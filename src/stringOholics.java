@@ -1,20 +1,14 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 public class stringOholics {
 
-    // you are given an array A consisting of strings made up of the letters 'a' and 'b' only.
-    // each string goes through a number of operations
-    // time 1, circularly rotate each string by 1 letter
 
-    public int getStringRepeats(final String str) {
-        // lets first come up the algorithm
-        char[] ar = str.toCharArray();
-        List<Character> list = new LinkedList<>();
-        return -1;
-    }
-
+    //////////// QUESTION /////////////
+    //       https://www.interviewbit.com/problems/stringoholics/
+    //////////// END /////////////
     // abcd
     // dabc -1
     // cdab
@@ -32,9 +26,50 @@ public class stringOholics {
         return sb.toString();
     }
 
+
+    // you are given an array A consisting of strings made up of the letters 'a' and 'b' only.
+    // each string goes through a number of operations
+    // time 1, circularly rotate each string by 1 letter
+
+    public int getStringRepeats(ArrayList<String> input) {
+        int len = input.size();
+        for(String str: input) {
+            int maxLen = findMaxLength(str);
+            int n = str.length();
+        }
+        return -1;
+    }
+
+    public int findMaxLength(String str) {
+        int[] lps = new int[str.length()];
+        lps[0] = 0;
+        int len =0;
+        int n = str.length();
+        int i = 1;
+        int max = 0;
+
+        while(i < n) {
+            if(str.charAt(i) == str.charAt(len)) {
+                len++;
+                lps[i] = len;
+                i++;
+                max = Math.max(max, len);
+            }else {
+                if(len == 0) {
+                    lps[i] =0;
+                    i++;
+                }else {
+                    len = lps[len - 1];
+                }
+            }
+        }
+        return max;
+    }
+
+
     public static void main(String[] args) {
         stringOholics ss = new stringOholics();
         String str = "abcd";
-        System.out.println(ss.getRotateString(str, 5));
+        System.out.println(ss.getRotateString(str, 4));
     }
 }
