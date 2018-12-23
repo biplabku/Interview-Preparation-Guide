@@ -191,11 +191,9 @@ public class validNumber {
 
         int i;
         for( i = 0; i < len; i++) {
-            // remove the zeros from the string
-            String s1 = getString(arr1[i]);
-            String s2 = getString(arr2[i]);
-            BigInteger b1 = BigInteger.valueOf(Long.parseLong(s1));
-            BigInteger b2 = BigInteger.valueOf(Long.parseLong(s2));
+
+            BigInteger b1 = BigInteger.valueOf(Long.parseLong(arr1[i]));
+            BigInteger b2 = BigInteger.valueOf(Long.parseLong(arr2[i]));
             int val = b1.compareTo(b2);
             if(val == 1){
                 return 1;
