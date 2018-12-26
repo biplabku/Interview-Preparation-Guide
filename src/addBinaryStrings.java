@@ -1,3 +1,5 @@
+import com.sun.jdi.ByteValue;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -103,7 +105,94 @@ public class addBinaryStrings {
         }
         return result.reverse().toString();
     }
+    // str1 = 100   111
+    // str2 = 11    111
+    //               110
 
+    public String addBinaryStringExa(String str1, String str2) {
+        int i = str1.length() - 1;
+        int j = str2.length() - 1;
+        int res = 0;
+        int carry = 0;
+        String output = "";
+        while(i >= 0 && j >= 0) {
+            // getting the values from the given indices
+            res += ((i >= 0) ? str1.charAt(i) - '0': 0);
+            res += ((j >= 0) ? str2.charAt(j) - '0': 0);
+            //
+            res = res + carry;
+            if(res == 1) {           // res = 1 = 1
+                carry = 0;
+                output = output + 1;
+            }else if(res == 0) {
+                carry = 0;
+                output = output + 0;
+            }else if(res == 2) { // res = 1 + 1 + 1 = 3
+                carry = 1;
+                output = output + 0;
+            }else if(res == 3) { // res = 1 + 1 = 2
+                carry = 1;
+                output = output + 1;
+            }
+            i--;
+            j--;
+            res = 0;
+        }
+        while(i >= 0) {
+            res += ((i >= 0) ? str1.charAt(i) - '0': 0);
+            //
+            res = res + carry;
+            if(res == 1) {           // res = 1 = 1
+                carry = 0;
+                output = output + 1;
+            }else if(res == 0) {
+                carry = 0;
+                output = output + 0;
+            }else if(res == 2) { // res = 1 + 1 + 1 = 3
+                carry = 1;
+                output = output + 0;
+            }else if(res == 3) { // res = 1 + 1 = 2
+                carry = 1;
+                output = output + 1;
+            }
+            i--;
+            res = 0;
+        }
+        while(j >= 0) {
+            res += ((j >= 0) ? str2.charAt(j) - '0': 0);
+            //
+            res = res + carry;
+            if(res == 1) {           // res = 1 = 1
+                carry = 0;
+                output = output + 1;
+            }else if(res == 0) {
+                carry = 0;
+                output = output + 0;
+            }else if(res == 2) { // res = 1 + 1 + 1 = 3
+                carry = 1;
+                output = output + 0;
+            }else if(res == 3) { // res = 1 + 1 = 2
+                carry = 1;
+                output = output + 1;
+            }
+            j--;
+            res = 0;
+        }
+        if(carry > 0) {
+            output = output + 1;
+        }
+        return new StringBuilder(output).reverse().toString();
+    }
+
+    public String getBaseAndCarry(char ch1, char ch2) {
+        if(ch1 == '1' && ch2 == '1') {
+            return "10";
+        }else if(ch1 == '1' && ch2 == '0' || ch1 == '0' && ch2 == '1') {
+            return "01";
+        }else {
+            return "00";
+        }
+    }
 
     public static void main(String[] args) {
         addBinaryStrings bs = new addBinaryStrings();
@@ -117,6 +206,6 @@ public class addBinaryStrings {
         list.add(5);
         list.add(4);
         int m = 8;
-        System.out.println(bs.mthToLast(list, m));
+        System.out.println(bs.addBinaryStringExa("01", "101"));
     }
 }
