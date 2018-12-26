@@ -5,8 +5,10 @@ public class addBinaryStrings {
 
 
     public int mthToLast(LinkList list, int m) {
+        if(list == null) return -1;
         LinkNode prev = list.head;
         LinkNode cur = list.head;
+
         int i = 0;
         while(cur.next != null) {
             if(i != m){
