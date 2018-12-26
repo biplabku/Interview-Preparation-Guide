@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class stringOholics {
 
@@ -31,45 +28,38 @@ public class stringOholics {
     // each string goes through a number of operations
     // time 1, circularly rotate each string by 1 letter
 
-    public int getStringRepeats(ArrayList<String> input) {
-        int len = input.size();
-        for(String str: input) {
-            int maxLen = findMaxLength(str);
-            int n = str.length();
-        }
-        return -1;
-    }
-
-    public int findMaxLength(String str) {
-        int[] lps = new int[str.length()];
-        lps[0] = 0;
-        int len =0;
-        int n = str.length();
-        int i = 1;
-        int max = 0;
-
-        while(i < n) {
-            if(str.charAt(i) == str.charAt(len)) {
-                len++;
-                lps[i] = len;
-                i++;
-                max = Math.max(max, len);
-            }else {
-                if(len == 0) {
-                    lps[i] =0;
-                    i++;
-                }else {
-                    len = lps[len - 1];
+    public int solveString(ArrayList<String> list) {
+        int i =(int) Math.pow(10,2);
+        int count = 0;
+        int res = 0;
+        int size = 0;
+        while(i != 0) { // this will be the main counter;
+            while(size != list.size() - 1) {
+                String str = list.get(size);
+                if (count != str.length()) {
+                    if (str.equalsIgnoreCase(getRotateString(str, count))) {
+                        res++;
+                    }
+                    count++;
+                } else if (count == str.length()) {
+                    count = 0;
                 }
+                i--;
             }
         }
-        return max;
+        return res;
     }
+
+    // next implementation is how to find the minimum number of times the maximum number of string are
+    // equal.
+
+
 
 
     public static void main(String[] args) {
         stringOholics ss = new stringOholics();
         String str = "abcd";
-        System.out.println(ss.getRotateString(str, 4));
+        ArrayList<String> list = new ArrayList<>(Arrays.asList("abcd", "abc", "bda"));
+        System.out.println(ss.solveString(list));
     }
 }
