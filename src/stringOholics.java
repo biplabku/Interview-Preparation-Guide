@@ -32,20 +32,28 @@ public class stringOholics {
         int i =(int) Math.pow(10,2);
         int count = 0;
         int res = 0;
-        int size = 0;
-        while(i != 0) { // this will be the main counter;
-            while(size != list.size() - 1) {
-                String str = list.get(size);
-                if (count != str.length()) {
-                    if (str.equalsIgnoreCase(getRotateString(str, count))) {
-                        res++;
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        while(i != 0) {
+            int size = 0;
+            while(size != list.size()) {
+                String str = list.get(i);
+                if(i > str.length()) {
+                    int counter = i%str.length();
+                    if(str.equalsIgnoreCase(getRotateString(str, counter))) {
                     }
-                    count++;
-                } else if (count == str.length()) {
-                    count = 0;
                 }
-                i--;
             }
+            /*
+            if(count != str.length()) {
+                if(str.equalsIgnoreCase(getRotateString(str, count))){
+                    res++;
+                }
+                count++;
+            }else if(count == str.length()) {
+                count = 0;
+            }
+            */
+            i--;
         }
         return res;
     }
