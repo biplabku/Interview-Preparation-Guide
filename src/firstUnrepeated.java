@@ -1,5 +1,4 @@
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 public class firstUnrepeated {
 
@@ -22,9 +21,52 @@ public class firstUnrepeated {
         return -1;
     }
 
+
+    public void iterateHashMap() {
+        HashMap<Integer, String> hmap = new HashMap<>();
+        // enter some random data.
+        hmap.put(1, "Apple");
+        hmap.put(2, "Mango");
+        hmap.put(3, "Pineapple");
+
+        // what does iterator means ?
+        // Its like a pointer that can refer to a data structure and iterate over it
+        // Map.Entry is a map entry (key-value pair). And the map.entryset method returns a
+        // a collection view of the map whose elements are of this class.
+        // And you can only access the map is to refer to the iterator of the same map
+
+        // Method 1. Using EntrySet and Iterator
+        Iterator iter = hmap.entrySet().iterator();
+        while(iter.hasNext()) {
+            Map.Entry pair = (Map.Entry) iter.next();
+            int key = (int)pair.getKey();
+            String value = (String)pair.getValue();
+            // System.out.println(key + " " + value + " 1 ");
+        }
+
+        // Method 2. Using KeySet
+        for(Integer integer : hmap.keySet()) {
+            int key = integer;
+            String value = hmap.get(integer);
+            // System.out.println(key + " " + value + " 2");
+        }
+
+        // Method 3. Using KeySet and Iterator
+        Set<Integer> keyset = hmap.keySet();
+        Iterator<Integer> iter1 = keyset.iterator();
+        while(iter1.hasNext()) {
+            int key = (iter1.next());
+            String value = hmap.get(key);
+            System.out.println(key + " " + value + " 3");
+        }
+        
+    }
+
     public static void main(String[] args) {
 
         String str = "leetcodel";
-        System.out.println(findUnrepeatedChar(str));
+        //System.out.println(findUnrepeatedChar(str));
+        firstUnrepeated gs = new firstUnrepeated();
+        gs.iterateHashMap();
     }
 }
