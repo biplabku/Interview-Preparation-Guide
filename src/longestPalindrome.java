@@ -45,7 +45,7 @@ public class longestPalindrome {
         }
         return res;
     }
-
+    // expand around center - O(N2)
     public static String longestPalindrome(String s) {
         if(s==null || s.length()<=1)
             return s;
