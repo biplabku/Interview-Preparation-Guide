@@ -9,6 +9,8 @@ public class ratInMaze {
             {0, 0, 0},
             {0, 0, 0}
     };
+
+    /*
     // Let say we first want to see if there is a path at all instead of finding a path to the goal
     public boolean findAPath(int[][] arr, int x, int y) {
         // breadth first search or depth first search
@@ -63,7 +65,7 @@ public class ratInMaze {
             return col;
         }
     }
-
+    */
     // starts from point 0,0 and check whether there exists a path to n-1, n-1
     public boolean findRoute(int[][] maze) {
 
@@ -80,7 +82,7 @@ public class ratInMaze {
             return true;
         }
 
-        if(isValid(maze, x, y)) {
+        if(isValid(maze, x, y) == true) {
             helper[x][y] = 1;
 
             // go down
@@ -105,6 +107,38 @@ public class ratInMaze {
         return false;
     }
 
+
+    // getting a binary representation of a number
+    public int complementNumber(int number) {
+        if(number == 0) {
+            return 1;
+        }else if(number == 1) {
+            return 0;
+        }
+        int remainder = 0;
+        StringBuilder sb = new StringBuilder();
+        while(number > 1) {
+            remainder = number %2;
+            sb.append(remainder);
+            number = number/2;
+
+        }
+        sb.append(number);
+        String str = sb.toString();
+        // invert the values of the string
+        int result = 0;
+        number = 0;
+        for(int i = str.length() - 1; i >= 0; i-- ) {
+            if(sb.charAt(i) == '0') {
+                result = result + (int)Math.pow(2, number);
+            }else if(sb.charAt(i) == '1') {
+                result = result + 0 * (int)Math.pow(2, number);
+            }
+            number++;
+        }
+        return result;
+    }
+
     public boolean isValid(int[][] maze, int x, int y) {
         return (x >=0 && x < N && y >= 0 && y < N && maze[x][y] == 0);
 
@@ -118,6 +152,7 @@ public class ratInMaze {
                 {1,0,1},
         };
         ratInMaze ms = new ratInMaze();
-        System.out.println(ms.findRoute(arr));
+        // System.out.println(ms.findRoute(arr));
+        System.out.println(ms.complementNumber(8));
     }
 }
