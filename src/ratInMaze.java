@@ -124,7 +124,7 @@ public class ratInMaze {
 
         }
         sb.append(number);
-        String str = sb.toString();
+        String str = sb.reverse().toString();
         // invert the values of the string
         int result = 0;
         number = 0;
@@ -145,6 +145,46 @@ public class ratInMaze {
     }
 
 
+
+    public boolean findPath(int[][] maze) {
+        if(solveMaze(maze, 0, 0, helper) == false) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean solveMaze(int[][] maze, int x, int y, int[][] statusBits) {
+        if(x == N - 1 && y == N - 1) {
+            statusBits[x][y] = 1;
+            return true;
+        }
+        if(solve(maze, x, y, statusBits) == true) {
+            statusBits[x][y] = 1;
+
+            // now we have to check which direction it needs to move
+            // move right
+            if(solveMaze(maze, x, y + 1, statusBits)) {         // move right
+                return true;
+            }else if(solveMaze(maze, x, y - 1, statusBits)) {   // move left
+                return true;
+            }else if(solveMaze(maze, x + 1, y, statusBits)) {   // move up
+                return true;
+            }else if(solveMaze(maze, x - 1, y, statusBits)) {   // move down
+                return true;
+            }
+            statusBits[x][y] = 0;
+            return false;
+        }
+        return false;
+    }
+
+    public boolean solve(int[][] maze, int x, int y, int[][] statusBits) {
+        if(x >= 0 && x < N && y >= 0 && y < N && maze[x][y] == 0) {
+            return true;
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         int[][] arr ={
                 {0,0,1},
@@ -152,7 +192,7 @@ public class ratInMaze {
                 {1,0,1},
         };
         ratInMaze ms = new ratInMaze();
-        // System.out.println(ms.findRoute(arr));
-        System.out.println(ms.complementNumber(8));
+        System.out.println(ms.findPath(arr));
+        // System.out.println(ms.complementNumber(2));
     }
 }
