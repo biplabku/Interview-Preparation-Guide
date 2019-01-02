@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 
 public class ratInMaze {
@@ -10,62 +12,32 @@ public class ratInMaze {
             {0, 0, 0},
     };
 
-    /*
-    // Let say we first want to see if there is a path at all instead of finding a path to the goal
-    public boolean findAPath(int[][] arr, int x, int y) {
-        // breadth first search or depth first search
-        // one of the methods can be used most probably for implementing this solution
-        boolean[][] isVisited = {
-                {false, false, false},
-                {false, false, false},
-                {false, false, false},
-        };
+    public List<Interval> mergeIntervals(List<Interval> list) {
+        List<Interval> result = new ArrayList<>();
+        if(list.size() < 1) {
+            return result;
+        }
+        // sort the input based on the first start times
+        
+        result.add(list.get(0));
+        int counter = 0;
+        for(int i = 1; i < list.size(); i++) {
+            Interval temp = result.get(counter);
+            Interval next = list.get(i);
 
-        Stack<rowColsNode> thestack = new Stack<>();
-        rowColsNode node = new rowColsNode(0,0);
-        thestack.push(node);
-
-        isVisited[0][0] = true;
-        while(!thestack.isEmpty()) {
-            rowColsNode node1 = thestack.peek();
-            rowColsNode temp = getAdjacent(node1, arr);
-            if((temp.getRow() != -1 || temp.getCol() != -1)) {
-                thestack.pop();
-            } else {
-                isVisited[temp.getRow()][temp.getCol()] = true;
-                thestack.push(temp);
+            if(temp.endTime >= next.startTime) {
+                result.set(counter, new Interval(temp.startTime, next.endTime));
+            }else {
+                result.add(next);
+                counter++;
             }
         }
-        return isVisited[arr.length][arr.length];
+        for(int i =0; i < result.size(); i++) {
+            System.out.println("[" + result.get(i).startTime + "," + result.get(i).endTime + "]");
+        }
+        return result;
     }
 
-    public rowColsNode getAdjacent(rowColsNode node, int[][] arr) {
-        int row = node.getRow();
-        int col = node.getCol();
-        if(arr[row][col] == 0 ){
-            return new rowColsNode(row,col);
-        }
-        return new rowColsNode(-1, -1);
-    }
-
-    public class rowColsNode {
-        int row;
-        int col;
-
-        public rowColsNode(int r, int c) {
-            row = r;
-            col = c;
-        }
-
-        public int getRow() {
-            return row;
-        }
-
-        public int getCol() {
-            return col;
-        }
-    }
-    */
     // starts from point 0,0 and check whether there exists a path to n-1, n-1
     public boolean findRoute(int[][] maze) {
 
@@ -192,7 +164,9 @@ public class ratInMaze {
                 {1,0,1},
         };
         ratInMaze ms = new ratInMaze();
-        System.out.println(ms.findPath(arr));
+        // System.out.println(ms.findPath(arr));
         // System.out.println(ms.complementNumber(2));
+        List<Interval> list = new ArrayList<>(Arrays.asList(new Interval(1,2), new Interval(2,6), new Interval(8,10), new Interval(11,15)));
+        System.out.println(ms.mergeIntervals(list));
     }
 }
