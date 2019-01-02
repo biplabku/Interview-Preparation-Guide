@@ -7,7 +7,7 @@ public class ratInMaze {
     int[][] helper = {
             {0, 0, 0},
             {0, 0, 0},
-            {0, 0, 0}
+            {0, 0, 0},
     };
 
     /*
@@ -147,10 +147,10 @@ public class ratInMaze {
 
 
     public boolean findPath(int[][] maze) {
-        if(solveMaze(maze, 0, 0, helper) == false) {
-            return false;
+        if(solveMaze(maze, 0, 0, helper) == true) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     public boolean solveMaze(int[][] maze, int x, int y, int[][] statusBits) {
@@ -179,7 +179,7 @@ public class ratInMaze {
     }
 
     public boolean solve(int[][] maze, int x, int y, int[][] statusBits) {
-        if(x >= 0 && x < N && y >= 0 && y < N && maze[x][y] == 0) {
+        if(x >= 0 && x < N && y >= 0 && y < N && maze[x][y] != 0) {
             return true;
         }
         return false;
@@ -187,7 +187,7 @@ public class ratInMaze {
 
     public static void main(String[] args) {
         int[][] arr ={
-                {0,0,1},
+                {1,1,1},
                 {1,0,1},
                 {1,0,1},
         };
