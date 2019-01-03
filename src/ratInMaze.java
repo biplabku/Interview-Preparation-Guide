@@ -1,9 +1,6 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
-public class ratInMaze {
+public class ratInMaze{
 
     public int N = 3;
     int[][] helper = {
@@ -18,7 +15,7 @@ public class ratInMaze {
             return result;
         }
         // sort the input based on the first start times
-        
+        Collections.sort(list);
         result.add(list.get(0));
         int counter = 0;
         for(int i = 1; i < list.size(); i++) {
@@ -37,6 +34,10 @@ public class ratInMaze {
         }
         return result;
     }
+
+
+
+
 
     // starts from point 0,0 and check whether there exists a path to n-1, n-1
     public boolean findRoute(int[][] maze) {
@@ -166,7 +167,7 @@ public class ratInMaze {
         ratInMaze ms = new ratInMaze();
         // System.out.println(ms.findPath(arr));
         // System.out.println(ms.complementNumber(2));
-        List<Interval> list = new ArrayList<>(Arrays.asList(new Interval(1,2), new Interval(2,6), new Interval(8,10), new Interval(11,15)));
+        List<Interval> list = new ArrayList<>(Arrays.asList(new Interval(2,6), new Interval(1,2), new Interval(8,10), new Interval(11,15)));
         System.out.println(ms.mergeIntervals(list));
     }
 }
