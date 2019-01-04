@@ -32,30 +32,38 @@ public class LinkList {
     }
 
 
-    public LinkNode add2Numbers(LinkNode l1, LinkNode l2) {
-        LinkNode result = null;
-        int sum =0;
+    public void add2Numbers(LinkList l1, LinkList l2) {
+        LinkList result = new LinkList();
+        int sum = 0;
         int carry = 0;
         LinkNode prev = null;
         LinkNode nxt = null;
-        while(l1 != null && l2 != null) {
-            sum = l1.data + l2.data + carry;
-            if(sum >= 10) {
-                sum = sum % 2;
-                carry = sum / 2;
+        LinkNode cur1 = l1.head;
+        LinkNode cur2 = l2.head;
+        while(cur1 != null || cur2 != null) {
+            if(cur1 != null && cur2 == null) {
+                sum = carry + cur1.data;
             }
-            LinkNode temp = new LinkNode(sum);
-            result = temp;
-            result = result.next;
-            l1 = l1.next;
-            l2 = l2.next;
+            if(cur1 == null && cur2 != null) {
+                sum = carry + cur2.data;
+            }
+            if(cur1 != null && cur2 != null) {
+                sum = carry + cur1.data + cur2.data;
+            }
+            if(sum >= 10) {
+                carry = sum / 10;
+                sum = sum % 10;
+            }else {
+                carry = 0;
+            }
+            result.add(sum);
+            cur1 = cur1.next;
+            cur2 = cur2.next;
         }
-        // setting the head of the linklist is needed to resolve this issue
-        if(carry != 0) {
-            result.next = new LinkNode(carry);
+        if(carry > 0) {
+            result.add(carry);
         }
-
-        return head.next;
+        result.display();
     }
 
     public void reverseLinkList(LinkList l1) {
@@ -80,9 +88,10 @@ public class LinkList {
         LinkList list2 = new LinkList();
         list2.add(5);
         list2.add(6);
-        list2.add(4);
-        // System.out.println(ls.add2Numbers(a1, a2));
-        list.reverseLinkList(list);
+        list2.add(5);
+        // list.reverseLinkList(list);
+        list.add2Numbers(list, list2);
+
     }
 }
 
