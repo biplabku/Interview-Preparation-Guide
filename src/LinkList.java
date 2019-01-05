@@ -43,12 +43,16 @@ public class LinkList {
         while(cur1 != null || cur2 != null) {
             if(cur1 != null && cur2 == null) {
                 sum = carry + cur1.data;
+                cur1 = cur1.next;
             }
             if(cur1 == null && cur2 != null) {
                 sum = carry + cur2.data;
+                cur2 = cur2.next;
             }
             if(cur1 != null && cur2 != null) {
                 sum = carry + cur1.data + cur2.data;
+                cur1 = cur1.next;
+                cur2 = cur2.next;
             }
             if(sum >= 10) {
                 carry = sum / 10;
@@ -57,13 +61,45 @@ public class LinkList {
                 carry = 0;
             }
             result.add(sum);
-            cur1 = cur1.next;
-            cur2 = cur2.next;
+
+
         }
         if(carry > 0) {
             result.add(carry);
         }
         result.display();
+    }
+
+    public LinkNode addTwoNumbers(LinkNode l1, LinkNode l2) {
+        int sum = 0;
+        int carry = 0;
+        LinkNode res = new LinkNode(0) ;
+        LinkNode head = res;
+        while(l1 != null || l2 != null) {
+            if(l1 != null && l2 == null) {
+                sum = carry + l1.data;
+                l1 = l1.next;
+            }else if(l1 == null && l2 != null) {
+                sum = carry + l2.data;
+                l2 = l2.next;
+            }else if(l1 != null && l2 != null) {
+                sum = carry + l1.data + l2.data;
+                l1 = l1.next;
+                l2 = l2.next;
+            }
+            if(sum >= 10) {
+                carry = 1;
+                sum = sum%10;
+            }else {
+                carry = 0;
+            }
+            res.next = new LinkNode(sum);
+            res = res.next;
+        }
+        if(carry > 0) {
+            res.next = new LinkNode(carry);
+        }
+        return head.next;
     }
 
     public void reverseLinkList(LinkList l1) {
@@ -88,7 +124,7 @@ public class LinkList {
         LinkList list2 = new LinkList();
         list2.add(5);
         list2.add(6);
-        list2.add(5);
+        list2.add(4);
         // list.reverseLinkList(list);
         list.add2Numbers(list, list2);
 
