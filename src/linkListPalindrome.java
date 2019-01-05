@@ -19,6 +19,17 @@ public class linkListPalindrome {
         return true;
     }
 
+    // prpbblem with this solution is that it will fail when there are negative numbers
+    public static boolean checkPalindrome(LinkList list) {
+        LinkNode cur = list.head;
+        // base solution
+        StringBuilder sb = new StringBuilder();
+        while(cur != null) {
+            sb.append(cur.data);
+            cur = cur.next;
+        }
+        return sb.toString().equalsIgnoreCase(sb.reverse().toString());
+    }
 
     public static void main(String[] args) {
         LinkList list = new LinkList();
@@ -26,6 +37,7 @@ public class linkListPalindrome {
         list.add(-1);
 
         System.out.println(linkListPalindrome(list));
+        System.out.println(checkPalindrome(list));
     }
 
 }
