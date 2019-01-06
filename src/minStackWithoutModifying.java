@@ -78,7 +78,6 @@ public class minStackWithoutModifying {
         ms.push(0);
         ms.display();
         ms.pop();
-        ms.pop();
         System.out.println(ms.getMin());
     }
 }
