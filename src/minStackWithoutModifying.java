@@ -102,20 +102,20 @@ public class minStackWithoutModifying {
         for(int i = 0; i <= str.length(); i++) {
             array[i] = i;
         }
-        int leftIndex = 0;
-        int rightIndex = str.length();
+        int leftIndex = -1;
+        int rightIndex = str.length()+1;
         ArrayList<Integer> list = new ArrayList<>();
         int counter =0;
         while(counter < str.length()) {
             if(str.charAt(counter) == 'D') {
-                list.add(array[rightIndex]);
-                rightIndex--;
+                list.add(array[--rightIndex]);
             }else if(str.charAt(counter) == 'I') {
-                list.add(array[leftIndex]);
-                leftIndex++;
+                list.add(array[++leftIndex]);
             }
             counter++;
         }
+        list.add(rightIndex - 1);
+        System.out.println(leftIndex + " <--val --> " +rightIndex);
         return list;
     }
 
