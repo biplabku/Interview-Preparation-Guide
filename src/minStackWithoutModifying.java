@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class minStackWithoutModifying {
 
     int curSize = 0;
@@ -70,14 +73,43 @@ public class minStackWithoutModifying {
         }
     }
 
+    public ArrayList<ArrayList<Integer>> subsetsofSet(ArrayList<Integer> input) {
+        ArrayList<ArrayList<Integer>> finalResult = new ArrayList<>();
+        Arrays.sort(input.toArray());
+        for(int i = 0; i < input.size(); i++) {
+            ArrayList<ArrayList<Integer>> temp = new ArrayList<>();
+            // copying the all the sublist which are already there
+            for(ArrayList<Integer> list : finalResult) {
+                temp.add(new ArrayList<>(list));
+            }
+
+            // adding the element to all the sublist
+            for(ArrayList<Integer> list : temp) {
+                list.add(input.get(i));
+            }
+            ArrayList<Integer> single = new ArrayList<>();
+            single.add(input.get(i));
+            temp.add(single);
+            finalResult.addAll(temp);
+        }
+        finalResult.add(new ArrayList<>());
+        return finalResult;
+    }
+
+
     public static void main(String[] args) {
         minStackWithoutModifying ms = new minStackWithoutModifying(4);
         ms.push(1);
         ms.push(2);
         ms.push(3);
         ms.push(0);
-        ms.display();
-        ms.pop();
-        System.out.println(ms.getMin());
+        //ms.display();
+        // ms.pop();
+        // System.out.println(ms.getMin());
+        ArrayList<Integer> temp = new ArrayList<>();
+        temp.add(1);
+        temp.add(2);
+        temp.add(3);
+        System.out.println(ms.subsetsofSet(temp));
     }
 }
