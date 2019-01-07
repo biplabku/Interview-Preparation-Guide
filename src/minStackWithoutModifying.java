@@ -97,6 +97,29 @@ public class minStackWithoutModifying {
     }
 
 
+    public ArrayList<Integer> incDecNumber(String str) {
+        int[] array = new int[str.length() + 1];
+        for(int i = 0; i <= str.length(); i++) {
+            array[i] = i;
+        }
+        int leftIndex = 0;
+        int rightIndex = str.length();
+        ArrayList<Integer> list = new ArrayList<>();
+        int counter =0;
+        while(counter < str.length()) {
+            if(str.charAt(counter) == 'D') {
+                list.add(array[rightIndex]);
+                rightIndex--;
+            }else if(str.charAt(counter) == 'I') {
+                list.add(array[leftIndex]);
+                leftIndex++;
+            }
+            counter++;
+        }
+        return list;
+    }
+
+
     public static void main(String[] args) {
         minStackWithoutModifying ms = new minStackWithoutModifying(4);
         ms.push(1);
@@ -110,6 +133,7 @@ public class minStackWithoutModifying {
         temp.add(1);
         temp.add(2);
         temp.add(3);
-        System.out.println(ms.subsetsofSet(temp));
+        //System.out.println(ms.subsetsofSet(temp));
+        System.out.println(ms.incDecNumber("DDI"));
     }
 }
