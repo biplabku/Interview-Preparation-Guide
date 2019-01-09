@@ -95,6 +95,29 @@ public class MinStackNext {
             return l;
         }
 
+
+        public List<Integer> getPartitionLabel(String str) {
+            List<Integer> list = new ArrayList<>();
+            HashMap<Character, Integer> hmap = new HashMap<>();
+            for(int i = 0; i < str.length(); i++) {
+                char ch = str.charAt(i);
+                hmap.put(ch, i);
+            }
+
+            int left = 0;
+            int right = 0;
+            while(left < str.length()) {
+                int start = left;
+                right = hmap.get(str.charAt(left));
+                while(left < right) {
+                    right = Math.max(right, hmap.get(str.charAt(left++)));
+                }
+                list.add(str.subSequence(start, left).length() + 1);
+                left++;
+            }
+            return list;
+        }
+
         public static void main(String[] args) {
             // 5-1-2-4-3
             MinStackNext ms = new MinStackNext();
@@ -106,6 +129,6 @@ public class MinStackNext {
             //ms.pop();
             // System.out.println(ms.getMin());
             String str = "abccaddbeffe";
-            System.out.println(ms.getPartition(str));
+            System.out.println(ms.getPartitionLabel(str));
         }
 }
