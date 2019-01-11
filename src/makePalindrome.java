@@ -114,6 +114,24 @@ public class makePalindrome {
         return result;
     }
 
+    public  int getHCD(int[] array) {
+        int max = 0;
+        for(int i = 0; i < array.length; i++) {
+            max = Math.max(max, array[i]);
+        }
+        int res = 1;
+        int counter = 0;
+        for(int i = 1; i <= max; i++) {
+            while(array[counter] % i  == 0) {
+                counter++;
+            }
+            if(counter == array.length) {
+                res = i;
+            }
+        }
+        return res ;
+    }
+
     public static void main(String[] args) {
         makePalindrome ms   = new makePalindrome();
         /*
@@ -126,6 +144,8 @@ public class makePalindrome {
         */
         String str = "MDCCCIV";
         // System.out.println(ms.romanToInt(str));
-        System.out.println(ms.doRomanToInt(str));
+        // System.out.println(ms.doRomanToInt(str));
+        int[] arr = new int[]{2,3,6,8,10};
+        System.out.println(ms.getHCD(arr));
     }
 }
