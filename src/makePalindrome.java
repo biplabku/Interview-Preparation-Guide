@@ -122,12 +122,14 @@ public class makePalindrome {
         int res = 1;
         int counter = 0;
         for(int i = 1; i <= max; i++) {
-            while(array[counter] % i  == 0) {
+            while(counter < array.length && array[counter] % i  == 0) {
                 counter++;
+
             }
             if(counter == array.length) {
                 res = i;
             }
+            counter = 0;
         }
         return res ;
     }
@@ -145,7 +147,7 @@ public class makePalindrome {
         String str = "MDCCCIV";
         // System.out.println(ms.romanToInt(str));
         // System.out.println(ms.doRomanToInt(str));
-        int[] arr = new int[]{2,3,6,8,10};
+        int[] arr = new int[]{2,2,6,8,10};
         System.out.println(ms.getHCD(arr));
     }
 }
