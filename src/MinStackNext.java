@@ -118,6 +118,19 @@ public class MinStackNext {
             return list;
         }
 
+        public int coinChange(int[] coins, int amount, int index) {
+            if(amount < 0) {
+                return 0;
+            }
+            if(amount == 0) {
+                return 1;
+            }
+            if(index == coins.length && amount > 0) {
+                return 0;
+            }
+            return coinChange(coins, amount - coins[index], index) + coinChange(coins, amount, index);
+        }
+
         public static void main(String[] args) {
             // 5-1-2-4-3
             MinStackNext ms = new MinStackNext();
@@ -129,6 +142,9 @@ public class MinStackNext {
             //ms.pop();
             // System.out.println(ms.getMin());
             String str = "abccaddbeffe";
-            System.out.println(ms.getPartitionLabel(str));
+            // System.out.println(ms.getPartitionLabel(str));
+            int[] coins = {1,2,5};
+            int amount = 11;
+            System.out.println(ms.coinChange(coins, amount, 0));
         }
 }

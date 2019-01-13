@@ -124,15 +124,17 @@ public class makePalindrome {
         for(int i = 1; i <= max; i++) {
             while(counter < array.length && array[counter] % i  == 0) {
                 counter++;
-
             }
             if(counter == array.length) {
-                res = i;
+                res =  i;
             }
             counter = 0;
         }
         return res ;
     }
+
+    // how to optimize this algorithm implementation
+
 
     public static void main(String[] args) {
         makePalindrome ms   = new makePalindrome();
@@ -147,7 +149,7 @@ public class makePalindrome {
         String str = "MDCCCIV";
         // System.out.println(ms.romanToInt(str));
         // System.out.println(ms.doRomanToInt(str));
-        int[] arr = new int[]{2,2,6,8,10};
+        int[] arr = new int[]{4, 4, 12, 8};
         System.out.println(ms.getHCD(arr));
     }
 }
