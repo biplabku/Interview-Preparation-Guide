@@ -58,8 +58,27 @@ public class meetupWeek3 {
             leftchild = null;
             rightchild = null;
         }
+    }
 
+    public boolean checkPalindrome(String str, int index) {
+        if(isPaldinrome(str)) {
+            return true;
+        }
+        for(int i = 1; i <= str.length(); i++) {
+            String temp1 = str.substring(0, i -1);
+            String temp2 = str.substring(i);
+            String temp = temp1 + temp2;
+            if(isPaldinrome(temp)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    public boolean isPaldinrome(String str) {
+        StringBuilder sb = new StringBuilder(str);
+        // takes O(N) runtime
+        return sb.toString().equalsIgnoreCase(sb.reverse().toString());
     }
 
     public static void main(String[] args) {
@@ -69,5 +88,7 @@ public class meetupWeek3 {
 
         meetupWeek3 ms = new meetupWeek3();
         System.out.println(ms.maxStackHeight(array1, array2, array3));
+        String str = "aaab";
+        System.out.println(ms.checkPalindrome(str, 0));
     }
 }
