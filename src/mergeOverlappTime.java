@@ -35,6 +35,42 @@ public class mergeOverlappTime  {
     }
 
 
+    public int sumRangeBST(BSTNode root, int left, int right) {
+        if(root == null) {
+            return 0;
+        }
+        if(root.val < left) {
+            return sumRangeBST(root.rightchild, left, right);
+        }
+        if(root.val > right) {
+            return sumRangeBST(root.leftchild, left, right);
+        }
+        return root.val + sumRangeBST(root.leftchild, left, right) + sumRangeBST(root.rightchild, left, right);
+    }
+
+    public class BSTNode{
+        public BSTNode leftchild;
+        public BSTNode rightchild;
+        public int val;
+
+        public BSTNode(int data) {
+            val = data;
+            leftchild = null;
+            rightchild = null;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     // Comparable tutorials
     // Comparable
     // as the name suggests is an interface defining a strategy of comparing an object with other objects of the
@@ -63,8 +99,11 @@ public class mergeOverlappTime  {
         thelist.add(new Interval(4,7));
         thelist.add(new Interval(5,6));
         thelist.add(new Interval(6,6));
-        System.out.println(thelist.get(0).startTime + " " + thelist.get(0).endTime);
+        // System.out.println(thelist.get(0).startTime + " " + thelist.get(0).endTime);
         mergeOverlappTime ms = new mergeOverlappTime();
-        ms.merge(thelist);
+        // ms.merge(thelist);
+        BSTNode bs = new BSTNode(9);
+        
+        System.out.println(ms.sumRangeBST())
     }
 }

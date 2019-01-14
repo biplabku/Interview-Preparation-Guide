@@ -37,14 +37,14 @@ public class closestRestaurants {
         int max = 0;
         for(int i = array1.length - 1; i >= 0; i--) {
             int el = array1[i];
-            while(el != array2[index1] && index1 > 0) {
+            while(index1 > 0 && el < array2[index1] ) {
                 index1--;
             }
-            while(el != array3[index2] && index2 > 0) {
+            while(el < array3[index2] && index2 > 0) {
                 index2--;
             }
-            if(index1 < 0 && index2 < 0 || index1 == 0 && index2 >= 0 ) {
-                index1  = array2.length - 1;
+            if(index1 < 0 && index2 >= 0 || index1 >=0 && index2 < 0) {
+                index1 = array2.length - 1;
                 index2 = array3.length - 1;
                 continue;
             }else if(index1 >= 0 && index2 >= 0) {
@@ -53,6 +53,9 @@ public class closestRestaurants {
         }
         return max;
     }
+
+
+
 
     public void cumulativeSum(int[] array) {
         for(int i =1; i < array.length; i++) {
