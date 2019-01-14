@@ -77,8 +77,46 @@ public class meetupWeek3 {
 
     public boolean isPaldinrome(String str) {
         StringBuilder sb = new StringBuilder(str);
-        // takes O(N) runtime
         return sb.toString().equalsIgnoreCase(sb.reverse().toString());
+    }
+
+    public static class ringBuffer {
+        public int size;
+        public int[] array;
+        int front = 0;
+        int rear = 0;
+        int cursize ;
+        public ringBuffer(int val) {
+            size = val;
+            cursize = 0;
+            array = new int[size];
+        }
+
+        public void init() {
+            array = new int[size];
+        }
+
+        public boolean push(int val) {
+            if(cursize >= size) {
+                return false;
+            }
+            rear = (rear + 1) % size;
+            array[rear] = val;
+            cursize++;
+            return true;
+        }
+
+        public int pop() {
+            if(cursize > 0) {
+                cursize--;
+                front = (front  + 1) % size;
+                return array[front];
+            }else{
+                return -1;
+            }
+        }
+
+
     }
 
     public static void main(String[] args) {
@@ -86,9 +124,23 @@ public class meetupWeek3 {
         int[] array2 = new int[] {2,2,1,4};
         int[] array3 = new int[] {5,1,4};
 
+        /*
         meetupWeek3 ms = new meetupWeek3();
         System.out.println(ms.maxStackHeight(array1, array2, array3));
         String str = "aaab";
         System.out.println(ms.checkPalindrome(str, 0));
+        */
+
+        ringBuffer rs = new ringBuffer(3);
+        System.out.println(rs.push(3));
+        System.out.println(rs.push(2));
+        System.out.println(rs.push(1));
+        System.out.println(rs.push(5));
+        System.out.println(rs.pop());
+        System.out.println(rs.push(8));
+        System.out.println(rs.pop());
+        System.out.println(rs.pop());
+        System.out.println(rs.pop());
+        System.out.println(rs.pop());
     }
 }
