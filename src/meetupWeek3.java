@@ -34,6 +34,34 @@ public class meetupWeek3 {
         }
     }
 
+
+    public int sumRangeBST(mergeOverlappTime.BSTNode root, int left, int right) {
+        if(root == null) {
+            return 0;
+        }
+        if(root.val < left) {
+            return sumRangeBST(root.rightchild, left, right);
+        }
+        if(root.val > right) {
+            return sumRangeBST(root.leftchild, left, right);
+        }
+        return root.val + sumRangeBST(root.leftchild, left, right) + sumRangeBST(root.rightchild, left, right);
+    }
+
+    public static class BSTNode{
+        public mergeOverlappTime.BSTNode leftchild;
+        public mergeOverlappTime.BSTNode rightchild;
+        public int val;
+
+        public BSTNode(int data) {
+            val = data;
+            leftchild = null;
+            rightchild = null;
+        }
+
+
+    }
+
     public static void main(String[] args) {
         int[] array1 = new int[] {1,1,3,1};
         int[] array2 = new int[] {2,2,1,4};
