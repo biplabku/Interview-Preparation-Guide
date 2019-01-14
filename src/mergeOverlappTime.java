@@ -48,7 +48,7 @@ public class mergeOverlappTime  {
         return root.val + sumRangeBST(root.leftchild, left, right) + sumRangeBST(root.rightchild, left, right);
     }
 
-    public class BSTNode{
+    public static class BSTNode{
         public BSTNode leftchild;
         public BSTNode rightchild;
         public int val;
@@ -58,6 +58,8 @@ public class mergeOverlappTime  {
             leftchild = null;
             rightchild = null;
         }
+
+
     }
 
 
@@ -103,7 +105,12 @@ public class mergeOverlappTime  {
         mergeOverlappTime ms = new mergeOverlappTime();
         // ms.merge(thelist);
         BSTNode bs = new BSTNode(9);
-        
-        System.out.println(ms.sumRangeBST())
+        bs.rightchild = new BSTNode(12);
+        bs.rightchild.leftchild = new BSTNode(10);
+        bs.leftchild = new BSTNode(6);
+        bs.leftchild.rightchild = new BSTNode(8);
+        bs.leftchild.leftchild = new BSTNode(1);
+
+        System.out.println(ms.sumRangeBST(bs, 6, 12));
     }
 }
