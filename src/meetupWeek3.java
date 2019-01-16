@@ -146,8 +146,35 @@ public class meetupWeek3 {
         return result;
     }
 
+    public void quickSortAlgorithm(int[] array, int low, int high) {
+        if(low < high) {
+            int partition =  partition(array, low, high);
+            quickSortAlgorithm(array, low, partition - 1);
+            quickSortAlgorithm(array, partition + 1, high );
+        }
+    }
+
+    public int partition(int[] array, int low, int high) {
+        int pivot = array[high];
+        int i = low;
+        for(int j = low; j <= high; j++) {
+            if(array[j] < pivot) {
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                i = i + 1;
+            }
+        }
+        int temp = array[i];
+        array[i] = array[high];
+        array[high] = temp;
+        return i;
+    }
+
+
+
     public static void main(String[] args) {
-        int[] array1 = new int[] {1,1,3,1};
+        int[] array1 = new int[] {1,1,3,1,0,-1,9};
         int[] array2 = new int[] {2,2,1,4};
         int[] array3 = new int[] {5,1,4};
 
@@ -170,7 +197,10 @@ public class meetupWeek3 {
         System.out.println(rs.pop());
         System.out.println(rs.pop());
         */
-
-        System.out.println(ms.subsetOfSet(new int[]{1,2,3}));
+        ms.quickSortAlgorithm(array1, 0, array1.length - 1);
+        for(int i =0; i < array1.length; i++) {
+            System.out.println(array1[i]);
+        }
+        // System.out.println(ms.subsetOfSet(new int[]{1,2,3}));
     }
 }
