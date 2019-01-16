@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class meetupWeek3 {
 
 
@@ -119,17 +123,40 @@ public class meetupWeek3 {
 
     }
 
+    public List<List<Integer>> subsetOfSet(int[] array) {
+        List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(array);
+        for(int i = 0; i < array.length; i++) {
+            List<List<Integer>> temp = new ArrayList<>();
+            // save the current result in a temporary list variable
+            for(List<Integer> list: result) {
+                temp.add(new ArrayList<>(list));
+            }
+            // Add the new number to all the elements in the variable list
+            for(List<Integer> list:temp) {
+                list.add(array[i]);
+            }
+            // now add the new element from the array into the mix and finally add into the result
+            ArrayList<Integer> single = new ArrayList<>();
+            single.add(array[i]);
+            temp.add(single);
+            result.addAll(temp);
+        }
+        result.addAll(new ArrayList<>());
+        return result;
+    }
+
     public static void main(String[] args) {
         int[] array1 = new int[] {1,1,3,1};
         int[] array2 = new int[] {2,2,1,4};
         int[] array3 = new int[] {5,1,4};
 
-        /*
+
         meetupWeek3 ms = new meetupWeek3();
+        /*
         System.out.println(ms.maxStackHeight(array1, array2, array3));
         String str = "aaab";
         System.out.println(ms.checkPalindrome(str, 0));
-        */
 
         ringBuffer rs = new ringBuffer(3);
         System.out.println(rs.push(3));
@@ -142,5 +169,8 @@ public class meetupWeek3 {
         System.out.println(rs.pop());
         System.out.println(rs.pop());
         System.out.println(rs.pop());
+        */
+
+        System.out.println(ms.subsetOfSet(new int[]{1,2,3}));
     }
 }
