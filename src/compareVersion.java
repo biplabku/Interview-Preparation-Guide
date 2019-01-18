@@ -1,7 +1,5 @@
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class compareVersion {
@@ -28,12 +26,36 @@ public class compareVersion {
 
 
     public int compareVersionSimplified(final String str1, final String str2) {
+
         List<BigInteger> list1 = Arrays.stream(str1.split("\\.")).
                 map(s -> new BigInteger(s)).collect(Collectors.toList());
         List<BigInteger> list2 = Arrays.stream(str2.split("\\.")).
                 map(s -> new BigInteger(s)).collect(Collectors.toList());
         int res = solve(list1, list2, 0);
         return res;
+    }
+
+    public void mergeSort(int[] original, int[] temp, int first, int end) {
+        for(int i = 0; i < original.length; i++) {
+            temp[i] = original[i];
+        }
+        doSplit(temp, first, end, original);
+    }
+
+    public void doSplit(int[] temp, int first, int last, int[] original) {
+        if(last - first < 2){
+            return;
+        }
+        int middle = (last - first)/2;
+        doSplit(temp, first, middle, original);
+        doSplit(temp, middle + 1, last, original);
+
+        doMerge(temp, first, middle, last, original);
+    }
+
+    public void doMerge(int[] temp, int first, int middle, int last, int[] original) {
+        int k = first;
+        
     }
 
     public static void main(String[] args) {
