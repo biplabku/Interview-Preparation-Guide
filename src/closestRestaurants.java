@@ -2,6 +2,15 @@ import java.util.*;
 
 public class closestRestaurants {
 
+    public int[][] kClosestPoints(int[][] points, int k) {
+        int[][] results = new int[k][2];
+    }
+
+    public int calcDistance(int x, int y) {
+        return (int) Math.sqrt(Math.pow(x, 2) + Math.pow(y,2));
+    }
+
+
 
     public List<List<Integer>> ClosesNeighbors(List<List<Integer>> list, int K) {
         int[] array = new int[list.size()];
@@ -24,9 +33,6 @@ public class closestRestaurants {
         return result;
     }
 
-    public int calcDistance(int x, int y) {
-        return (int)Math.sqrt((0 - x) * (0 - x) + (0 - y) * (0 - y));
-    }
 
     public int mexHeightStack(int[] array1, int[] array2, int[] array3) {
         cumulativeSum(array1);

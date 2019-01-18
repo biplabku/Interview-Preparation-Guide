@@ -55,7 +55,7 @@ public class compareVersion {
 
     public void doMerge(int[] temp, int first, int middle, int last, int[] original) {
         int k = first;
-        
+
     }
 
     public static void main(String[] args) {
