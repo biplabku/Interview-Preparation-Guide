@@ -62,6 +62,27 @@ public class MapTutorials {
         return -1;
     }
 
+    public int majorityElementMethod2 (List<Integer> list) {
+        int maj = list.get(0);
+        int count = 1;
+        int maj_index = 0;
+        int i;
+        for(i = 1; i < list.size(); i++) {
+            if(maj == list.get(i)) {
+                count++;
+            }else {
+                count--;
+            }
+            if(count == 0) {
+                maj = list.get(i);
+                maj_index = i;
+                count = 1;
+            }
+        }
+        return list.get(maj_index);
+    }
+
+
     public static void main(String[] args) {
         MapTutorials ms = new MapTutorials();
         // ms.linkedHashMap();
@@ -71,6 +92,6 @@ public class MapTutorials {
         list.add(1);
         list.add(2);
         list.add(2);
-        System.out.println(ms.majorityElement(list));
+        System.out.println(ms.majorityElementMethod2(list));
     }
 }
