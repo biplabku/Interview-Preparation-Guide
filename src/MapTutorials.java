@@ -35,8 +35,42 @@ public class MapTutorials {
         }
     }
 
+    public int majorityElement(List<Integer> list) {
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+        for(int i =0; i< list.size(); i++) {
+            if(!hmap.containsKey(list.get(i))) {
+                hmap.put(list.get(i), 1);
+            }else {
+                hmap.put(list.get(i), hmap.get(list.get(i)) + 1);
+            }
+        }
+        int max = 0;
+        int res = 0;
+        Iterator iter = hmap.entrySet().iterator();
+        while(iter.hasNext()) {
+            Map.Entry pair = (Map.Entry)iter.next();
+            int val = (int)pair.getValue();
+            if(max < val) {
+                max = val;
+                res = (int)pair.getKey();
+            }
+        }
+
+        if(max > list.size()/2) {
+            return res;
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
         MapTutorials ms = new MapTutorials();
-        ms.linkedHashMap();
+        // ms.linkedHashMap();
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(1);
+        list.add(1);
+        list.add(2);
+        list.add(2);
+        System.out.println(ms.majorityElement(list));
     }
 }
