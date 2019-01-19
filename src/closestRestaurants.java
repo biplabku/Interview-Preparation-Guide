@@ -2,12 +2,52 @@ import java.util.*;
 
 public class closestRestaurants {
 
-    public int[][] kClosestPoints(int[][] points, int k) {
+    public int[][] kClosest(int[][] points, int k) {
         int[][] results = new int[k][2];
-    }
+        HashMap<Point, Integer> hmap = new HashMap<>();
+        for(int i = 0; i < points.length; i++) {
+            Point p = new Point(points[i][0], points[i][1]);
+            int val = calcDistance(p.x, p.y);
+            hmap.put(p, val);
+        }
+        // Convert map to list
+        List<Map.Entry<Point, Integer>> list = new LinkedList<Map.Entry<Point, Integer>>(hmap.entrySet());
 
+        // sort the list with a comparator
+        Collections.sort(list, new Comparator<Map.Entry<Point, Integer>>() {
+            @Override
+            public int compare(Map.Entry<Point, Integer> o1, Map.Entry<Point, Integer> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        });
+        HashMap<Point, Integer> sort = new LinkedHashMap<>();
+        for(Map.Entry<Point, Integer> entry : list) {
+            sort.put(entry.getKey(), entry.getValue());
+        }
+        Iterator iter = sort.entrySet().iterator();
+        int i = 0;
+        while(iter.hasNext()) {
+            Map.Entry pair = (Map.Entry)iter.next();
+            Point p = (Point)pair.getKey();
+            results[i][0] = p.x;
+            results[i][1] = p.y;
+            i++;
+            if(i == k) {
+                break;
+            }
+        }
+        return results;
+    }
     public int calcDistance(int x, int y) {
-        return (int) Math.sqrt(Math.pow(x, 2) + Math.pow(y,2));
+        return (int)Math.sqrt((x)* (x) + (y)* (y));
+    }
+    class Point {
+        int x;
+        int y;
+        public Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
     }
 
 
@@ -103,6 +143,11 @@ public class closestRestaurants {
         int[] array = new int[]{1,1,3,1};
         int[] array1 = new int[]{2,2,1,4};
         int[] array2 = new int[]{5,1,2};
-        System.out.println(ms.mexHeightStack(array, array1, array2));
+        int[][] input = new int[][] {{3,3},{5,-1}, {-2,4}};
+        int[][] temp = ms.kClosest(input, 2);
+        for(int i =0 ; i < temp.length; i++) {
+            System.out.println(temp[i][0] + " " + temp[i][1]);
+        }
+        // System.out.println(ms.kClosestPoints(input, 2));
     }
 }
