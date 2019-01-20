@@ -134,6 +134,48 @@ public class MapTutorials {
     }
 
 
+    public ListNode findNthFromEnd(ListNode head, int n) {
+        ListNode front = head;
+        ListNode back = head;
+        int k = 0;
+        while(front != null) {
+            if(k >= n) {
+                back = back.next;
+            }
+            front = front.next;
+            k++;
+        }
+        return back;
+    }
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode front = head;
+        ListNode back = head;
+        int k = 0;
+        ListNode prev = head;
+        ListNode next = head;
+        while(front != null) {
+            if(k >= n) {
+                prev = back;
+                back = back.next;
+                next = back.next;
+            }
+            front = front.next;
+            k++;
+        }
+        prev.next = next;
+        return back;
+    }
+
+
+    public static class ListNode {
+        int val;
+        ListNode next;
+        public ListNode(int data) {
+            val = data;
+            next = null;
+        }
+    }
 
 
     public static void main(String[] args) {
@@ -147,6 +189,12 @@ public class MapTutorials {
         list.add(2);
         // System.out.println(ms.majorityElementMethod2(list));
         String[] str = new String[]{"abca", "abc"};
-        System.out.println(ms.longCommonPrefix(str));
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+        // System.out.println(ms.longCommonPrefix(str));
+        System.out.println(ms.findNthFromEnd(head, 2).val);
     }
 }
