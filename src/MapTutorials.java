@@ -106,6 +106,34 @@ public class MapTutorials {
         return list.get(maj_index);
     }
 
+    // array of Strings
+    public String longCommonPrefix(String[] str) {
+        if(str.length == 0) {
+            return "";
+        }
+        int min = Integer.MAX_VALUE;
+        for(int i = 0; i < str.length; i++) {
+            min  = Math.min(min, str[i].length());
+        }
+        if(min  == 0) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < min; i++) {
+            for(int j = 1; j < str.length; j++) {
+                char ch1 = str[j - 1].charAt(i);
+                char ch2 = str[j].charAt(i);
+                if(ch1 != ch2) {
+                    return sb.toString();
+                }
+            }
+            char ch = str[0].charAt(i);
+            sb.append(str[0].charAt(i));
+        }
+        return sb.toString();
+    }
+
+
 
 
     public static void main(String[] args) {
@@ -118,6 +146,7 @@ public class MapTutorials {
         list.add(2);
         list.add(2);
         // System.out.println(ms.majorityElementMethod2(list));
-        System.out.println(ms.isPalindromeMethod2(123));
+        String[] str = new String[]{"abca", "abc"};
+        System.out.println(ms.longCommonPrefix(str));
     }
 }
