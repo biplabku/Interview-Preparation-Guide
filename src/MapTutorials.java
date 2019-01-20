@@ -6,6 +6,30 @@ public class MapTutorials {
     // It is similar to HashMap in most aspects. However, the linked hashmap is
     // based on both hash table and linked list to enhance the functionality of the
     // hashmap
+
+    public boolean isPalindromeNumber(int number) {
+        if(number < 0) {
+            return false;
+        }
+        String str = String.valueOf(number);
+        StringBuilder sb = new StringBuilder(str);
+        return sb.toString().equalsIgnoreCase(sb.reverse().toString());
+    }
+
+    public boolean isPalindromeMethod2(int number) {
+        int original = number;
+        if(number < 0) {
+            return false;
+        }
+        int result = 0;
+        while(number != 0) {
+            result = result * 10 +  (number % 10);
+            number = number / 10;
+        }
+        return  result == original;
+    }
+
+
     public void linkedHashMap( ) {
         HashMap<Integer, String> hmap = new HashMap<>();
         hmap.put(5, "apple");
@@ -83,6 +107,7 @@ public class MapTutorials {
     }
 
 
+
     public static void main(String[] args) {
         MapTutorials ms = new MapTutorials();
         // ms.linkedHashMap();
@@ -92,6 +117,7 @@ public class MapTutorials {
         list.add(1);
         list.add(2);
         list.add(2);
-        System.out.println(ms.majorityElementMethod2(list));
+        // System.out.println(ms.majorityElementMethod2(list));
+        System.out.println(ms.isPalindromeMethod2(123));
     }
 }
