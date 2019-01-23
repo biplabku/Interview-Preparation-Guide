@@ -48,10 +48,38 @@ public class janweek3rd {
         return Math.min(left, right);
     }
 
-
+    // 1, 3, 2, 2, 3, 1
+    // 1, 1, 2, 2, 3, 3
     public int[] wiggleSort(int[] array) {
-        
+        return array;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public static void main(String[] args) {
