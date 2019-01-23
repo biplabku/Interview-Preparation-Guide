@@ -49,6 +49,11 @@ public class janweek3rd {
     }
 
 
+    public int[] wiggleSort(int[] array) {
+        
+    }
+
+
     public static void main(String[] args) {
         janweek3rd js = new janweek3rd();
         String str = "loveleetcode";
