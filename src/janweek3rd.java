@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class janweek3rd {
 
 
@@ -56,7 +58,26 @@ public class janweek3rd {
 
 
 
+    public ArrayList<Integer> flip(String str) {
+        return new ArrayList<>();
+    }
 
+    public void selectionSort(int[] array) {
+        for(int i = 0; i < array.length; i++) {
+            int min = array[i];
+            int index = i;
+            for(int j = i + 1; j < array.length; j++) {
+                if(min > array[j]) {
+                    min = array[j];
+                    index = j;
+                }
+            }
+            int temp = array[i];
+            array[i] = array[index];
+            array[index] = temp;
+        }
+        display(array);
+    }
 
 
 
@@ -85,6 +106,8 @@ public class janweek3rd {
     public static void main(String[] args) {
         janweek3rd js = new janweek3rd();
         String str = "loveleetcode";
-        js.shortestToChar(str, 'e');
+        // js.shortestToChar(str, 'e');
+        int[] array = new int[]{2,5,1,7,0,2};
+        js.selectionSort(array);
     }
 }
