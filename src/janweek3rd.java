@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class janweek3rd {
 
@@ -79,27 +80,43 @@ public class janweek3rd {
         display(array);
     }
 
+    public void insertionSort(int[] array) {
+        for(int i = 1; i < array.length; i++) {
+            int j = i - 1;
+            int val = array[i];
+            while(j >= 0 && array[j] > val)  {
+                array[j + 1] = array[j];
+                j = j - 1;
+            }
+            array[j + 1] = val;
+        }
+        display(array);
+    }
 
+    public List<Integer> isSelfDividingNumber(int left, int right) {
+        List<Integer> list = new ArrayList<>();
+        for(int i = left; i <= right; i++) {
+            if(isSelfNumber(i)) {
+                list.add(i);
+            }
+        }
+        return list;
+    }
 
+    // create a helper function to check whether the number is self dividing number or not
+    // 128 % 1 == 0, 128 % 2 == 0, and 128 % 8 == 0.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public boolean isSelfNumber(int number) {
+        int original = number;
+        while(number > 1) {
+            int remainder = number % 10;
+            number = number/10;
+            if(remainder == 0 || original % remainder != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 
 
@@ -108,6 +125,7 @@ public class janweek3rd {
         String str = "loveleetcode";
         // js.shortestToChar(str, 'e');
         int[] array = new int[]{2,5,1,7,0,2};
-        js.selectionSort(array);
+        // js.insertionSort(array);
+        System.out.println(js.isSelfDividingNumber(1,22));
     }
 }
