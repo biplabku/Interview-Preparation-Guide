@@ -1,7 +1,23 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class janweek3rd {
+
+
+    public List<Integer> add2Numbers(int[] array, int k) {
+        List<Integer> list = new ArrayList<>();
+        for(int i = 0; i < array.length -1; i++) {
+            for(int j = i + 1; j < array.length; j++) {
+                if(array[i] + array[j] == k) {
+                    list.add(array[i]);
+                    list.add(array[j]);
+                    break;
+                }
+            }
+        }
+        return list;
+    }
 
 
     // Input: S = "loveleetcode", C = 'e'
@@ -53,7 +69,17 @@ public class janweek3rd {
 
     // 1, 3, 2, 2, 3, 1
     // 1, 1, 2, 2, 3, 3
+
+    // odd -- 1, 2, 3
+    // even - 1, 2, 3
+    //
     public int[] wiggleSort(int[] array) {
+        Arrays.sort(array);
+        // find the median element
+        for(int i = 0; i < array.length; i++) {
+            for(int j = i + 1; j < array.length; j++) {
+            }
+        }
         return array;
     }
 
@@ -119,6 +145,19 @@ public class janweek3rd {
     }
 
 
+    public boolean isPerfectNumber(int number) {
+        if(number == 0) {
+            return false;
+        }
+        int result = 0;
+        for(int i = 1; i < number; i++) {
+            if(number % i == 0) {
+                result += i;
+            }
+        }
+        return result == number;
+    }
+
 
     public static void main(String[] args) {
         janweek3rd js = new janweek3rd();
@@ -126,6 +165,6 @@ public class janweek3rd {
         // js.shortestToChar(str, 'e');
         int[] array = new int[]{2,5,1,7,0,2};
         // js.insertionSort(array);
-        System.out.println(js.isSelfDividingNumber(1,22));
+        System.out.println(js.isPerfectNumber(28));
     }
 }
