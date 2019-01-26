@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class janweek3rd {
@@ -14,6 +15,22 @@ public class janweek3rd {
                     list.add(array[j]);
                     break;
                 }
+            }
+        }
+        return list;
+    }
+    // 10, 15, 3, 7     k = 17
+    public List<Integer> add2NumbersFast(int[] array, int k) {
+        List<Integer> list = new ArrayList<>();
+        HashSet<Integer> hset = new HashSet<>();
+        for(int i = 0; i < array.length; i++) {
+            int val = Math.abs(k - array[i]);
+            if(hset.contains(val)) {
+                list.add(val);
+                list.add(array[i]);
+                break;
+            }else {
+                hset.add(array[i]);
             }
         }
         return list;
@@ -161,10 +178,8 @@ public class janweek3rd {
 
     public static void main(String[] args) {
         janweek3rd js = new janweek3rd();
-        String str = "loveleetcode";
-        // js.shortestToChar(str, 'e');
-        int[] array = new int[]{2,5,1,7,0,2};
-        // js.insertionSort(array);
-        System.out.println(js.isPerfectNumber(28));
+        int[] array = {10,15,3,7};
+        int k = 13;
+        System.out.println(js.add2NumbersFast(array, k));
     }
 }
