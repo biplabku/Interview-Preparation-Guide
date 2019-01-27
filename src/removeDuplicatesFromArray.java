@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class removeDuplicatesFromArray {
 
@@ -123,11 +120,30 @@ public class removeDuplicatesFromArray {
     }
 
 
+    public void findProdArrayEff(int[] array) {
+        int[] original = Arrays.copyOf(array, array.length);
+        for(int i = 0; i < array.length; i++) {
+            array[i] = getProd(original[i], original);
+        }
+        display(array);
+    }
+
+    public int getProd( int key, int[] array) {
+        int prod = 1;
+        for(int i = 0; i < array.length; i++) {
+            if(key != array[i]) {
+                prod *= array[i];
+            }
+        }
+        return prod;
+    }
+
+
 
     public static void main(String[] args) {
         removeDuplicatesFromArray rs = new removeDuplicatesFromArray();
-        int[] array = {1,2,3,4,5};
+        int[] array = {3,2,1};
 
-        rs.findProdArray(array);
+        rs.findProdArrayEff(array);
     }
 }
