@@ -110,11 +110,24 @@ public class removeDuplicatesFromArray {
         return sign * res;
     }
 
+
+    public void findProdArray(int[] array) {
+        int prodSum = 1;
+        for(int i = 0; i < array.length; i++) {
+            prodSum *= array[i];
+        }
+        for(int i = 0; i < array.length; i++) {
+            array[i] = prodSum/ array[i];
+        }
+        display(array);
+    }
+
+
+
     public static void main(String[] args) {
         removeDuplicatesFromArray rs = new removeDuplicatesFromArray();
-        int[] array = {3,2,2,3,4,5,6};
-        String[] words = {"abc","deq","mee","aqq","dkd","ccc"};
-        String pattern = "abb";
-        System.out.println(rs.stringToInteger("42"));
+        int[] array = {1,2,3,4,5};
+
+        rs.findProdArray(array);
     }
 }
