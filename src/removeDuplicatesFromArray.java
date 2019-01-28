@@ -2,6 +2,46 @@ import java.util.*;
 
 public class removeDuplicatesFromArray {
 
+    public int[] countBits(int num) {
+        int[] arr = new int[num + 1];
+        arr[0] = 0;
+        for(int i = 1; i <= num; i++) {
+            arr[i] = getOnesFromBinary(i);
+        }
+        display(arr);
+        return arr;
+    }
+
+    public int getOnesFromBinary(int val) {
+        int res = 0;
+        while(val > 0) {
+            if(val % 2 == 1) {
+                res += 1;
+            }
+            val = val /2;
+        }
+        return res;
+    }
+
+    // reverse only the words in a string
+    public String reverseWords(String str) {
+        str = str.trim();
+        String[] words = str.split(" ");
+        StringBuilder sb = new StringBuilder();
+        for(int i = words.length - 1; i > 0; i--) {
+            if(words[i].length() < 1) {
+                continue;
+            }else {
+                sb.append(words[i]);
+                sb.append(" ");
+            }
+        }
+        sb.append(words[0]);
+        return sb.toString();
+    }
+
+
+
     public void removeDups(int[] array) {
         int index = 1;
         for(int i = 1; i < array.length; i++) {
@@ -139,11 +179,61 @@ public class removeDuplicatesFromArray {
     }
 
 
+    public boolean checkPossibility(int[] array){
+        boolean seen = false;
+        int max = Integer.MIN_VALUE;
+        for(int i = 1; i < array.length; i++) {
+            if(array[i] >= array[i - 1]) {
+                max = Math.max(max, array[i]);
+                continue;
+            }else if(seen) {
+               return false;
+            }else{
+                array[i] = max;
+                seen = true;
+            }
+        }
+        return true;
+    }
+
+
+    public int findMinArrowShots(int[][] points) {
+        Arrays.sort(points, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                Integer one = o1[0];
+                Integer two = o2[0];
+                return one.compareTo(two);
+            }
+        });
+        int count = 0;
+        System.out.println(points[0].length + " " + points.length);
+        for(int i = 1; i < points.length; i++) {
+            int ycur = points[i-1][1];
+            int xnxt = points[i][0];
+            int j = i;
+            if(ycur >= xnxt) {
+                while(ycur >= xnxt) {
+                    count++;
+                    j = i + 1;
+                    xnxt = points[j][0];
+                }
+            }else {
+                count++;
+            }
+            i = j - 1;
+        }
+        return count;
+    }
+
+
+
+
 
     public static void main(String[] args) {
         removeDuplicatesFromArray rs = new removeDuplicatesFromArray();
-        int[] array = {3,2,1};
-
-        rs.findProdArrayEff(array);
+        int[] array = {3,4,2,3};
+        int[][] points = {{10,16}, {2,8}, {1,6}, {7,12}};
+        System.out.println(rs.findMinArrowShots(points));
     }
 }
