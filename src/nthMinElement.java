@@ -50,6 +50,29 @@ public class nthMinElement {
         }
     }
 
+    public int nextTryMinElement(int[] array, int k) {
+        int pivot = array[0];
+        int[] newArray = new int[array.length];
+        int leftIndex = 0;
+        int rightIndex = array.length - 1;
+        for(int i = 0; i < array.length; i++) {
+            if(array[i] <= pivot) {
+                newArray[leftIndex] = array[i];
+                leftIndex++;
+            }else {
+                newArray[rightIndex] = array[i];
+                rightIndex--;
+            }
+        }
+
+        if(k < leftIndex) {
+            return nextTryMinElement(Arrays.copyOfRange(newArray, 0, leftIndex), k);
+        }else if(k > leftIndex) {
+            return nextTryMinElement(Arrays.copyOfRange(newArray, leftIndex + 1, newArray.length), k - leftIndex);
+        }
+        return pivot;
+    }
+
     public void swap(int[] array, int i, int j) {
         int temp = array[i];
         array[i] = array[j];
@@ -67,6 +90,6 @@ public class nthMinElement {
     public static void main(String[] args) {
         nthMinElement ms = new nthMinElement();
         int[] array = {5,6,3,15,11};
-        System.out.println(ms.nthMinElement(array, 2));
+        System.out.println(ms.nextTryMinElement(array, 3));
     }
 }
