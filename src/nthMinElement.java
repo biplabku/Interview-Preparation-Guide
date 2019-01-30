@@ -1,4 +1,7 @@
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class nthMinElement {
 
@@ -79,6 +82,34 @@ public class nthMinElement {
         array[j] = temp;
     }
 
+    public boolean isomorphicStrings(String str, String ptr) {
+        if(str.length() != ptr.length()) {
+            return false;
+        }
+        HashMap<Character, Integer> hmap1 = new HashMap<>();
+        HashMap<Character, Integer> hmap2 = new HashMap<>();
+        for(int i = 0; i < str.length(); i++) {
+            char ch2 = ptr.charAt(i);
+            char ch1 = str.charAt(i);
+            if(!hmap1.containsKey(ch1)) {
+                hmap1.put(ch1, i);
+            }
+            if(!hmap2.containsKey(ch2)) {
+                hmap2.put(ch2, i);
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        StringBuilder sb2 = new StringBuilder();
+
+        for(int i = 0; i < str.length(); i++) {
+            sb.append(hmap1.get(str.charAt(i)));
+            sb2.append(hmap2.get(ptr.charAt(i)));
+        }
+
+        return sb.toString().equalsIgnoreCase(sb2.toString());
+    }
+
 
     public void display(int[] array) {
         for(int i = 0; i < array.length; i++) {
@@ -90,6 +121,9 @@ public class nthMinElement {
     public static void main(String[] args) {
         nthMinElement ms = new nthMinElement();
         int[] array = {5,6,3,15,11};
-        System.out.println(ms.nextTryMinElement(array, 3));
+        // System.out.println(ms.nextTryMinElement(array, 3));
+        String str = "abba";
+        String ptr = "abab";
+        System.out.println(ms.isomorphicStrings(str, ptr));
     }
 }
