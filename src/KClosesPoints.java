@@ -41,8 +41,36 @@ public class KClosesPoints {
         return result;
     }
 
+
+    public int numOfSegments(String str) {
+        str = str.trim();
+        String[] array = str.split(" ");
+        return array.length;
+    }
+
+
+    public List<List<Integer>> getSum(int[] array, int number) {
+        List<List<Integer>> result = new ArrayList<>();
+        HashSet<Integer> hset = new HashSet<>();
+        for(int i = 0; i < array.length; i++) {
+            int val = number - array[i];
+            if(!hset.contains(val)) {
+                hset.add(array[i]);
+            }else {
+                List<Integer> list = new ArrayList<>();
+                list.add(val);
+                list.add(array[i]);
+                if(!result.contains(list)){
+                    result.add(list);
+                }
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         KClosesPoints ls = new KClosesPoints();
+        /*
         List<List<Integer>> list = new ArrayList<>();
         List<Integer> temp = new ArrayList<>();
         temp.add(3);
@@ -66,6 +94,8 @@ public class KClosesPoints {
         temp4.add(-3);
         list.add(temp4);
         */
-        System.out.println(ls.KClosesPoints(list, 1));
+        int[] array = {1,4,2,5,3,6,4,1,0};
+        System.out.println(ls.getSum(array, 5));
+        // System.out.println(ls.numOfSegments("My name is Biplab"));
     }
 }
