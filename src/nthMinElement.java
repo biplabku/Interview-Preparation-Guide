@@ -111,6 +111,31 @@ public class nthMinElement {
     }
 
 
+    public boolean isomorphFast(String str1, String str2) {
+        if(str1.length() != str2.length()) {
+            return false;
+        }
+        HashMap<Character, Character> hmap = new HashMap<>();
+        for(int i = 0; i < str1.length(); i++) {
+            char ch1 = str1.charAt(i);
+            char ch2 = str2.charAt(i);
+            if(!hmap.containsKey(ch1)) { //  if it does not contain the first value
+                if(hmap.containsValue(ch2)) {
+                    return false;
+                }else{
+                    hmap.put(ch1, ch2);
+                }
+            }else {
+                if(hmap.get(ch1) == ch2) {
+                    continue;
+                }else {
+                    return false;
+                }
+            }
+        }
+        return  true;
+    }
+
     public void display(int[] array) {
         for(int i = 0; i < array.length; i++) {
             System.out.println(array[i]);
@@ -124,6 +149,6 @@ public class nthMinElement {
         // System.out.println(ms.nextTryMinElement(array, 3));
         String str = "abba";
         String ptr = "abab";
-        System.out.println(ms.isomorphicStrings(str, ptr));
+        System.out.println(ms.isomorphFast(str, ptr));
     }
 }
