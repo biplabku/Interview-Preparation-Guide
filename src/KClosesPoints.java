@@ -68,6 +68,57 @@ public class KClosesPoints {
         return result;
     }
 
+
+    public double medianOfSorted(List<Integer> list1, List<Integer> list2) {
+        double res = 0;
+        List<Integer> list = new ArrayList<>();
+        int index1 = 0;
+        int index2 = 0;
+        while(index1 < list1.size() && index2 < list2.size()) {
+            if(list1.get(index1) <= list2.get(index2)) {
+                list.add(list1.get(index1));
+                index1++;
+            }else if(list1.get(index1) > list2.get(index2)) {
+                list.add(list2.get(index2));
+                index2++;
+            }
+        }
+        while(index1 < list1.size()) {
+            list.add(list1.get(index1));
+            index1++;
+        }
+        while(index2 < list2.size()) {
+            list.add(list2.get(index2));
+            index2++;
+        }
+
+        if(list.size() == 1) {
+            return (double)list.get(0);
+        }
+        int n = list.get(list.size()/2);
+        int l = list.get(list.size()/2 + 1);
+        if(list.size() % 2 == 0) {
+            res = (double)(n + l) /2;
+            return res;
+        }
+        res = (double)(list.get(list.size()/2));
+        return res;
+    }
+
+    public int KthSmallestGivenSize() {
+        return 1;
+    }
+
+
+    public class KNode{
+        int size;
+        int val;
+        public KNode leftChild;
+        public KNode rightChild;
+    }
+
+
+
     public static void main(String[] args) {
         KClosesPoints ls = new KClosesPoints();
         /*
@@ -96,6 +147,10 @@ public class KClosesPoints {
         */
         int[] array = {1,4,2,5,3,6,4,1,0};
         System.out.println(ls.getSum(array, 5));
+        List<Integer> list = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+        list2.add(2);
+        System.out.println(ls.medianOfSorted(list, list2));
         // System.out.println(ls.numOfSegments("My name is Biplab"));
     }
 }
