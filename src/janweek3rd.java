@@ -176,10 +176,54 @@ public class janweek3rd {
     }
 
 
+    public int getMaxWaterContainer(int[] array) {
+        int max = Integer.MIN_VALUE;
+        for(int i = 0; i < array.length ; i++) {
+            int sum = array[i];
+            for(int j = i + 1; j < array.length; j++) {
+
+                if(array[i] < ) {
+                    break;
+                }else {
+                    sum = sum * (j - j + 1);
+                }
+                if(sum > max) {
+                    max = sum;
+                }
+            }
+        }
+        return max;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static void main(String[] args) {
         janweek3rd js = new janweek3rd();
-        int[] array = {10,15,3,7};
+        int[] array = {1,6,5,2,5};
         int k = 13;
-        System.out.println(js.add2NumbersFast(array, k));
+        System.out.println(js.getMaxWaterContainer(array));
     }
 }
