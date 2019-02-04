@@ -187,6 +187,21 @@ public class janweek3rd {
     }
 
 
+    public int getMaxSecondMethod(int[] array) {
+        int left = 0;
+        int right = array.length - 1;
+        int max = 0;
+        while(left < right) {
+            max = Math.max(max, Math.min(array[left], array[right]) * (right - left));
+            if(array[left] < array[right]) {
+                left++;
+            }else {
+                right--;
+            }
+        }
+        return max;
+    }
+
 
 
 
@@ -215,6 +230,6 @@ public class janweek3rd {
         janweek3rd js = new janweek3rd();
         int[] array = {1,6,5,2,5};
         int k = 13;
-        System.out.println(js.getMaxWaterContainer(array));
+        System.out.println(js.getMaxSecondMethod(array));
     }
 }
