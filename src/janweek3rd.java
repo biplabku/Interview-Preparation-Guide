@@ -177,19 +177,10 @@ public class janweek3rd {
 
 
     public int getMaxWaterContainer(int[] array) {
-        int max = Integer.MIN_VALUE;
+        int max = 0;
         for(int i = 0; i < array.length ; i++) {
-            int sum = array[i];
             for(int j = i + 1; j < array.length; j++) {
-
-                if(array[i] < ) {
-                    break;
-                }else {
-                    sum = sum * (j - j + 1);
-                }
-                if(sum > max) {
-                    max = sum;
-                }
+                max = Math.max(max, Math.min(array[i], array[j]) * (j - i));
             }
         }
         return max;
