@@ -203,24 +203,21 @@ public class janweek3rd {
     }
 
 
+    public List<List<Integer>> getCombinatorialSum(int k, int number) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        for(int i = 1; i <= number; i++) {
+            list.add(i);
+        }
+        for(int i = 1; i < 10; i++) {
+            for(int j = 1; j <= k; j++) {
+                
+            }
+        }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return result;
+    }
 
 
 
@@ -230,6 +227,6 @@ public class janweek3rd {
         janweek3rd js = new janweek3rd();
         int[] array = {1,6,5,2,5};
         int k = 13;
-        System.out.println(js.getMaxSecondMethod(array));
+        System.out.println(js.getCombinatorialSum(3, 9));
     }
 }

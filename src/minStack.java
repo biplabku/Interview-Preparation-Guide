@@ -10,7 +10,9 @@ public class minStack {
         }
         System.out.println('\n');
         for (int i = 0; i < array.length; i++) {
-            System.out.println("Popped " + stack.pop().value );
+            System.out
+
+                    .println("Popped " + stack.pop().value );
             System.out.println("New min is " + stack.min());
         }
     }
