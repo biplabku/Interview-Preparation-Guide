@@ -205,18 +205,26 @@ public class janweek3rd {
 
     public List<List<Integer>> getCombinatorialSum(int k, int number) {
         List<List<Integer>> result = new ArrayList<>();
-        List<Integer> list = new ArrayList<>();
-        for(int i = 1; i <= number; i++) {
-            list.add(i);
-        }
-        for(int i = 1; i < 10; i++) {
-            for(int j = 1; j <= k; j++) {
-                
+        getTheSumList(result, k, number, new ArrayList<>(), 1);
+        return result;
+    }
+
+    public void getTheSumList(List<List<Integer>> list, int k, int number, List<Integer> curentList, int start) {
+        // end case
+        if(curentList.size() == k && number == 0) {
+            Arrays.sort(curentList.toArray());
+            list.add(new ArrayList<>(curentList));
+            return ;
+        } else {
+            for(int i = 1; i < 10; i++) {
+                if(curentList.contains(i)) {
+                    continue;
+                }
+                curentList.add(i);
+                getTheSumList(list, k, number - i, curentList, i + 1);
+                curentList.remove(curentList.size() - 1);
             }
         }
-
-
-        return result;
     }
 
 
@@ -227,6 +235,6 @@ public class janweek3rd {
         janweek3rd js = new janweek3rd();
         int[] array = {1,6,5,2,5};
         int k = 13;
-        System.out.println(js.getCombinatorialSum(3, 9));
+        System.out.println(js.getCombinatorialSum(3, 7));
     }
 }
