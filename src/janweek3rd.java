@@ -238,11 +238,14 @@ public class janweek3rd {
         }
     }
 
-    
 
-
-
-
+    public int totalBinaryNodes(BSTNode node, int res) {
+        if(node == null) {
+            return 1;
+        }
+        res = 1 + totalBinaryNodes(node.leftChild, res) + totalBinaryNodes(node.rightChild, res);
+        return res;
+    }
 
 
 
