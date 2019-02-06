@@ -212,8 +212,19 @@ public class janweek3rd {
     public void getTheSumList(List<List<Integer>> list, int k, int number, List<Integer> curentList, int start) {
         // end case
         if(curentList.size() == k && number == 0) {
-            Arrays.sort(curentList.toArray());
-            list.add(new ArrayList<>(curentList));
+            int[] arr = new int[curentList.size()];
+            for(int i = 0;i < curentList.size(); i++) {
+                arr[i] = curentList.get(i);
+            }
+            Arrays.sort(arr);
+            curentList.clear();
+            for(int i = 0; i < arr.length; i++) {
+                curentList.add(arr[i]);
+            }
+            if(!list.contains(curentList)) {
+                list.add(new ArrayList<>(curentList));
+
+            }
             return ;
         } else {
             for(int i = 1; i < 10; i++) {
@@ -227,6 +238,12 @@ public class janweek3rd {
         }
     }
 
+    
+
+
+
+
+
 
 
 
@@ -235,6 +252,6 @@ public class janweek3rd {
         janweek3rd js = new janweek3rd();
         int[] array = {1,6,5,2,5};
         int k = 13;
-        System.out.println(js.getCombinatorialSum(3, 7));
+        System.out.println(js.getCombinatorialSum(3, 9));
     }
 }
