@@ -238,7 +238,7 @@ public class janweek3rd {
         }
     }
 
-
+    // total number of binary nodes
     public int totalBinaryNodes(BSTNode node, int res) {
         if(node == null) {
             return 1;
@@ -247,6 +247,16 @@ public class janweek3rd {
         return res;
     }
 
+    // Given the root to a binary tree, return the deepest node.
+
+
+    public int getMaxHeight(BSTNode node) {
+        if(node == null) {
+            return 0;
+        }
+
+        return 1 + Math.max(getMaxHeight(node.leftChild), getMaxHeight(node.rightChild));
+    }
 
 
 
