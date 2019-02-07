@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class janweek3rd {
 
@@ -259,6 +256,40 @@ public class janweek3rd {
     }
 
 
+    public int firstMissingPositive(int[] array) {
+        if(array.length < 1) {
+            return 1;
+        }
+        if(array.length == 1) {
+            if(array[0] > 2) {
+                return 1;
+            }else if(array[0] == 1) {
+                return 2;
+            }
+        }
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+        for(int i = 0; i < array.length; i++) {
+            if(!hmap.containsKey(array[i])) {
+                hmap.put(array[i], 1);
+            }
+        }
+        int i = 1;
+        int count = 0;
+        for(i = 1; i <= array.length; i++) {
+            if(!hmap.containsKey(i)) {
+                return i;
+            }else {
+                count++;
+            }
+        }
+        if(count == hmap.size()) {
+            return i;
+        }
+        return i+1;
+
+    }
+
+
     public List<Double> averageOfLevels(TreeNode root) {
         if(root == null) {
             return null;
@@ -273,12 +304,12 @@ public class janweek3rd {
             double sum = 0;
             for(int i = 0; i < val; i++) {
                 TreeNode node = queue.poll();
-                sum += node.val;
-                if(node.left != null) {
-                    queue.add(node.left);
+                sum += node.data;
+                if(node.leftChild != null) {
+                    queue.add(node.leftChild);
                 }
-                if(node.right != null) {
-                    queue.add(node.right);
+                if(node.rightChild != null) {
+                    queue.add(node.rightChild);
                 }
             }
             result.add(sum/val);
@@ -286,10 +317,25 @@ public class janweek3rd {
         return result;
     }
 
+    public List<Integer> findDuplicates(int[] array) {
+        List<Integer> result = new ArrayList<>();
+        Arrays.sort(array);
+        for(int i = 0; i < array.length - 1; i++) {
+            if(array[i] == array[ i + 1]) {
+                if(!result.contains(array[i + 1])) {
+                    result.add(array[i + 1]);
+
+                }
+            }
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
         janweek3rd js = new janweek3rd();
-        int[] array = {1,6,5,2,5};
+        int[] array = {2,1};
         int k = 13;
-        System.out.println(js.getCombinatorialSum(3, 9));
+        System.out.println(js.firstMissingPositive(array));
     }
 }
