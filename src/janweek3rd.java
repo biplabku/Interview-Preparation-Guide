@@ -289,6 +289,40 @@ public class janweek3rd {
 
     }
 
+    // a  b  c  b  a
+    public String KDistinctChars(String str, int k) {
+        StringBuilder sb = new StringBuilder();
+        HashSet<Character> hset = new HashSet<>();
+        int ptr1 = 0;
+        int ptr2 = 0;
+        int max = 0;
+
+
+        for(int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if(!hset.contains(ch)) {
+                hset.add(ch);
+                ptr2 = i;
+
+            }
+
+            if(hset.size() > k) {
+                if(max < (ptr2 - ptr1)) {
+                    sb.setLength(0);
+                    sb.append(str.substring(ptr1, ptr2 ));
+                    max = sb.length();
+                }
+                if(i >= str.length() - 1) {
+                    return sb.toString();
+                }
+                i = ptr1;
+                ptr1 = i + 1;
+                hset.clear();
+
+            }
+        }
+        return sb.append(str.substring(ptr1, str.length() - 1)).toString();
+    }
 
     public List<Double> averageOfLevels(TreeNode root) {
         if(root == null) {
@@ -332,12 +366,14 @@ public class janweek3rd {
         return result;
     }
 
-   
+
+
 
     public static void main(String[] args) {
         janweek3rd js = new janweek3rd();
         int[] array = {2,1};
         int k = 13;
-        System.out.println(js.firstMissingPositive(array));
+        String str = "abcbabcbcbcbca";
+        System.out.println(js.KDistinctChars(str, 2));
     }
 }
