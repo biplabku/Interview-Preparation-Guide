@@ -321,7 +321,8 @@ public class janweek3rd {
 
             }
         }
-        return sb.append(str.substring(ptr1, str.length() - 1)).toString();
+        sb.setLength(0);
+        return sb.append(str.substring(ptr1, str.length())).toString();
     }
 
     public List<Double> averageOfLevels(TreeNode root) {
@@ -373,7 +374,7 @@ public class janweek3rd {
         janweek3rd js = new janweek3rd();
         int[] array = {2,1};
         int k = 13;
-        String str = "abcbabcbcbcbca";
+        String str = "abc";
         System.out.println(js.KDistinctChars(str, 2));
     }
 }
