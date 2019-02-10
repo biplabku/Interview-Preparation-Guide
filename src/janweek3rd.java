@@ -89,6 +89,39 @@ public class janweek3rd {
     //
     public int[] wiggleSort(int[] array) {
         Arrays.sort(array);
+        TreeMap<Integer, Integer> hmap = new TreeMap<>();
+        for(int i = 0; i < array.length; i++){
+            if(!hmap.containsKey(array[i])) {
+                hmap.put(array[i], 1);
+            }else {
+                hmap.put(array[i], hmap.get(array[i]) + 1);
+            }
+        }
+        int[] newArr = new int[array.length];
+        int count = 0;
+        int counter = array.length - 1;
+        for(int i = 0; i < array.length/2; i++) {
+            if(hmap.containsKey(array[i])) {            // smaller
+                if(hmap.get(array[i]) == 0) {
+                    newArr[count] = hmap.get(array[i]);
+                }else{
+                    newArr[count] = array[i];
+                    hmap.put(array[i], hmap.get(array[i]) - 1);
+                }
+            }
+            if(hmap.containsKey(array[counter])) {      // larger
+                if(hmap.get(array[counter]) == 0) {
+                    newArr[++count] = hmap.get(array[counter]);
+                }else {
+                    newArr[++count] = array[counter];
+                    hmap.put(array[counter], hmap.get(array[counter]) - 1);
+                    counter--;
+                }
+            }
+            count++;
+        }
+
+
         // find the median element
         for(int i = 0; i < array.length; i++) {
             for(int j = i + 1; j < array.length; j++) {
@@ -370,11 +403,12 @@ public class janweek3rd {
 
 
 
+
     public static void main(String[] args) {
         janweek3rd js = new janweek3rd();
-        int[] array = {2,1};
+        int[] array = {1, 3, 2, 2, 3, 1};
         int k = 13;
         String str = "abc";
-        System.out.println(js.KDistinctChars(str, 2));
+        System.out.println(js.wiggleSort(array));
     }
 }
