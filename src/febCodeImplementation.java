@@ -1,5 +1,6 @@
 import com.sun.source.tree.Tree;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -65,12 +66,34 @@ public class febCodeImplementation {
         return max;
     }
 
+    //
+    public int maxSubArraySumLengthFast(int[] array, int k) {
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+        int max = 0;
+        int sum = 0;
+        for(int i = 0; i < array.length; i++) {
+            sum += array[i];
+            if(sum == k) {
+                max = Math.max(max, i + 1);
+            }
+
+            int diff = sum - k;
+            if(hmap.containsKey(diff)) {
+                max = Math.max(max, i - hmap.get(diff));
+            }
+            if(!hmap.containsKey(sum)) {
+                hmap.put(sum, i);
+            }
+        }
+        return max;
+    }
+
 
     public static void main(String[] args) {
         febCodeImplementation ls = new febCodeImplementation();
         String str1 = "horse";
         String str2 = "ros";
         int[] array = {-2,-1,2,1};
-        System.out.println(ls.maxSubArraySum(array, 1)) ;
+        System.out.println(ls.maxSubArraySumLengthFast(array, 1)) ;
     }
 }
