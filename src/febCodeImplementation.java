@@ -8,6 +8,29 @@ import java.util.TreeMap;
 public class febCodeImplementation {
 
 
+    public int increasingSubsequence(int[] array) {
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+        for(int i = 0; i < array.length; i++) {
+            int max = 1;
+            int temp = array[i];
+            for(int j = i + 1; j < array.length; j++) {
+                if(temp <= array[j]) {
+                    temp = array[j];
+                    max++;
+                }
+            }
+            hmap.put(i, max);
+        }
+        int max = 0;
+        Iterator iter = hmap.entrySet().iterator();
+        while(iter.hasNext()) {
+            Map.Entry pair = (Map.Entry) iter.next();
+            max = Math.max((int)pair.getValue(), max);
+        }
+        return max;
+    }
+
+
     public int minDistance(String word1, String word2) {
         int res = 0;
         TreeMap<Character, Integer> tmap1 = new TreeMap<>();
@@ -93,7 +116,7 @@ public class febCodeImplementation {
         febCodeImplementation ls = new febCodeImplementation();
         String str1 = "horse";
         String str2 = "ros";
-        int[] array = {-2,-1,2,1};
-        System.out.println(ls.maxSubArraySumLengthFast(array, 1)) ;
+        int[] array = {3,10,2,1,20};
+        System.out.println(ls.increasingSubsequence(array)) ;
     }
 }
