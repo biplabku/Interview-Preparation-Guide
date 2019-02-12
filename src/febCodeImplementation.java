@@ -31,6 +31,24 @@ public class febCodeImplementation {
     }
 
 
+    public int getClosestBinaryNode(BSTNode root, int target, int min, BSTNode temp) {
+        if(root == null) {
+            return -1;
+        }
+        int diff = Math.abs(target - root.data);
+        if(diff < min) {
+            min = diff;
+            temp.data = root.data;
+        }
+        if(target < root.data) {
+            getClosestBinaryNode(root.leftChild, target, min, temp);
+        }else if(target > root.data) {
+            getClosestBinaryNode(root.rightChild, target, min, temp);
+        }
+        return temp.data;
+    }
+
+
     public int minDistance(String word1, String word2) {
         int res = 0;
         TreeMap<Character, Integer> tmap1 = new TreeMap<>();
@@ -114,9 +132,16 @@ public class febCodeImplementation {
 
     public static void main(String[] args) {
         febCodeImplementation ls = new febCodeImplementation();
-        String str1 = "horse";
-        String str2 = "ros";
-        int[] array = {3,10,2,1,20};
-        System.out.println(ls.increasingSubsequence(array)) ;
+        BSTNode  root = new BSTNode(9);
+        root.leftChild    = new BSTNode(4);
+        root.rightChild   = new BSTNode(17);
+        root.leftChild.leftChild = new BSTNode(3);
+        root.leftChild.rightChild = new BSTNode(6);
+        root.leftChild.rightChild.leftChild = new BSTNode(5);
+        root.leftChild.rightChild.rightChild = new BSTNode(7);
+        root.rightChild.rightChild = new BSTNode(22);
+        root.rightChild.rightChild.leftChild = new BSTNode(20);
+        BSTNode temp = new BSTNode(Integer.MAX_VALUE);
+        System.out.println(ls.getClosestBinaryNode(root, 12, Integer.MAX_VALUE, temp)) ;
     }
 }
