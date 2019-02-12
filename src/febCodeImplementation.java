@@ -49,8 +49,19 @@ public class febCodeImplementation {
     }
 
     public int getClosestBinaryNodeHard(BSTNode root, int target, int min, BSTNode temp) {
-        
+        BSTNode minNode = new BSTNode(getClosestBinaryNode(root, target, Integer.MAX_VALUE, new BSTNode(Integer.MAX_VALUE)));
+        return 1;
     }
+
+
+    public int mindifferenceFast(BSTNode root) {
+        if(root == null) {
+            return -1;
+        }
+
+        return 1;
+    }
+
 
 
     public int minDistance(String word1, String word2) {
@@ -146,6 +157,6 @@ public class febCodeImplementation {
         root.rightChild.rightChild = new BSTNode(22);
         root.rightChild.rightChild.leftChild = new BSTNode(20);
         BSTNode temp = new BSTNode(Integer.MAX_VALUE);
-        System.out.println(ls.getClosestBinaryNode(root, 12, Integer.MAX_VALUE, temp)) ;
+        System.out.println(ls.mindifferenceFast(root)) ;
     }
 }
