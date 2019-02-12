@@ -48,6 +48,10 @@ public class febCodeImplementation {
         return temp.data;
     }
 
+    public int getClosestBinaryNodeHard(BSTNode root, int target, int min, BSTNode temp) {
+        
+    }
+
 
     public int minDistance(String word1, String word2) {
         int res = 0;
