@@ -1,9 +1,6 @@
 import com.sun.source.tree.Tree;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class febCodeImplementation {
 
@@ -145,6 +142,21 @@ public class febCodeImplementation {
     }
 
 
+    public List<Integer> maxSumSubArray(int[] array, int k) {
+        List<Integer> list = new ArrayList<>();
+        int max1 = array[0];
+        int max2 = array[1];
+        for(int i = 1; i < array.length; i++) {
+            max1 = Math.max(array[i], max1);
+            max2 = Math.max(array[i], max2);
+            if(i >= k-1) {
+                list.add(Math.max(max1, max2));
+                max1 = max2;
+            }
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         febCodeImplementation ls = new febCodeImplementation();
         BSTNode  root = new BSTNode(9);
@@ -157,6 +169,7 @@ public class febCodeImplementation {
         root.rightChild.rightChild = new BSTNode(22);
         root.rightChild.rightChild.leftChild = new BSTNode(20);
         BSTNode temp = new BSTNode(Integer.MAX_VALUE);
-        System.out.println(ls.mindifferenceFast(root)) ;
+        int[] array = {10, 5, 2, 7, 8, 7};
+        System.out.println(ls.maxSumSubArray(array, 2)) ;
     }
 }
