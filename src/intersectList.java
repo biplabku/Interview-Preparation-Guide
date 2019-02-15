@@ -35,6 +35,22 @@ public class intersectList {
 
     }
 
+    public LinkNode removeLinkElements(LinkNode head, int val) {
+        LinkNode temp = new LinkNode(0);
+        temp.next = head;
+        LinkNode first = head;
+        LinkNode second = temp;
+        while(first != null) {
+            first = first.next;
+            if(first.data == val) {
+                second.next = first;
+            }else {
+                second = second.next;
+            }
+        }
+        return temp.next;
+    }
+
 
     public static void main(String[] args) {
         LinkNode node1 = new LinkNode(3);
@@ -56,6 +72,6 @@ public class intersectList {
         nod3.next = nod4;
 
         intersectList ls = new intersectList();
-        System.out.println(ls.findIntersectNode(node1, nod1).data);
+        System.out.println(ls.removeLinkElements(node1, 1));
     }
 }
