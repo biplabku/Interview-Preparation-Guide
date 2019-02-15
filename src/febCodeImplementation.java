@@ -7,6 +7,7 @@ public class febCodeImplementation {
 
     public int increasingSubsequence(int[] array) {
         HashMap<Integer, Integer> hmap = new HashMap<>();
+
         for(int i = 0; i < array.length; i++) {
             int max = 1;
             int temp = array[i];
@@ -150,12 +151,14 @@ public class febCodeImplementation {
             max1 = Math.max(array[i], max1);
             max2 = Math.max(array[i], max2);
             if(i >= k-1) {
-                list.add(Math.max(max1, max2));
+                list.add(max1);
                 max1 = max2;
             }
         }
         return list;
     }
+
+
 
     public static void main(String[] args) {
         febCodeImplementation ls = new febCodeImplementation();
@@ -169,7 +172,7 @@ public class febCodeImplementation {
         root.rightChild.rightChild = new BSTNode(22);
         root.rightChild.rightChild.leftChild = new BSTNode(20);
         BSTNode temp = new BSTNode(Integer.MAX_VALUE);
-        int[] array = {10, 5, 2, 7, 8, 7};
+        int[] array = {13,14,23,28,3,9};
         System.out.println(ls.maxSumSubArray(array, 2)) ;
     }
 }

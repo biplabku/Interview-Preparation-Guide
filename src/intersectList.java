@@ -36,19 +36,13 @@ public class intersectList {
     }
 
     public LinkNode removeLinkElements(LinkNode head, int val) {
-        LinkNode temp = new LinkNode(0);
-        temp.next = head;
-        LinkNode first = head;
-        LinkNode second = temp;
-        while(first != null) {
-            first = first.next;
-            if(first.data == val) {
-                second.next = first;
-            }else {
-                second = second.next;
-            }
+        LinkNode cur = head;
+        LinkNode nxt = cur.next;
+
+        while(cur != null) {
+
         }
-        return temp.next;
+        return null;
     }
 
 
