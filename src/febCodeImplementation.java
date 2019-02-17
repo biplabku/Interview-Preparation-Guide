@@ -152,7 +152,9 @@ public class febCodeImplementation {
         for(int i = 0; i < words.length; i++) {
             String s1 = words[i];
             int val = str.indexOf(s1);
-            tmap.put(val, s1);
+            if(!tmap.containsKey(val)) {
+                tmap.put(val, s1);
+            }
         }
         Iterator iter = tmap.entrySet().iterator();
         while(iter.hasNext()) {
@@ -213,8 +215,8 @@ public class febCodeImplementation {
         BSTNode temp = new BSTNode(Integer.MAX_VALUE);
         int[] array = {13,14,23,28,3,9};
         int[] array1 = {-7, -8,7,5,7,1,6,0};
-        String[] words = {"bed", "bath", "bedbath", "and", "beyond"};
-        String str = "bedbathandbeyond";
+        String[] words = {"quick", "brown", "the", "fox"};
+        String str = "thequickbrownfox";
         System.out.println(ls.checkWords(words, str)) ;
     }
 }
