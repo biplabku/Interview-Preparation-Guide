@@ -142,6 +142,26 @@ public class febCodeImplementation {
         return max;
     }
 
+    // thequickbrownfox
+    // 'quick', 'brown', 'the', 'fox'
+
+    //
+    public List<String> checkWords(String[] words, String str) {
+        List<String> result = new ArrayList<>();
+        TreeMap<Integer, String> tmap = new TreeMap<>();
+        for(int i = 0; i < words.length; i++) {
+            String s1 = words[i];
+            int val = str.indexOf(s1);
+            tmap.put(val, s1);
+        }
+        Iterator iter = tmap.entrySet().iterator();
+        while(iter.hasNext()) {
+            Map.Entry pair = (Map.Entry) iter.next();
+            result.add(pair.getValue().toString());
+        }
+        return result;
+    }
+
 
     public List<Integer> maxSumSubArray(int[] array, int k) {
         List<Integer> list = new ArrayList<>();
@@ -159,6 +179,25 @@ public class febCodeImplementation {
     }
 
 
+    // {1, 3, -1, -3, 5, 3, 6, 7};
+    //  1,  3, -1   max2 = (max2, array[last])
+    //  3, -1, -3   max2 =
+    // -1, -3,  5
+    // -3,  5,  3
+    //  5,  3,  6
+    //  3,  6,  7
+
+    public List<Integer> slidingWinMax(int[] array, int k) {
+        Queue<Integer> queue = new LinkedList<>();
+        List<Integer> result = new ArrayList<>();
+        for(int i = 0; i < k; i++) {
+            while(!queue.isEmpty() ) {
+                
+            }
+        }
+        return result;
+    }
+
 
     public static void main(String[] args) {
         febCodeImplementation ls = new febCodeImplementation();
@@ -173,6 +212,9 @@ public class febCodeImplementation {
         root.rightChild.rightChild.leftChild = new BSTNode(20);
         BSTNode temp = new BSTNode(Integer.MAX_VALUE);
         int[] array = {13,14,23,28,3,9};
-        System.out.println(ls.maxSumSubArray(array, 2)) ;
+        int[] array1 = {-7, -8,7,5,7,1,6,0};
+        String[] words = {"bed", "bath", "bedbath", "and", "beyond"};
+        String str = "bedbathandbeyond";
+        System.out.println(ls.checkWords(words, str)) ;
     }
 }
