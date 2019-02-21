@@ -1,4 +1,33 @@
+import java.util.List;
+import java.util.Stack;
+
 public class intersectList {
+
+    public int getRussianDollImplementation(List<List<Integer>> list) {
+        int max = 0;
+        for(int i = 0; i < list.size(); i++) {
+            List<Integer> temp1 = list.get(i);
+            Stack<List<Integer>> theStack = new Stack<>();
+            theStack.push(temp1);
+            for(int j = 0; j < list.size(); j++) {
+                if(i != j) {
+                    List<Integer> temp2 = list.get(j);
+                    if(temp1.get(0) < temp2.get(0) && temp1.get(1) < temp2.get(1)) {
+                        Stack<List<Integer>> tmpStck = new Stack<>();
+                        while(temp2.get(0) < theStack.peek().get(0) && temp1.get(1) < theStack.peek().get(1) && !theStack.isEmpty()) {
+                            tmpStck.push(theStack.pop());
+                        }
+                        theStack.push(temp2);
+                        while(!tmpStck.isEmpty()) {
+                            theStack.push(tmpStck.pop());
+                        }
+                    }
+                }
+                max = Math.max(max, theStack.size());
+            }
+        }
+        return max;
+    }
 
     public  LinkNode findIntersectNode(LinkNode head1, LinkNode head2) {
         int size1 = 0;
@@ -44,6 +73,8 @@ public class intersectList {
         }
         return null;
     }
+
+    
 
 
     public static void main(String[] args) {
