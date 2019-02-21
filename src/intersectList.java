@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -13,17 +14,24 @@ public class intersectList {
                 if(i != j) {
                     List<Integer> temp2 = list.get(j);
                     if(temp1.get(0) < temp2.get(0) && temp1.get(1) < temp2.get(1)) {
-                        Stack<List<Integer>> tmpStck = new Stack<>();
-                        while(temp2.get(0) < theStack.peek().get(0) && temp1.get(1) < theStack.peek().get(1) && !theStack.isEmpty()) {
-                            tmpStck.push(theStack.pop());
-                        }
-                        theStack.push(temp2);
-                        while(!tmpStck.isEmpty()) {
-                            theStack.push(tmpStck.pop());
+                        if(!theStack.isEmpty()) {
+                            Stack<List<Integer>> tmpStack = new Stack<>();
+                            List<Integer> cur = theStack.peek();
+                            while(cur.get(0) > temp2.get(0) && cur.get(1) > temp2.get(1) && !theStack.isEmpty()) {
+                                tmpStack.push(theStack.pop());
+                            }
+                            if(theStack.isEmpty() || theStack.peek().get(0) < temp2.get(0) && theStack.peek().get(1) < temp2.get(1) ) {
+                                theStack.push(temp2);
+                            }
+                            while(!tmpStack.isEmpty()) {
+                                theStack.push(tmpStack.pop());
+                            }
+                        }else {
+                            theStack.push(temp2);
                         }
                     }
+                    max = Math.max(max, theStack.size());
                 }
-                max = Math.max(max, theStack.size());
             }
         }
         return max;
@@ -96,7 +104,25 @@ public class intersectList {
         nod2.next = nod3;
         nod3.next = nod4;
 
+        List<List<Integer>> list = new ArrayList<>();
+        List<Integer> t1 = new ArrayList<>();
+        t1.add(5);
+        t1.add(4);
+        List<Integer> t2 = new ArrayList<>();
+        t2.add(6);
+        t2.add(4);
+        List<Integer> t3 = new ArrayList<>();
+        t3.add(6);
+        t3.add(7);
+        List<Integer> t4 = new ArrayList<>();
+        t4.add(2);
+        t4.add(3);
+        list.add(t1);
+        list.add(t2);
+        list.add(t3);
+        list.add(t4);
+
         intersectList ls = new intersectList();
-        System.out.println(ls.removeLinkElements(node1, 1));
+        System.out.println(ls.getRussianDollImplementation(list));
     }
 }
