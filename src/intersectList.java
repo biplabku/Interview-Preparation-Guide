@@ -248,6 +248,34 @@ public class intersectList {
         return sb.toString();
     }
 
+
+    public int makingAnagrams(String str1, String str2) {
+        HashMap<Character, Integer> hmap = new HashMap<>();
+        for(int i =0; i < str1.length(); i++) {
+            char ch = str1.charAt(i);
+            if(!hmap.containsKey(ch)) {
+                hmap.put(ch, 1);
+            }else {
+                hmap.put(ch, hmap.get(ch) + 1);
+            }
+        }
+        int count = 0;
+        for(int  i = 0; i < str2.length(); i++) {
+            char ch = str2.charAt(i);
+            if(hmap.containsKey(ch)) {
+                int val = hmap.get(ch);
+                if(val == 0) {
+
+                }else {
+                    val = val - 1;
+                    hmap.put(ch, val);
+                    count++;
+                }
+            }
+        }
+        return (str1.length() - count) + (str2.length() - count);
+    }
+
     public static void main(String[] args) {
         LinkNode node1 = new LinkNode(3);
         LinkNode node2 = new LinkNode(5);
@@ -289,6 +317,6 @@ public class intersectList {
 
         intersectList ls = new intersectList();
         ls.getTest(19);
-        System.out.println(ls.runLengthCorrect("aa"));
+        System.out.println(ls.makingAnagrams("absdjkvuahdakejfnfauhdsaavasdlkj", "djfladfhiawasdkjvalskufhafablsdkashlahdfa"));
     }
 }
