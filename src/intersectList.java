@@ -148,8 +148,83 @@ public class intersectList {
         return null;
     }
 
-    
 
+
+    public void getTest(int number) {
+        System.out.println(number / 10);
+        String str = "1234";
+        int sum = 0;
+        for(int i = 0; i < str.length(); i++) {
+            sum += Integer.valueOf(str.charAt(i));
+        }
+        System.out.println(sum);
+    }
+
+    static String GetCheckDigitAndCheckCode(String input) {
+        /*
+         * Write your code here.
+         */
+        int sum = 0;
+        for(int i = 0; i < input.length(); i++) {
+            if(i%2 == 0 || i == 0) {
+
+                sum += 3 * Character.getNumericValue(input.charAt(i));
+            }else {
+                sum += Character.getNumericValue(input.charAt(i));
+            }
+        }
+        int subDigit = ((sum/10) + 1 ) * 10;
+        int checkDigit = subDigit - sum;
+
+        input = input + checkDigit;
+
+
+        int digit1 = get9Digits(input.substring(0, 8));
+        int digit2 = get9Digits(input.substring(9));
+
+        // NOTE - Not able to understand what means by index of 2 digit numbers so here am just adding instead of multiplying the 2 9 digits.
+        int result = digit1 + digit2 + 207;
+        int remainder = result % 103;
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(checkDigit);
+        sb.append(',');
+        sb.append(remainder);
+        return sb.toString();
+    }
+
+    public static  int get9Digits(String str) {
+        int val = 0;
+        for(int i = 0; i < str.length(); i++) {
+            val = val * 10 + Character.getNumericValue(str.charAt(i));
+        }
+        return  val;
+    }
+
+
+    public String runLengthCoding(String str) {
+        str = str.trim();
+        HashMap<Character, Integer> hmap = new HashMap<>();
+        for(int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if(!hmap.containsKey(ch)) {
+                hmap.put(ch, 1);
+            }else {
+                hmap.put(ch, hmap.get(ch) + 1);
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        Iterator iter = hmap.entrySet().iterator();
+        for(int i =0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if(hmap.containsKey(ch)) {
+                sb.append(hmap.get(ch));
+                sb.append(ch);
+                hmap.remove(ch);
+            }
+        }
+        return sb.toString();
+    }
 
     public static void main(String[] args) {
         LinkNode node1 = new LinkNode(3);
@@ -191,6 +266,7 @@ public class intersectList {
         int[][] array = {{2,100}, {3,200}, {4,300}, {5,500}, {5,400}, {5, 250}, {6,370}, {6,360}, {7,380}};
 
         intersectList ls = new intersectList();
-        System.out.println(ls.bruteRussianDoll(array));
+        ls.getTest(19);
+        System.out.println(ls.runLengthCoding("AAAABBBCCDAA"));
     }
 }
