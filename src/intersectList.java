@@ -182,7 +182,8 @@ public class intersectList {
         int digit1 = get9Digits(input.substring(0, 8));
         int digit2 = get9Digits(input.substring(9));
 
-        // NOTE - Not able to understand what means by index of 2 digit numbers so here am just adding instead of multiplying the 2 9 digits.
+        // NOTE - Not able to understand what means by index of 2
+        // digit numbers so here am just adding instead of multiplying the 2 9 digits.
         int result = digit1 + digit2 + 207;
         int remainder = result % 103;
 
@@ -223,6 +224,27 @@ public class intersectList {
                 hmap.remove(ch);
             }
         }
+        return sb.toString();
+    }
+
+    public String runLengthCorrect(String str) {
+        Stack<Character> theStack = new Stack<>();
+        theStack.push(str.charAt(0));
+        StringBuilder sb = new StringBuilder();
+        for(int i = 1; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if(theStack.peek() == ch) {
+                theStack.push(ch);
+            }else {
+                sb.append(theStack.size());
+                sb.append(theStack.peek());
+                theStack.clear();
+                theStack.push(ch);
+            }
+        }
+        sb.append(theStack.size());
+        sb.append(theStack.peek());
+        theStack.clear();
         return sb.toString();
     }
 
@@ -267,6 +289,6 @@ public class intersectList {
 
         intersectList ls = new intersectList();
         ls.getTest(19);
-        System.out.println(ls.runLengthCoding("AAAABBBCCDAA"));
+        System.out.println(ls.runLengthCorrect("aa"));
     }
 }
