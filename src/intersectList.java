@@ -276,7 +276,39 @@ public class intersectList {
         return (str1.length() - count) + (str2.length() - count);
     }
 
+    public void MakeTheNumbersMatch(int a, int b, int x, int y) {
+        while(a!=x && b!=y)
+        {
+            if(a> x)
+            {
+                a--;
+            }
+            else
+            {
+                a++;
+            }
+            if(b>y)
+            {
+                b--;
+            }
+            else
+            {
+                b++;
+            }
+        }
+    }
+
+
     public static void main(String[] args) {
+        int[][] array = {{2,100}, {3,200}, {4,300}, {5,500}, {5,400}, {5, 250}, {6,370}, {6,360}, {7,380}};
+
+        intersectList ls = new intersectList();
+        ls.getTest(19);
+        ls.MakeTheNumbersMatch(2, 1, 8, 10);
+
+
+
+
         LinkNode node1 = new LinkNode(3);
         LinkNode node2 = new LinkNode(5);
         LinkNode node3 = new LinkNode(1);
@@ -312,11 +344,5 @@ public class intersectList {
         list.add(t2);
         list.add(t3);
         list.add(t4);
-
-        int[][] array = {{2,100}, {3,200}, {4,300}, {5,500}, {5,400}, {5, 250}, {6,370}, {6,360}, {7,380}};
-
-        intersectList ls = new intersectList();
-        ls.getTest(19);
-        System.out.println(ls.makingAnagrams("absdjkvuahdakejfnfauhdsaavasdlkj", "djfladfhiawasdkjvalskufhafablsdkashlahdfa"));
     }
 }
