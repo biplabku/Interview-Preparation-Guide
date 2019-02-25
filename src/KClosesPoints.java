@@ -3,6 +3,52 @@ import java.util.*;
 public class KClosesPoints {
 
 
+    public int[][] kclosestPointsThere(int[][] points, int k) {
+        int[][] result = new int[k][2];
+        int len = k;
+        TreeMap<Integer, LinkedList<Points>> tmap = new TreeMap<>();
+
+        for(int i = 0; i < points.length; i++) {
+            Points temp = new Points(points[i][0], points[i][1]);
+            int val = calcDistance(temp.x, temp.y);
+            if(!tmap.containsKey(val)) {
+                LinkedList<Points> list = new LinkedList<>();
+                list.add(temp);
+                tmap.put(val, list);
+            }else {
+                tmap.get(val).add(temp);
+            }
+        }
+        Iterator iter = tmap.entrySet().iterator();
+        LinkedList<Points> temp = new LinkedList<>();
+        while(iter.hasNext() && temp.size() != k) {
+            Map.Entry pair = (Map.Entry) iter.next();
+            LinkedList<Points> list = (LinkedList)pair.getValue();
+            temp.addAll(list);
+        }
+        for(int i = 0; i < temp.size() && i < len; i++) {
+            Points p2 = temp.get(i);
+            result[i][0] = p2.x;
+            result[i][1] = p2.y;
+
+        }
+
+        return result;
+    }
+
+    public int calcDistance(int x, int y) {
+        return (int)Math.sqrt((x )*(x) + (y ) * (y ));
+    }
+
+    public static class Points {
+        int x;
+        int y;
+
+        public Points(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
 
     public List<List<Integer>> KClosesPoints(List<List<Integer>> list, int k) {
         List<List<Integer>> result = new LinkedList<>();
@@ -40,6 +86,7 @@ public class KClosesPoints {
         }
         return result;
     }
+
 
 
     public int numOfSegments(String str) {
@@ -118,6 +165,68 @@ public class KClosesPoints {
     }
 
 
+    public String[] findRelativeRanks(int[] nums) {
+        Arrays.sort(nums);
+
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+        for(int i = 0; i < nums.length; i++) {
+            if(!hmap.containsKey(nums[i])) {
+                hmap.put(nums[i], i);
+            }
+        }
+        int count = 0;
+        String[] result = new String[nums.length];
+        for(int i = 0; i < nums.length; i++) {
+            if(i == 0) {
+                result[count] = "Gold Medal";
+            }else if(i == 1) {
+                result[count] = "Silver Medal";
+            }else if(i == 2) {
+                result[count] = "Bronze Medal";
+            }else {
+                result[count] = Integer.toString(i + 1);
+            }
+            count++;
+        }
+        return result;
+    }
+
+
+    public int[][] kClosest(int[][] points, int k) {
+        int[][] result = new int[k][2];
+        int len = k;
+        TreeMap<Integer, LinkedList<Points>> tmap = new TreeMap<>();
+
+        for(int i = 0; i < points.length; i++) {
+            Points temp = new Points(points[i][0], points[i][1]);
+            int val = calcDistance1(temp.x, temp.y);
+            if(!tmap.containsKey(val)) {
+                LinkedList<Points> list = new LinkedList<>();
+                list.add(temp);
+                tmap.put(val, list);
+            }else {
+                tmap.get(val).add(temp);
+            }
+        }
+        Iterator iter = tmap.entrySet().iterator();
+        LinkedList<Points> temp = new LinkedList<>();
+        while(iter.hasNext() && temp.size() != k) {
+            Map.Entry pair = (Map.Entry) iter.next();
+            LinkedList<Points> list = (LinkedList)pair.getValue();
+            temp.addAll(list);
+        }
+        for(int i = 0; i < temp.size() && i < len; i++) {
+            Points p2 = temp.get(i);
+            result[i][0] = p2.x;
+            result[i][1] = p2.y;
+        }
+
+        return result;
+    }
+
+    public int calcDistance1(int x, int y) {
+        return (int)Math.sqrt((x )*(x) + (y ) * (y ));
+    }
 
     public static void main(String[] args) {
         KClosesPoints ls = new KClosesPoints();
@@ -145,12 +254,14 @@ public class KClosesPoints {
         temp4.add(-3);
         list.add(temp4);
         */
-        int[] array = {1,4,2,5,3,6,4,1,0};
+        int[] array = {10,3,8,9,4};
         System.out.println(ls.getSum(array, 5));
         List<Integer> list = new ArrayList<>();
         List<Integer> list2 = new ArrayList<>();
         list2.add(2);
-        System.out.println(ls.medianOfSorted(list, list2));
+
+        int[][] array1 = {{-5,4}, {-6,-5},{4,6}};
+        System.out.println(ls.kclosestPointsThere(array1, 2));
         // System.out.println(ls.numOfSegments("My name is Biplab"));
     }
 }
