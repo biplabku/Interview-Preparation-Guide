@@ -298,16 +298,81 @@ public class intersectList {
         }
     }
 
+    public String[] findRelativeRanks(int[] nums) {
+        TreeMap<Integer, Integer> hmap = new TreeMap<>();
+        for(int i = 0; i < nums.length; i++) {
+            if(!hmap.containsKey(nums[i])) {
+                hmap.put(nums[i], i);
+            }
+        }
+        String[] words = new String[nums.length];
+        Iterator iter = hmap.entrySet().iterator();
+
+        HashMap<Integer, String> tmap = new HashMap<>();
+        int count = nums.length;
+        while(iter.hasNext()) {
+            Map.Entry pair = (Map.Entry) iter.next();
+            int key = (int)pair.getKey();
+            int value = (int)pair.getValue();
+            value = count;
+            count--;
+            hmap.put(key, value);
+        }
+        for(int i = 0; i < nums.length; i++) {
+            if(hmap.get(nums[i]) == 1) {
+                words[i] = "Gold Medal";
+            }else if(hmap.get(nums[i]) == 2) {
+                words[i] = "Silver Medal";
+            }else if(hmap.get(nums[i]) == 3) {
+                words[i] = "Bronze Medal";
+            }else {
+                words[i] = hmap.get(nums[i]).toString();
+            }
+        }
+        return words;
+    }
+
+    // [2, 6, 4, 8, 10, 9, 15]
+    // output - 5
+    public int findUnsortedSubarray(int[] nums) {
+        int leftIndex = Integer.MAX_VALUE;
+        int rightIndex = Integer.MIN_VALUE;
+        for(int i = 1; i < nums.length; i++) {
+            if(nums[i] < nums[i - 1]) {
+                leftIndex = Math.min(leftIndex, nums[i - 1]);
+            }
+        }
+
+        for(int i = nums.length - 2; i >= 0; i--) {
+            if(nums[i] > nums[i + 1]) {
+                rightIndex = Math.max(rightIndex, nums[i]);
+            }
+        }
+        int left;
+        int right;
+        for(left = 0; left < nums.length; left++) {
+            if(leftIndex < nums[left]) {
+                break;
+            }
+        }
+        for(right = nums.length - 1; right >= 0; right--) {
+            if(rightIndex > nums[right]) {
+                break;
+            }
+        }
+        return (right - 1) < 0 ? 0: (right - 1 + 1);
+    }
+
+
+    public int minimumDeleteSum(String str1, String str2) {
+        
+    }
+
 
     public static void main(String[] args) {
         int[][] array = {{2,100}, {3,200}, {4,300}, {5,500}, {5,400}, {5, 250}, {6,370}, {6,360}, {7,380}};
 
         intersectList ls = new intersectList();
-        ls.getTest(19);
-        ls.MakeTheNumbersMatch(2, 1, 8, 10);
-
-
-
 
         LinkNode node1 = new LinkNode(3);
         LinkNode node2 = new LinkNode(5);
@@ -344,5 +409,7 @@ public class intersectList {
         list.add(t2);
         list.add(t3);
         list.add(t4);
+        int[] nums = {2,1};
+        System.out.println(ls.findUnsortedSubarray(nums));
     }
 }
