@@ -422,6 +422,27 @@ public class intersectList {
     }
 
 
+    public int mySquareRoot(int x) {
+        if(x == 0) {
+            return 0;
+        }
+        if(x == 1 || x == 2 || x == 3) {
+            return 1;
+        }
+        int start = 2;
+        int end = x;
+        while(start < end) {
+            int mid = start + (end - start) / 2 + 1;
+            if(mid  > x/mid) {
+                end = mid - 1;
+            }else {
+                start = mid;
+            }
+        }
+        return end;
+    }
+
+
     public static void main(String[] args) {
         int[][] array = {{2,100}, {3,200}, {4,300}, {5,500}, {5,400}, {5, 250}, {6,370}, {6,360}, {7,380}};
         int[][] grid = {{3,0,8,4},{2,4,5,7},{9,2,6,3},{0,3,1,0}};
@@ -463,6 +484,6 @@ public class intersectList {
         list.add(t3);
         list.add(t4);
         int[] nums = {2,1};
-        System.out.println(ls.skyLine(grid));
+        System.out.println(ls.mySquareRoot(2147395599));
     }
 }
