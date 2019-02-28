@@ -365,13 +365,66 @@ public class intersectList {
 
 
     public int minimumDeleteSum(String str1, String str2) {
-        
+        int count = 0;
+        TreeMap<Integer, Integer> tmap = new TreeMap<>();
+        String large = str1.length() >= str2.length() ? str1:str2;
+        String small = str1.length() < str2.length() ? str1:str2;
+
+        for(int i = 0; i < large.length(); i++) {
+            int val = Integer.valueOf(large.charAt(i));
+            if(!tmap.containsKey(val)) {
+                tmap.put(val, 1);
+            }else {
+                tmap.put(val, tmap.get(val) + 1);
+            }
+        }
+
+        for(int i = 0 ; i < small.length(); i++) {
+            int val = Integer.valueOf(small.charAt(i));
+            if(tmap.containsKey(val) && tmap.get(val) != 0) {
+                tmap.put(val, tmap.get(val) - 1);
+            }
+        }
+        Iterator iter = tmap.entrySet().iterator();
+        while(iter.hasNext()) {
+            Map.Entry pair = (Map.Entry) iter.next();
+            int val = (int)pair.getValue();
+            if(val > 0) {
+                count += (int)pair.getKey();
+            }
+
+        }
+        return count;
+    }
+
+    public int[][] skyLine(int[][] array) {
+        int[] maxRow = new int[array[0].length];
+        int[] maxCol = new int[array.length] ;
+        for(int i = 0; i < array[0].length; i++) {
+            int rowMax = array[i][0];
+            int colMax = array[0][i];
+            for(int j = 0; j < array.length; j++) {
+                rowMax = Math.max(rowMax, array[i][j]);
+            }
+            maxRow[i] = rowMax;
+            for(int j = 0; j < array.length; j++) {
+                colMax = Math.max(colMax, array[j][i]);
+            }
+            maxCol[i] = colMax;
+        }
+
+        for(int i =0; i < array[0].length; i++) {
+            for(int j = 0; j < array.length; j++) {
+                array[i][j] = Math.min(maxRow[i], maxCol[j]);
+            }
+        }
+        return array;
     }
 
 
     public static void main(String[] args) {
         int[][] array = {{2,100}, {3,200}, {4,300}, {5,500}, {5,400}, {5, 250}, {6,370}, {6,360}, {7,380}};
-
+        int[][] grid = {{3,0,8,4},{2,4,5,7},{9,2,6,3},{0,3,1,0}};
         intersectList ls = new intersectList();
 
         LinkNode node1 = new LinkNode(3);
@@ -410,6 +463,6 @@ public class intersectList {
         list.add(t3);
         list.add(t4);
         int[] nums = {2,1};
-        System.out.println(ls.findUnsortedSubarray(nums));
+        System.out.println(ls.skyLine(grid));
     }
 }
