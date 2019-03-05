@@ -94,14 +94,20 @@ public class burstBalloons {
         LinkNode cur = head;
         int val = 0;
         LinkNode prev = head;
+        LinkNode p = head;
         while(cur != null) {
             if(val != k) {
                 cur = cur.next;
+                p = cur;
                 val++;
             }else if(val == k){
-                val = 1;
-                reverseList(prev, k).next = cur.next;
-                prev = cur.next;
+                val = 0;
+                prev = reverseList(prev, k);
+                while(prev.next != null) {
+                    prev = prev.next;
+                }
+                prev.next = cur;
+                cur = p;
             }
         }
         return head;
@@ -109,9 +115,8 @@ public class burstBalloons {
 
     public LinkNode reverseList(LinkNode head, int k) {
         LinkNode prev = null;
-        LinkNode nxt = null;
+        LinkNode nxt;
         LinkNode cur = head;
-        int val = k;
         while(cur != null && k != 0) {
             nxt = cur.next;
             cur.next = prev;
@@ -119,18 +124,76 @@ public class burstBalloons {
             cur = nxt;
             k--;
         }
-        while(val != 0 && prev.next != null) {
-            prev = prev.next;
-            val--;
-        }
         return prev;
+    }
+    //
+    // 1 1 2 2 3 3 4
+    //       2
+    // 1 1 2 3
+    //     2
+
+    public int singleElementSortedArray(int[] array) {
+        int low = 0;
+        int high = array.length - 1;
+        while(low < high) {
+            int mid = (low + high )/2;
+            if(mid % 2 == 0) {
+                if(array[mid] == array[mid + 1]) {
+                    low = mid + 2;
+                }else {
+                    high = mid;
+                }
+            }else if(mid % 2 == 1){
+                if(array[mid] == array[mid - 1]) {
+                    low = mid + 1;
+                }else {
+                    high = mid - 1;
+                }
+            }
+        }
+        return  array[low];
     }
 
 
+    public void search(int[] arr, int low, int high) {
+        if(low > high)
+            return;
+        if(low == high)
+        {
+            System.out.println("The required element is "+arr[low]);
+            return;
+        }
+        int mid = (low + high)/2;
+        if(mid % 2 == 0)
+        {
+            if(arr[mid] == arr[mid+1])
+                search(arr, mid+2, high);
+            else
+                search(arr, low, mid);
+        }
+        // If mid is odd
+        else if(mid % 2 == 1)
+        {
+            if(arr[mid] == arr[mid-1])
+                search(arr, mid+1, high);
+            else
+                search(arr, low, mid-1);
+        }
+    }
 
 
-
-
+    // 1 -- 2 -- 3 -- 4
+    // 2 -- 1 -- 4 -- 3
+    public LinkNode swapLinkNodes(LinkNode head) {
+        LinkNode cur = head;
+        LinkNode nxtHead = head.next;
+        while(nxtHead != null) {
+            nxtHead.next = cur;
+            nxtHead = nxtHead.next;
+            cur = cur.next;
+        }
+        return nxtHead;
+    }
 
 
 
@@ -141,7 +204,7 @@ public class burstBalloons {
         burstBalloons bs = new burstBalloons();
         String str = "dog dog cat dog";
         String pattern = "aaba";
-        int[] array = {2,2,1};
+        int[] array = {3,3,7,7,10,11,11};
 
 
         LinkNode node1 = new LinkNode(1);
@@ -153,6 +216,6 @@ public class burstBalloons {
         node2.next = node3;
         node3.next = node4;
         node4.next = node5;
-        System.out.println(bs.getGroupReverse(node1, 2));
+        System.out.println(bs.swapLinkNodes(node1));
     }
 }
