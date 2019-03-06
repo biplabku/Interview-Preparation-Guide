@@ -1,4 +1,4 @@
-import java.util.HashMap;
+import java.util.*;
 
 public class burstBalloons {
 
@@ -187,14 +187,42 @@ public class burstBalloons {
     public LinkNode swapLinkNodes(LinkNode head) {
         LinkNode cur = head;
         LinkNode nxtHead = head.next;
-        while(nxtHead != null) {
-            nxtHead.next = cur;
+        LinkNode fakeNode = nxtHead;
+        LinkNode nxt = head.next;
+        while(cur.next != null && cur != null) {
+            nxtHead.next = nxt;
             nxtHead = nxtHead.next;
-            cur = cur.next;
+            nxtHead.next = nxt.next;
+            nxt = nxt.next.next;
         }
-        return nxtHead;
+        return fakeNode;
     }
 
+    // [{2,15}, {36,45}, {9,29}, {16,23}, {4,9}]
+    // {2,15}, {4,9}, {9,29}, {16,23}, {36,45}
+    // 2,15
+    // 4, 9
+    public int minConferenceRoom(Interval[] intervals) {
+        Arrays.sort(intervals, new Comparator<Interval>() {
+            @Override
+            public int compare(Interval o1, Interval o2) {
+                return o1.startTime - o2.startTime;
+            }
+        });
+        PriorityQueue<Interval> queue = new PriorityQueue<>();
+        queue.offer(intervals[0]);
+        for(int i = 1; i < intervals.length; i++) {
+            Interval temp = queue.peek();
+            if(intervals[i].startTime >= temp.endTime) {
+                queue.poll();
+                queue.offer(intervals[i]);
+            }else {
+                queue.offer(intervals[i]);
+            }
+        }
+        return queue.size();
+
+    }
 
 
 
@@ -216,6 +244,13 @@ public class burstBalloons {
         node2.next = node3;
         node3.next = node4;
         node4.next = node5;
-        System.out.println(bs.swapLinkNodes(node1));
+
+        Interval[] list = new Interval[3];
+        list[0] = new Interval(0,30);
+        list[1] = new Interval(5,10);
+        list[2] = new Interval(15,20);
+        //list[3] = new Interval(16,23);
+        // list[4] = new Interval(4,9);
+        System.out.println(bs.minConferenceRoom(list));
     }
 }
