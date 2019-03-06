@@ -209,22 +209,36 @@ public class burstBalloons {
                 return o1.startTime - o2.startTime;
             }
         });
-        PriorityQueue<Interval> queue = new PriorityQueue<>();
-        queue.offer(intervals[0]);
-        for(int i = 1; i < intervals.length; i++) {
-            Interval temp = queue.peek();
-            if(intervals[i].startTime >= temp.endTime) {
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+        queue.offer(intervals[0].endTime);
+        for(int i=1; i<intervals.length; i++){
+            if(intervals[i].startTime >= queue.peek()) {
                 queue.poll();
-                queue.offer(intervals[i]);
-            }else {
-                queue.offer(intervals[i]);
             }
+            queue.offer(intervals[i].endTime);
         }
         return queue.size();
 
     }
 
+    public int minMeetingRooms(Interval[] intervals) {
+        if(intervals == null || intervals.length == 0) return 0;
+        Arrays.sort(intervals, IntervalComparator);
+        PriorityQueue<Integer> endTimes = new PriorityQueue<>();
+        endTimes.offer((intervals[0].endTime));
+        for(int i=1; i<intervals.length; i++){
+            if(intervals[i].startTime >= endTimes.peek()) endTimes.poll();
+            endTimes.offer(intervals[i].endTime);
+        }
+        return endTimes.size();
+    }
 
+    private static Comparator<Interval> IntervalComparator = new Comparator<Interval>() {
+        @Override
+        public int compare(Interval l1, Interval l2){
+            return l1.startTime - l2.startTime;
+        }
+    };
 
 
 
