@@ -240,6 +240,41 @@ public class burstBalloons {
         }
     };
 
+    // 1->2->6->3->4->5->6
+    public LinkNode removeDuplicateElements(LinkNode head, int val) {
+        LinkNode cur = head.next;
+        LinkNode prev = head;
+        while(cur != null) {
+            if(cur.data == val) {
+                prev.next = cur.next;
+            }else {
+                prev = cur.next;
+            }
+            cur = cur.next;
+        }
+        return head;
+    }
+
+    // 1 -- 2 -- 3 -- 4 -- 5
+    // cur = 2
+    // pre = 1
+    public LinkNode swapNodes(LinkNode head) {
+        LinkNode prev = head;
+        LinkNode cur = head.next;
+        head = prev;
+        while(true) {
+            LinkNode nxt = cur.next;
+            cur.next = prev;
+            if (nxt == null || nxt.next == null) {
+                prev.next = nxt;
+                break;
+            }
+            prev.next = nxt.next;
+            prev = nxt;
+            cur = prev.next;
+        }
+        return head;
+    }
 
 
     public static void main(String[] args) {
@@ -265,6 +300,6 @@ public class burstBalloons {
         list[2] = new Interval(15,20);
         //list[3] = new Interval(16,23);
         // list[4] = new Interval(4,9);
-        System.out.println(bs.minConferenceRoom(list));
+        System.out.println(bs.swapNodes(node1));
     }
 }
