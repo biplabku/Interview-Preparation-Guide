@@ -276,10 +276,20 @@ public class burstBalloons {
         return head;
     }
 
+    public LinkNode reverseKGroups(LinkNode head, int k) {
+        return head;
+    }
+
+    public String temp(String str) {
+        int inde = str.indexOf('[');
+        int inde2 = str.indexOf(']');
+        str = str.substring(inde, inde2);
+        return str;
+    }
 
     public static void main(String[] args) {
         burstBalloons bs = new burstBalloons();
-        String str = "dog dog cat dog";
+        String str = "burger.letters.com - - [01/july/1995.0.0 - 400] /shuttle";
         String pattern = "aaba";
         int[] array = {3,3,7,7,10,11,11};
 
@@ -300,6 +310,7 @@ public class burstBalloons {
         list[2] = new Interval(15,20);
         //list[3] = new Interval(16,23);
         // list[4] = new Interval(4,9);
-        System.out.println(bs.swapNodes(node1));
+
+        System.out.println(bs.temp(str));
     }
 }
