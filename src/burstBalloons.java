@@ -287,6 +287,32 @@ public class burstBalloons {
         return str;
     }
 
+    public List<Integer> largestValue(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        int left = Integer.MIN_VALUE;
+        int right = Integer.MIN_VALUE;
+        result.add(root.data);
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            while(size != 0) {
+                TreeNode temp = queue.poll();
+                if(temp.leftChild != null) {
+                    left = Math.max(left, temp.leftChild.data);
+                    queue.offer(temp.leftChild);
+                }
+                if(temp.rightChild != null) {
+                    right = Math.max(right, temp.rightChild.data);
+                    queue.offer(temp.rightChild);
+                }
+                size--;
+            }
+            result.add(Math.max(left, right));
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         burstBalloons bs = new burstBalloons();
         String str = "burger.letters.com - - [01/july/1995.0.0 - 400] /shuttle";
