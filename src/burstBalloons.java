@@ -313,11 +313,49 @@ public class burstBalloons {
         return result;
     }
 
+    public void moveZeros(int[] array) {
+        int pointer1 = 0;
+        for(int i = 0; i < array.length; i++) {
+            if(array[i] != 0) {
+                swap(pointer1, i, array);
+                pointer1 = pointer1 + 1;
+            }
+        }
+        display(array);
+    }
+
+    public int findDuplicate(int[] array) {
+        int slow = array[0];
+        int fast = array[1];
+        int n = array.length;
+        while(array[slow] != array[fast]) {
+            slow = (slow + 1) % n;
+            fast = (fast + 2) % n;
+            if(fast == slow) {
+                fast = (fast + 1) % n;
+            }
+        }
+        return array[slow];
+    }
+
+    public void swap(int i, int j, int[] nums) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
+    public void display(int[] array) {
+        for(int i = 0; i < array.length; i++) {
+            System.out.print(array[i]);
+        }
+    }
+
+
     public static void main(String[] args) {
         burstBalloons bs = new burstBalloons();
         String str = "burger.letters.com - - [01/july/1995.0.0 - 400] /shuttle";
         String pattern = "aaba";
-        int[] array = {3,3,7,7,10,11,11};
+        int[] array = {1,3,4,2,2};
 
 
         LinkNode node1 = new LinkNode(1);
@@ -337,6 +375,6 @@ public class burstBalloons {
         //list[3] = new Interval(16,23);
         // list[4] = new Interval(4,9);
 
-        System.out.println(bs.temp(str));
+        System.out.println(bs.findDuplicate(array));
     }
 }
