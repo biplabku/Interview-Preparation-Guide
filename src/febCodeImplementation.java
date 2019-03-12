@@ -5,6 +5,78 @@ import java.util.*;
 public class febCodeImplementation {
 
 
+    public int pathSum(BSTNode root, int sum) {
+        int result = 0;
+        Queue<BSTNode> queue = new LinkedList<>();
+        queue.offer(root);
+        int count = 0;
+        while(!queue.isEmpty()) {
+            BSTNode temp = queue.poll();
+            int sumValue = temp.data;
+            if(temp.leftChild == null && temp.rightChild == null && sumValue == sum) {
+                count += 1;
+            }
+
+            if(temp.leftChild != null) {
+                queue.offer(temp.leftChild);
+
+            }
+        }
+        return count;
+
+    }
+
+    public int[] getClosestValue(String str, char ch) {
+        int index = str.indexOf(ch);
+        int[] array = new int[str.length()];
+        int counter = 0;
+        for(int i = 0; i < str.length(); i++) {
+            if(str.charAt(i) != ch) {
+                array[counter] = Math.abs(i - index);
+                counter++;
+            }else if(str.charAt(i) == ch) {
+                if(i > index) {
+                    index = i;
+                }
+                array[counter] = 0;
+                counter++;
+            }
+        }
+
+        str = new StringBuilder(str).reverse().toString();
+        index = str.indexOf(ch);
+        counter = str.length() - 1;
+        for(int i = 0; i < str.length(); i++) {
+            if(str.charAt(i) != ch) {
+                int val = Math.abs(i - index);
+                if(array[counter] < val) {
+                    counter--;
+                    continue;
+                }else {
+                    array[counter] = val;
+                    counter--;
+                }
+            }else if(str.charAt(i) == ch) {
+                if(i > index) {
+                    index = i;
+                }
+                array[counter] = 0;
+                counter--;
+            }
+        }
+
+        display(array);
+        return array;
+    }
+
+    public void display(int[] array) {
+        for(int i = 0; i < array.length; i++) {
+            System.out.print(array[i]);
+        }
+    }
+
+
+
     public int increasingSubsequence(int[] array) {
         HashMap<Integer, Integer> hmap = new HashMap<>();
 
@@ -203,20 +275,20 @@ public class febCodeImplementation {
 
     public static void main(String[] args) {
         febCodeImplementation ls = new febCodeImplementation();
-        BSTNode  root = new BSTNode(9);
-        root.leftChild    = new BSTNode(4);
-        root.rightChild   = new BSTNode(17);
+        BSTNode  root = new BSTNode(10);
+        root.leftChild    = new BSTNode(5);
+        root.rightChild   = new BSTNode(-3);
         root.leftChild.leftChild = new BSTNode(3);
-        root.leftChild.rightChild = new BSTNode(6);
-        root.leftChild.rightChild.leftChild = new BSTNode(5);
-        root.leftChild.rightChild.rightChild = new BSTNode(7);
-        root.rightChild.rightChild = new BSTNode(22);
-        root.rightChild.rightChild.leftChild = new BSTNode(20);
+        root.leftChild.rightChild = new BSTNode(2);
+        root.leftChild.leftChild.leftChild = new BSTNode(3);
+        root.leftChild.leftChild.rightChild = new BSTNode(-2);
+        root.leftChild.rightChild.rightChild = new BSTNode(1);
+        root.rightChild.rightChild = new BSTNode(11);
         BSTNode temp = new BSTNode(Integer.MAX_VALUE);
         int[] array = {13,14,23,28,3,9};
         int[] array1 = {-7, -8,7,5,7,1,6,0};
         String[] words = {"quick", "brown", "the", "fox"};
-        String str = "thequickbrownfox";
-        System.out.println(ls.checkWords(words, str)) ;
+        String str = "cizokxcijwbyspcfcqws";
+        System.out.println(ls.getClosestValue(str, 'c')) ;
     }
 }
