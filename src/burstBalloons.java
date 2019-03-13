@@ -350,10 +350,42 @@ public class burstBalloons {
         }
     }
 
+    public boolean stringExists(char[][] grid, String word) {
+
+        Queue<Character> queue = new LinkedList<>();
+        queue.offer(word.charAt(0));
+        boolean[][] visted = new boolean[grid.length][grid[0].length];
+
+        return false;
+    }
+
+    public List<String> flightProblem(List<List<String>> list, String str) {
+        PriorityQueue<String> result1 = new PriorityQueue<>();
+        List<String> result = new ArrayList<>();
+        result.add(str);
+        HashSet<Integer> hset = new HashSet<>();
+        for(int i = 0; i < list.size(); i++) {
+            for(int j = 0; j < list.size(); j++) {
+                String key = list.get(j).get(0);
+                if(str.equalsIgnoreCase(key)) {
+                    if(hset.contains(j)) {
+                        continue;
+                    }
+                    result.add(list.get(j).get(1));
+                    hset.add(j);
+                    str = list.get(j).get(1);
+                }
+            }
+        }
+        if(result.size() == 2) {
+            return null;
+        }
+        return result;
+    }
+
 
     public static void main(String[] args) {
         burstBalloons bs = new burstBalloons();
-        String str = "burger.letters.com - - [01/july/1995.0.0 - 400] /shuttle";
         String pattern = "aaba";
         int[] array = {1,3,4,2,2};
 
@@ -375,6 +407,27 @@ public class burstBalloons {
         //list[3] = new Interval(16,23);
         // list[4] = new Interval(4,9);
 
-        System.out.println(bs.findDuplicate(array));
+        List<List<String>> temp = new ArrayList<>();
+        List<String> t = new ArrayList<>();
+        t.add("A");
+        t.add("B");
+        List<String> t1 = new ArrayList<>();
+        t1.add("A");
+        t1.add("C");
+        List<String> t2 = new ArrayList<>();
+        t2.add("B");
+        t2.add("C");
+        List<String> t3 = new ArrayList<>();
+        t3.add("C");
+        t3.add("A");
+        temp.add(t);
+        temp.add(t1);
+        temp.add(t2);
+        temp.add(t3);
+
+        String str = "geeks";
+        char[][] grid = {{'a','x','m','y'}, {'b', 'g', 'd', 'f'},
+                {'x','e', 'e', 't'}, {'r','a','k', 's'}};
+        System.out.println(bs.flightProblem(temp, "A"));
     }
 }
