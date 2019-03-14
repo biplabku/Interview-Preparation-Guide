@@ -356,6 +356,7 @@ public class burstBalloons {
         queue.offer(word.charAt(0));
         boolean[][] visted = new boolean[grid.length][grid[0].length];
 
+
         return false;
     }
 
@@ -384,10 +385,45 @@ public class burstBalloons {
     }
 
 
+    public boolean checkPalindromeWithDelete(String str) {
+        int left = 0;
+        int right = str.length() - 1;
+        int count = 0;
+        while(left < right) {
+            if(str.charAt(left) == str.charAt(right)) {
+                left++;
+                right--;
+            }else {
+                count++;
+                if(count > 1) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    //  2, 4, 6, 2, 5
+    //  5, 1, 1, 5
+
+    public int largestNonAdjacent(int[] array) {
+        int max1 = array[0];
+        int max2 = 0;
+        int max3 ;
+        int i;
+        for(i = 1; i < array.length; i++ ) {
+            max3 = max1 > max2 ? max1:max2;
+            max1 = max2 + array[i];
+            max2 = max3;
+        }
+        return max1 > max2 ? max1 : max2;
+    }
+
+
     public static void main(String[] args) {
         burstBalloons bs = new burstBalloons();
         String pattern = "aaba";
-        int[] array = {1,3,4,2,2};
+        int[] array = {5, 1, 1, 5};
 
 
         LinkNode node1 = new LinkNode(1);
@@ -428,6 +464,6 @@ public class burstBalloons {
         String str = "geeks";
         char[][] grid = {{'a','x','m','y'}, {'b', 'g', 'd', 'f'},
                 {'x','e', 'e', 't'}, {'r','a','k', 's'}};
-        System.out.println(bs.flightProblem(temp, "A"));
+        System.out.println(bs.largestNonAdjacent(array));
     }
 }
