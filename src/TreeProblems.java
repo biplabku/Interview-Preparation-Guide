@@ -7,7 +7,17 @@ public class TreeProblems {
     // inorder =  [9,3,15,20,7]  left root right
     public TreeNode buildTree(int[] preorder, int [] inorder) {
         TreeNode root = addNode(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
+        System.out.println(" Height of the tree is  -- > " + treeHeight(root));
         return root;
+    }
+
+    public int treeHeight(TreeNode root) {
+        if(root == null) {
+            return -1;
+        }
+        int left = 1 + treeHeight(root.leftChild);
+        int right = 1 + treeHeight(root.rightChild);
+        return Math.max(left, right);
     }
 
     public void inOrder(TreeNode root) {
