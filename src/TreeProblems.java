@@ -8,8 +8,21 @@ public class TreeProblems {
     public TreeNode buildTree(int[] preorder, int [] inorder) {
         TreeNode root = addNode(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
         System.out.println(" Height of the tree is  -- > " + treeHeight(root));
+        TreeNode t = greaterTree(root, 0);
+        inOrder(t);
         return root;
     }
+
+    public TreeNode greaterTree(TreeNode root, int sum) {
+        if(root != null) {
+            greaterTree(root.rightChild, sum);
+            sum += root.data;
+            root.data = sum;
+            greaterTree(root.leftChild, sum);
+        }
+        return root;
+    }
+
 
     public int treeHeight(TreeNode root) {
         if(root == null) {
