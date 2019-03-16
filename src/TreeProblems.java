@@ -159,7 +159,24 @@ public class TreeProblems {
         return (root1.data == root2.data) && left && right;
     }
 
+    public boolean checkSameTree(TreeNode root1, TreeNode root2) {
+        return isSameTree(root1, root2);
+    }
 
+    public boolean isSameTree(TreeNode root1, TreeNode root2) {
+        if(root1 == null && root2 == null) {
+            return true;
+        }
+        if((root1 == null && root2 != null) || (root1 != null && root2 == null) ) {
+            return false;
+        }
+
+        boolean left = isSameTree(root1.leftChild, root2.leftChild);
+        boolean right = isSameTree(root1.rightChild, root2.rightChild);
+        boolean value = root1.data == root2.data;
+
+        return value && left && right;
+    }
 
 
 
