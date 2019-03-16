@@ -3,7 +3,8 @@ import com.sun.source.tree.Tree;
 public class TreeProblems {
 
     public TreeNode buildTree(int[] preorder, int [] inorder) {
-        TreeNode root = addNode(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
+        TreeNode root = addNode(preorder, 0, preorder.length - 1, inorder,
+                0, inorder.length - 1);
         System.out.println(" Height of the tree is  -- > " + treeHeight(root));
         TreeNode t = greaterTree(root, 0);
         inOrder(t);
@@ -49,7 +50,8 @@ public class TreeProblems {
     }
 
 
-    public TreeNode addNode(int[] preorder, int prestart, int preend, int[] inorder, int instart, int inend) {
+    public TreeNode addNode(int[] preorder, int prestart, int preend, int[]
+            inorder, int instart, int inend) {
         if(prestart > preend) {
             return  null;
         }
@@ -110,12 +112,35 @@ public class TreeProblems {
     }
 
 
+    public int fibonacci(int number) {
+        if(number == 0 || number == 1) {
+            return 1;
+        }
+        return number * fibonacci(number - 1);
+    }
 
+    public int result = 0;
+    public int evaluateBinaryTree(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+        if(root.leftChild == null && root.rightChild != null) {
+            return root.data;
+        }
+        int left = evaluateBinaryTree(root.leftChild);
+        int right = evaluateBinaryTree(root.rightChild);
+        if(root.data == '+') {
+            result = left + right;
+        }else if(root.data == '-') {
+            result = left - right;
+        }else if(root.data == '*') {
+            result = left * right;
+        }else if(root.data == '/') {
+            result = left/ right;
+        }
+        return result;
 
-
-
-
-
+    }
 
 
 
@@ -163,6 +188,6 @@ public class TreeProblems {
         int[] arr = {3,9,20,15,7};
         int[] arr2 = {9,3,15,20,7};
         TreeProblems ts = new TreeProblems();
-        System.out.println(ts.buildTree(arr, arr2));
+        System.out.println(ts.fibonacci(3));
     }
 }
