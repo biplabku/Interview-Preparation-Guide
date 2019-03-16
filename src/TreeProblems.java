@@ -1,3 +1,5 @@
+import com.sun.source.tree.Tree;
+
 public class TreeProblems {
 
     public TreeNode buildTree(int[] preorder, int [] inorder) {
@@ -86,8 +88,26 @@ public class TreeProblems {
         return left + right + root.data;
     }
 
+    int depth = Integer.MAX_VALUE;
+    public int minimumDepth(TreeNode root) {
+        minDepth(root);
+        return depth;
+    }
+    public int minDepth(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
 
-
+        int left = 1 + minimumDepth(root.leftChild);
+        int right = 1 + minimumDepth(root.rightChild);
+        if(left == 1) {
+            return right;
+        }else if(right == 1) {
+            return left;
+        }
+        depth = Math.min(left, right);
+        return depth;
+    }
 
 
 
