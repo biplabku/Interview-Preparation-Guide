@@ -174,10 +174,26 @@ public class TreeProblems {
         boolean left = isSameTree(root1.leftChild, root2.leftChild);
         boolean right = isSameTree(root1.rightChild, root2.rightChild);
         boolean value = root1.data == root2.data;
-
         return value && left && right;
     }
 
+    public int res = 0;
+    public int diameterBinary(TreeNode root) {
+        getLength(root);
+        return res;
+    }
+
+    public int getLength(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+
+        int left = 1 + getLength(root.leftChild);
+        int right = 1 + getLength(root.rightChild);
+
+        res = Math.max(left + right, res);
+        return Math.max(left, right);
+    }
 
 
 
