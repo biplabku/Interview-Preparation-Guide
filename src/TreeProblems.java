@@ -143,6 +143,22 @@ public class TreeProblems {
     }
 
 
+    public boolean isSymmetric(TreeNode root) {
+        return checkSymetric(root, root);
+    }
+
+    public boolean checkSymetric(TreeNode root1, TreeNode root2) {
+        if(root1 == null && root2 == null) {
+            return true;
+        }
+        if(root1 == null || root2 == null) {
+            return false;
+        }
+        boolean left = checkSymetric(root1.leftChild, root2.rightChild);
+        boolean right = checkSymetric(root1.rightChild, root2.leftChild);
+        return (root1.data == root2.data) && left && right;
+    }
+
 
 
 
