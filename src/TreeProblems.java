@@ -1,10 +1,5 @@
 public class TreeProblems {
 
-    //        3
-    //     9        20
-    //           15    7
-    // preorder = [3,9,20,15,7]  root left right
-    // inorder =  [9,3,15,20,7]  left root right
     public TreeNode buildTree(int[] preorder, int [] inorder) {
         TreeNode root = addNode(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
         System.out.println(" Height of the tree is  -- > " + treeHeight(root));
@@ -41,6 +36,17 @@ public class TreeProblems {
         }
     }
 
+
+    public boolean isUnivalued(TreeNode root) {
+        boolean left = (root.leftChild == null || (root.data == root.leftChild.data
+        && isUnivalued(root.leftChild)));
+        boolean right = (root.rightChild == null || (root.data == root.rightChild.data
+        && isUnivalued(root.rightChild)));
+
+        return left && right;
+    }
+
+
     public TreeNode addNode(int[] preorder, int prestart, int preend, int[] inorder, int instart, int inend) {
         if(prestart > preend) {
             return  null;
@@ -62,6 +68,74 @@ public class TreeProblems {
                 inorder, idx + 1, inend);
         return root;
     }
+
+    public int sum = 0;
+    public int findTilt(TreeNode root) {
+        getTilt(root);
+        return sum;
+    }
+
+    public int getTilt(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+        int left = getTilt(root.leftChild);
+        int right = getTilt(root.rightChild);
+
+        sum += Math.abs(left - right);
+        return left + right + root.data;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
