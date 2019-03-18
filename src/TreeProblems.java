@@ -1,5 +1,7 @@
 import com.sun.source.tree.Tree;
 
+import java.util.Stack;
+
 public class TreeProblems {
 
     public TreeNode buildTree(int[] preorder, int [] inorder) {
@@ -196,14 +198,44 @@ public class TreeProblems {
     }
 
 
+    public boolean checkWord(char[][] grid, String word) {
+        boolean isSeen = false;
+        for(int i = 0; i < grid.length; i++) {
+            for(int j = 0; j < grid[0].length; j++) {
+                if(word.charAt(0) == grid[i][j]) {
+                    isSeen = dfsSearch(grid, word, i, j, 0);
+                    if(isSeen == true) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return isSeen;
+    }
 
+    public boolean dfsSearch(char[][] grid, String word, int i, int j, int k) {
+        int m = grid.length;
+        int n = grid[0].length;
 
+        if(i < 0 || j < 0 || i >= m || j >= n) {
+            return false;
+        }
 
-
-
-
-
-
+        if(grid[i][j] == word.charAt(k)) {
+            char temp = grid[i][j];
+            grid[i][j] = '#';
+            if(k == word.length() - 1) {
+                return true;
+            }else if(dfsSearch(grid, word, i - 1, j, k + 1)
+                || dfsSearch(grid, word, i + 1, j, k  +1)
+            || dfsSearch(grid, word, i,  j - 1, k + 1)
+            || dfsSearch(grid, word, i, j + 1, k + 1)) {
+                return true;
+            }
+            grid[i][j] = temp;
+        }
+        return false;
+    }
 
 
 
@@ -237,6 +269,9 @@ public class TreeProblems {
         int[] arr = {3,9,20,15,7};
         int[] arr2 = {9,3,15,20,7};
         TreeProblems ts = new TreeProblems();
-        System.out.println(ts.fibonacci(3));
+
+        char[][] grid = {{'a', 'b', 'c', 'e'}, {'s', 'f', 'c', 's'},
+                {'a', 'd', 'e', 'e'}, {'a', 'b', 'c', 'b'}};
+        System.out.println(ts.checkWord(grid,"sadle"));
     }
 }
