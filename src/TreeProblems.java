@@ -239,10 +239,10 @@ public class TreeProblems {
 
 
     public TreeNode isIncreasing(TreeNode root) {
-        TreeNode node = getIncrease();
+        TreeNode node = getIncrease(root);
         return node;
     }
-    public TreeNode resnode;
+
     public TreeNode getIncrease(TreeNode root) {
         if(root == null) {
             return null;
@@ -265,6 +265,24 @@ public class TreeProblems {
 
     }
 
+    TreeNode cur;
+    public TreeNode increasingBST(TreeNode root) {
+        TreeNode ans = new TreeNode(0);
+        cur = ans;
+        inOrder1(root);
+        return ans.rightChild;
+    }
+
+    public void inOrder1(TreeNode root) {
+        if(root == null) {
+            return ;
+        }
+        inOrder1(root.leftChild);
+        root.leftChild = null;
+        cur.rightChild = root;
+        cur = root;
+        inOrder1(root.rightChild);
+    }
 
 
 
