@@ -1,6 +1,6 @@
 import com.sun.source.tree.Tree;
 
-import java.util.Stack;
+import java.util.*;
 
 public class TreeProblems {
 
@@ -285,6 +285,45 @@ public class TreeProblems {
     }
 
 
+    public int getMinTreeLevel(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+        int count = 0;
+        hmap.put(count, root.data);
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            int left = 0;
+            int right = 0;
+
+            int res = 0;
+            for(int i = 0; i < size; i++) {
+                TreeNode temp = queue.poll();
+                if(temp.leftChild != null) {
+                    left = temp.leftChild.data;
+                    queue.offer(temp.leftChild);
+                }
+                if(temp.rightChild != null) {
+                    right = temp.rightChild.data;
+                    queue.offer(temp.rightChild);
+                }
+                res += left + right;
+            }
+            count += 1;
+            hmap.put(count, res);
+        }
+
+        Iterator iter = hmap.entrySet().iterator();
+        while(iter.hasNext()) {
+            Map.Entry pair = (Map.Entry) iter.next();
+            int key = (int) pair.getKey();
+            int value = (int) pair.getValue();
+
+        }
+        return 1;
+    }
+
+
 
 
 
@@ -315,6 +354,12 @@ public class TreeProblems {
 
         char[][] grid = {{'a', 'b', 'c', 'e'}, {'s', 'f', 'c', 's'},
                 {'a', 'd', 'e', 'e'}, {'a', 'b', 'c', 'b'}};
-        System.out.println(ts.checkWord(grid,"sadle"));
+
+        TreeNode root = new TreeNode(1);
+        root.leftChild = new TreeNode(2);
+        root.rightChild = new TreeNode(3);
+        root.rightChild.leftChild = new TreeNode(4);
+        root.rightChild.rightChild = new TreeNode(5);
+        System.out.println(ts.getMinTreeLevel(root));
     }
 }
