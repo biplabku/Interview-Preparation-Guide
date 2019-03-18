@@ -238,7 +238,32 @@ public class TreeProblems {
     }
 
 
+    public TreeNode isIncreasing(TreeNode root) {
+        TreeNode node = getIncrease();
+        return node;
+    }
+    public TreeNode resnode;
+    public TreeNode getIncrease(TreeNode root) {
+        if(root == null) {
+            return null;
+        }
 
+        TreeNode left = getIncrease(root.leftChild);
+        TreeNode right = getIncrease(root.rightChild);
+
+        TreeNode cur = left;
+        while(cur != null && cur.rightChild != null) {
+            cur = cur.rightChild;
+        }
+        if(cur != null) {
+            cur.rightChild = root;
+        }
+        root.leftChild = null;
+        root.rightChild = right;
+
+        return left != null ? left:root;
+
+    }
 
 
 
