@@ -323,11 +323,62 @@ public class TreeProblems {
         return 1;
     }
 
+    // SFO, HKO -- YYZ, SFO -- YUL, YYZ -- HKO, ORD
+    // YUL - starting point
+    public List<List<String>> get_itinerary(List<List<String>> flights, List<List<String>> current_itinerary) {
+        if(!flights.contains(current_itinerary)) {
+            return current_itinerary;
+        }
+        List<String> last_stop = current_itinerary.get(current_itinerary.size() - 1);
+        for(int i = 0; i < flights.size(); i++) {
+            List<List<String>> flights_minus_current = flights;
+            flights_minus_current.remove(i);
+        }
+        return flights;
+    }
 
 
+    public void reArrange(int[] array) {
+        int currentIndex = 0;
+        for(int i = 0; i < array.length; i++) {
+            if(array[i] % 2 == 0) {
+                swap(array, currentIndex, i);
+                currentIndex++;
+            }
+        }
+        display(array);
+    }
+
+    public void swap(int[] array, int start, int end) {
+        int temp = array[end];
+        array[end] = array[start];
+        array[start] = temp;
+    }
+
+    public void display(int[] array) {
+        for(int i = 0; i < array.length; i++) {
+            System.out.println(array[i]);
+        }
+    }
+
+    public ArrayList<Integer> searchRange(final List<Integer> list, int target) {
+        return searchTarget(list, target, 0, list.size() - 1);
+    }
+
+    public ArrayList<Integer> searchTarget(final List<Integer> list, int target, int start, int end) {
+        int mid = (start + end)/2;
+        if(list.get(mid) < target) {
+            start = mid + 1;
+        }else if(list.get(mid) ==  target){
+            end = mid -1;
+        }else {
+            end = mid - 1;
+        }
+        return new ArrayList<>();
+    }
 
 
-
+    
 
 
 
@@ -348,7 +399,7 @@ public class TreeProblems {
 
 
     public static void main(String[] args) {
-        int[] arr = {3,9,20,15,7};
+        int[] arr = {1,2,21,4,7};
         int[] arr2 = {9,3,15,20,7};
         TreeProblems ts = new TreeProblems();
 
@@ -360,6 +411,6 @@ public class TreeProblems {
         root.rightChild = new TreeNode(3);
         root.rightChild.leftChild = new TreeNode(4);
         root.rightChild.rightChild = new TreeNode(5);
-        System.out.println(ts.getMinTreeLevel(root));
+        ts.reArrange(arr);
     }
 }
