@@ -343,7 +343,7 @@ public class TreeProblems {
         for(int i = 0; i < array.length; i++) {
             if(array[i] % 2 == 0) {
                 swap(array, currentIndex, i);
-                currentIndex++;
+                currentIndex += 2;
             }
         }
         display(array);
@@ -378,7 +378,8 @@ public class TreeProblems {
     }
 
 
-    
+
+
 
 
 
