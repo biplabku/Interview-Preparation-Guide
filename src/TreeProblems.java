@@ -425,13 +425,85 @@ public class TreeProblems {
 
     }
 
+    public class LRUNode{
+        int key;
+        int value;
+        LRUNode prev;
+        LRUNode next;
+
+        public LRUNode(int key, int value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
+
+    public class LRUcacheGoogle{
+        HashMap<Integer, LRUNode> hmap = new HashMap<>();
+        public int size;
+        public int currentSize;
+        LRUNode head = null;
+        LRUNode tail = null;
+
+        public LRUcacheGoogle(int val) {
+            size = val;
+            currentSize = 0;
+        }
+
+        public void set(int key, int value) {
+            if(hmap.containsKey(key)) {
+                LRUNode t = hmap.get(key);
+                t.value = value;
+
+            }else {
+                if(hmap.size() >= size) {
+                    hmap.remove(tail.key);
+                    remove(tail);
+                }
+                LRUNode t = new LRUNode(key, value);
+                setHead(t);
+                hmap.put(key, t);
+            }
+        }
 
 
+        public void setHead(LRUNode t) {
+            if(head != null) {
+                head.prev = t;
+            }
+            t.next = head;
+            t.prev = null;
+            head = t;
 
+            if(tail == null) {
+                tail = head;
+            }
+        }
 
+        public void remove(LRUNode t) {
+            if(t.prev != null) {
+                t.prev.next = t.next;
+            }else {
+                head = t.next;
+            }
 
+            if(t.next != null) {
+                t.next.prev = t.prev;
+            }else {
+                tail = t.prev;
+            }
+        }
 
+        public int get(int key) {
+            if(!hmap.containsKey(key)) {
+                return -1;
+            }
+            LRUNode t = hmap.get(key);
+            remove(t);
+            setHead(t);
 
+            return t.value;
+        }
+    }
 
 
 
