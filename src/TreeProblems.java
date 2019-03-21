@@ -325,7 +325,8 @@ public class TreeProblems {
 
     // SFO, HKO -- YYZ, SFO -- YUL, YYZ -- HKO, ORD
     // YUL - starting point
-    public List<List<String>> get_itinerary(List<List<String>> flights, List<List<String>> current_itinerary) {
+    public List<List<String>> get_itinerary(List<List<String>> flights,
+                                            List<List<String>> current_itinerary) {
         if(!flights.contains(current_itinerary)) {
             return current_itinerary;
         }
@@ -365,7 +366,8 @@ public class TreeProblems {
         return searchTarget(list, target, 0, list.size() - 1);
     }
 
-    public ArrayList<Integer> searchTarget(final List<Integer> list, int target, int start, int end) {
+    public ArrayList<Integer> searchTarget(final List<Integer> list, int target,
+                                           int start, int end) {
         int mid = (start + end)/2;
         if(list.get(mid) < target) {
             start = mid + 1;
@@ -377,15 +379,51 @@ public class TreeProblems {
         return new ArrayList<>();
     }
 
+    int left = 1;
+    int right = 1;
+    public boolean isCousins(TreeNode root, int x, int y) {
+        return true;
+    }
+
+    public TreeNode checkCousin(TreeNode root, int x, int y) {
+        if(root == null) {
+            return null;
+        }
+        if(root.data != x) {
+            left++;
+            checkCousin(root.leftChild, x, y);
+            right++;
+            checkCousin(root.rightChild, x, y);
+        }else if(root.data == x) {
+            
+        }
+        TreeNode left = checkCousin(root.leftChild, x, y);
+        return left;
+    }
 
 
 
+    ArrayList<Integer> list = new ArrayList<>();
+    public int findSecondMinimumValue(TreeNode root) {
+        getSecondMin(root);
+        Collections.sort(list);
+        for(int i = 0; i < list.size() - 1; i++) {
+            if(list.get(i) != list.get(i + 1)) {
+                return list.get(i + 1);
+            }
+        }
+        return -1;
+    }
 
+    public void getSecondMin(TreeNode root) {
+        if(root == null) {
+            return ;
+        }
+        getSecondMin(root.leftChild);
+        list.add(root.data);
+        getSecondMin(root.rightChild);
 
-
-
-
-
+    }
 
 
 
@@ -407,11 +445,11 @@ public class TreeProblems {
         char[][] grid = {{'a', 'b', 'c', 'e'}, {'s', 'f', 'c', 's'},
                 {'a', 'd', 'e', 'e'}, {'a', 'b', 'c', 'b'}};
 
-        TreeNode root = new TreeNode(1);
+        TreeNode root = new TreeNode(2);
         root.leftChild = new TreeNode(2);
-        root.rightChild = new TreeNode(3);
-        root.rightChild.leftChild = new TreeNode(4);
-        root.rightChild.rightChild = new TreeNode(5);
-        ts.reArrange(arr);
+        root.rightChild = new TreeNode(5);
+        root.rightChild.leftChild = new TreeNode(5);
+        root.rightChild.rightChild = new TreeNode(7);
+        System.out.println(ts.findSecondMinimumValue(root));
     }
 }
