@@ -454,14 +454,14 @@ public class TreeProblems {
                 LRUNode t = hmap.get(key);
                 t.value = value;
 
-            }else {
-                if(hmap.size() >= size) {
-                    hmap.remove(tail.key);
-                    remove(tail);
+            }else { //  if it does not contain a key
+                if(hmap.size() >= size) { // check size
+                    hmap.remove(tail.key); // remove the key from the hashmap
+                    remove(tail);         // remove the tail from the Node
                 }
                 LRUNode t = new LRUNode(key, value);
-                setHead(t);
-                hmap.put(key, t);
+                setHead(t);   // set the new head as most recently used item
+                hmap.put(key, t); // put it inside the hashmap
             }
         }
 
