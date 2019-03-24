@@ -1,5 +1,6 @@
 import com.sun.source.tree.Tree;
 
+import java.sql.Array;
 import java.util.*;
 
 public class TreeProblems {
@@ -505,23 +506,139 @@ public class TreeProblems {
         }
     }
 
+    // 1 - 2 - 3 - 4 - 5 - 6
+    // 2 - 1
+    public void swapLinkNodes(LinkNode head) {
+        LinkNode newHead = head.next;
+        LinkNode cur = head;
+        LinkNode prev = null;
+        while(cur != null && cur.next != null) {
+            LinkNode first = cur;
+            LinkNode second = cur.next;
+            if(prev == null) {
+                newHead.next = new LinkNode(first.data);
+                newHead = newHead.next;
+                prev = new LinkNode(1);
+            }else{
+                newHead.next = new LinkNode(second.data);
+                newHead = newHead.next;
+            }
+            first = second;
+            first.next = second.next;
+            cur = first.next;
+        }
+
+        while(newHead != null) {
+            System.out.println(newHead.data);
+        }
+    }
+
+    class Location{
+        int x;
+        int y;
+        public Location(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    public int robotInGrid(int[][] grid, int start, int end) {
+        boolean[][] visited = new boolean[grid.length][grid[0].length];
+        for(int i = 0; i < grid.length; i++) {
+            for(int j = 0; j < grid[0].length; j++) {
+                visited[i][j] = false;
+            }
+        }
+        HashSet<ArrayList<Location>> hset = new HashSet<>();
+        int counter = 0;
+        Location loc = new Location(0, 0);
+        visited[0][0] = true;
+        findPath(hset, grid, visited, loc, 4, 4);
+        loc.x = 0;
+        loc.y = 0;
+        findPath(hset, grid, visited, loc, 4, 4);
+        return hset.size();
+    }
+
+    public boolean findPath(HashSet<ArrayList<Location>> result, int[][] grid, boolean[][] visited, Location p, int row, int col) {
+        int start = p.x;
+        int end = p.y;
+        if(start == row - 1 && end == col - 1) {
+            return true;
+        }
+        if(start + 1 < row && end < col) {
+            start = start + 1;
+            p.x = start;
+            if(visited[start][end] == false) {
+                visited[start][end] = true;
+                findPath(result, grid, visited, p, row, col);
+            }
+        }else if(start < row && end + 1 < col) {
+            end = end + 1;
+            p.y = end;
+            if(visited[start][end] == false) {
+                visited[start][end] = true;
+                findPath(result, grid, visited, p, row, col);
+            }
+        }else {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkValidity(int row, int col, int x, int y) {
+        return x < row && y < col;
+    }
+
+    public ArrayList<Location> getPath(boolean[][] maze){
+        if(maze == null || maze.length == 0) {
+            return null;
+        }
+        ArrayList<Location> path = new ArrayList<>();
+        if(getPath(maze, maze.length - 1, maze[0].length - 1, path)) {
+            return path;
+        }
+        return null;
+    }
+
+    public boolean getPath(boolean[][] maze, int row, int col, ArrayList<Location> path)  {
+        if(col < 0 || row < 0 || !maze[row][col]) {
+            return false;
+        }
+
+        boolean isAtOrgin = row == 0 && col == 0;
+        if(isAtOrgin || getPath(maze, row, col - 1, path) ||
+                getPath(maze, row - 1, col, path)) {
+            Location p = new Location(row, col);
+            path.add(p);
+            return true;
+        }
+        return false;
+    }
 
 
 
 
     public static void main(String[] args) {
-        int[] arr = {1,2,21,4,7};
-        int[] arr2 = {9,3,15,20,7};
         TreeProblems ts = new TreeProblems();
-
-        char[][] grid = {{'a', 'b', 'c', 'e'}, {'s', 'f', 'c', 's'},
-                {'a', 'd', 'e', 'e'}, {'a', 'b', 'c', 'b'}};
-
         TreeNode root = new TreeNode(2);
         root.leftChild = new TreeNode(2);
         root.rightChild = new TreeNode(5);
         root.rightChild.leftChild = new TreeNode(5);
         root.rightChild.rightChild = new TreeNode(7);
-        System.out.println(ts.findSecondMinimumValue(root));
+
+        LinkNode l1 = new LinkNode(1);
+        LinkNode l2 = new LinkNode(2);
+        LinkNode l3 = new LinkNode(3);
+        LinkNode l4 = new LinkNode(4);
+        LinkNode l5 = new LinkNode(5);
+        l1.next = l2;
+        l2.next = l3;
+        l3.next = l4;
+        l4.next = l5;
+
+        int[][] grid = {{1, 0, 0, 0}, {0,0,0,0}, {0,0,0,0}, {0,0,0,1}};
+
+        ts.robotInGrid(grid, 4, 4);
     }
 }
