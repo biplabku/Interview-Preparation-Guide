@@ -65,7 +65,7 @@ public class isCousins {
             recur(node.rightChild, x, level + 1, p);
         }
     }
-    
+
     public static void main(String[] args) {
         isCousins ls = new isCousins();
         TreeNode root = new TreeNode(1);
