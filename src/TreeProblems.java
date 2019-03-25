@@ -616,16 +616,45 @@ public class TreeProblems {
         return false;
     }
 
+    List<String> serializeString = new ArrayList<>();
+
+    public String serialize(TreeNode root) {
+        doSerialize(root);
+        return serializeString.toString();
+    }
+
+    public void doSerialize(TreeNode root) {
+        if(root == null) {
+            serializeString.add("null");
+            return ;
+        }
+        serializeString.add(String.valueOf(root.data));
+        doSerialize(root.leftChild);
+        doSerialize(root.rightChild);
+    }
 
 
+    public TreeNode deSerializeString(List<String> list) {
+        TreeNode root = new TreeNode(Integer.valueOf(list.get(0)));
+        doDeSerialize(root, list, 0);
+    }
+
+    public void doDeSerialize(TreeNode root, List<String> list, int index) {
+        if(index == list.size()) {
+            return;
+        }
+        index = index + 1;
+        
+        root.leftChild = list.get(index + 1)
+    }
 
     public static void main(String[] args) {
         TreeProblems ts = new TreeProblems();
-        TreeNode root = new TreeNode(2);
+        TreeNode root = new TreeNode(1);
         root.leftChild = new TreeNode(2);
-        root.rightChild = new TreeNode(5);
-        root.rightChild.leftChild = new TreeNode(5);
-        root.rightChild.rightChild = new TreeNode(7);
+        root.rightChild = new TreeNode(3);
+        root.rightChild.leftChild = new TreeNode(4);
+        root.rightChild.rightChild = new TreeNode(5);
 
         LinkNode l1 = new LinkNode(1);
         LinkNode l2 = new LinkNode(2);
@@ -639,6 +668,6 @@ public class TreeProblems {
 
         int[][] grid = {{1, 0, 0, 0}, {0,0,0,0}, {0,0,0,0}, {0,0,0,1}};
 
-        ts.robotInGrid(grid, 4, 4);
+        System.out.println(ts.serialize(root));
     }
 }

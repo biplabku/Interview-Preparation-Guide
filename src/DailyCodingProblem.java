@@ -1,5 +1,7 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 public class DailyCodingProblem {
 
@@ -114,7 +116,7 @@ public class DailyCodingProblem {
 
     public int maxProductSubarray(int[] nums) {
         int max = Integer.MIN_VALUE;
-        for(int i =0; i < nums.length; i++) {
+        for(int i = 0; i < nums.length; i++) {
             int sum = 1;
             for(int j = i; j < nums.length; j++) {
                 sum = sum * nums[j];
@@ -126,26 +128,26 @@ public class DailyCodingProblem {
         return max;
     }
 
-
-
-
-
-
-
-
     public int maxProductMethod2(int[] nums) {
         int maxProduct2 = nums[0] * nums[1];
         int maxProduct3 = maxProduct2 * nums[2];
-        for(int i = 3; i < nums.length; i++) {
-            maxProduct2 = Math.max(maxProduct2, nums[i] * nums[i - 1]);
-            maxProduct3 = Math.max(maxProduct3, maxProduct2 * nums[i] );
+        int res = 0;
+        for(int i = 2; i < nums.length; i++) {
+            int prod2 = nums[i - 1] * nums[i - 2];
+            int prod3 = prod2 * nums[i];
+            maxProduct2 = Math.max(maxProduct2, prod2);
+            maxProduct3 = Math.max(maxProduct3, prod3);
+            res = Math.max(maxProduct2, maxProduct3);
         }
-        return maxProduct2;
+        return res;
     }
+
+
+
 
     public static void main(String[] args) {
         DailyCodingProblem ds = new DailyCodingProblem();
-        int[] array = {2,3,-2,4};
-        System.out.println(ds.maxProductSubarray(array));
+        int[] array = {2,3,1,4};
+        System.out.println(ds.maxProductMethod2(array));
     }
 }
