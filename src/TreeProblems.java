@@ -637,15 +637,44 @@ public class TreeProblems {
     public TreeNode deSerializeString(List<String> list) {
         TreeNode root = new TreeNode(Integer.valueOf(list.get(0)));
         doDeSerialize(root, list, 0);
+        return root;
     }
 
     public void doDeSerialize(TreeNode root, List<String> list, int index) {
         if(index == list.size()) {
             return;
         }
-        index = index + 1;
+    }
+
+
+    public List<String> stringBreakup(String str, int k) {
         
-        root.leftChild = list.get(index + 1)
+    }
+
+
+    public int findIndexOfTarget(int[] array, int target) {
+        int left = 0;
+        int right = array.length - 1;
+        while(left <= right) {
+            int mid = (left + right)/2;
+            if(array[mid] == target) {
+                return mid;
+            }
+            if(array[mid] < array[right]) {
+                if(target > array[mid] && target <= array[right]) {
+                    left = mid  + 1;
+                }else {
+                    right = mid - 1;
+                }
+            }else if(array[mid] > array[right]) {
+                if(target < array[mid] && target >= array[left]) {
+                    right = mid - 1;
+                }else{
+                    left = mid + 1;
+                }
+            }
+        }
+        return -1;
     }
 
     public static void main(String[] args) {
@@ -667,7 +696,7 @@ public class TreeProblems {
         l4.next = l5;
 
         int[][] grid = {{1, 0, 0, 0}, {0,0,0,0}, {0,0,0,0}, {0,0,0,1}};
-
-        System.out.println(ts.serialize(root));
+        int[] array = {3,4,5,1,2};
+        System.out.println(ts.findIndexOfTarget(array, 2));
     }
 }
