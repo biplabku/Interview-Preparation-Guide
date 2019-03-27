@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 
 public class DailyCodingProblem {
 
@@ -189,7 +190,7 @@ public class DailyCodingProblem {
             }
         }
 
-        for(i = row, j = col; j >= 0 && i >= 0; i--, j--) {
+        for(i = row, j = col; j >= 0 && i < board.length; i++, j--) {
             if(board[i][j] == 1) {
                 return false;
             }
@@ -198,6 +199,22 @@ public class DailyCodingProblem {
         return true;
     }
 
+
+
+    public void generateRandNumbers(int k) {
+        Random rand = new Random();
+        int[] array = new int[52];
+        for(int i = 0; i < 52; i++) {
+            array[i] = i;
+        }
+        // shuffle the cards based on the random function generator
+        for(int i = 0; i < array.length; i++) {
+            int random = i + rand.nextInt(52 - i);
+            int temp = array[random];
+            array[random] = array[i];
+            array[i] = temp;
+        }
+    }
 
 
     public static void main(String[] args) {
