@@ -648,7 +648,45 @@ public class TreeProblems {
 
 
     public List<String> stringBreakup(String str, int k) {
-        
+        List<String> result = new ArrayList<>();
+        String[] words = str.split(" ");
+        List<String> theStack = new ArrayList<>();
+        int count = 0;
+        for(int i = 0; i < words.length; i++) {
+            String s = words[i];
+            if(count + s.length() <= k) {
+                count += s.length();
+                theStack.add(s);
+                if(count == k) {
+                    count = 0;
+                    result.add(formString(theStack));
+                    i = i - 1;
+                    theStack.clear();
+                }
+            }else { // length is greater than k
+                count = 0;
+                if(!theStack.isEmpty()) {
+                    result.add(formString(theStack));
+                    i = i - 1;
+                    theStack.clear();
+                }
+            }
+        }
+        result.add(formString(theStack));
+        return result;
+    }
+    
+
+
+    public String formString(List<String> stack) {
+        int size = 0;
+        StringBuilder sb = new StringBuilder();
+        while(size < stack.size()) {
+            sb.append(stack.get(size));
+            sb.append(" ");
+            size++;
+        }
+        return sb.substring(0, sb.length() - 1);
     }
 
 
@@ -697,6 +735,7 @@ public class TreeProblems {
 
         int[][] grid = {{1, 0, 0, 0}, {0,0,0,0}, {0,0,0,0}, {0,0,0,1}};
         int[] array = {3,4,5,1,2};
-        System.out.println(ts.findIndexOfTarget(array, 2));
+        String str = "the quick brown fox jumps over the lazy dog";
+        System.out.println(ts.stringBreakup(str, 10));
     }
 }
