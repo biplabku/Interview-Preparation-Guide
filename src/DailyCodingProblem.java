@@ -143,6 +143,61 @@ public class DailyCodingProblem {
     }
 
 
+    public boolean nQueenProblem(int number) {
+        int[][] board = new int[number][number];
+        for(int i = 0; i < number; i++) {
+            for(int j = 0; j < number; j++) {
+                board[i][j] = 0;
+            }
+        }
+
+        if(solveNQueens(board, 0) == false) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean solveNQueens(int[][] board, int col ) {
+        if(col >= board.length) {
+            return true;
+        }
+
+        for(int i = 0; i < board.length; i++) {
+            if(isSafe(board, i, col)) {
+                board[i][col] = 1;
+                if(solveNQueens(board, col + 1) == true) {
+                    return true;
+                }
+                board[i][col] = 0; //  this is the most important step of backtracking
+            }
+        }
+        return false;
+    }
+
+    public boolean isSafe(int[][] board, int col, int row) {
+        int i;
+        int j;
+        for(i = 0; i < col; i++) {
+            if(board[row][i] == 1) {
+                return false;
+            }
+        }
+
+        for(i = row, j = col; i >= 0 && j >= 0; i--, j--) {
+            if(board[i][j] == 1) {
+                return  false;
+            }
+        }
+
+        for(i = row, j = col; j >= 0 && i >= 0; i--, j--) {
+            if(board[i][j] == 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 
 
     public static void main(String[] args) {
