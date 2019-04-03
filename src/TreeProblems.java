@@ -713,27 +713,702 @@ public class TreeProblems {
         return -1;
     }
 
+
+    public TreeNode heightBalanced(int[] head) {
+        return doHeightBalance( head, 0, head.length - 1);
+    }
+
+    public TreeNode doHeightBalance(int[] array, int start, int end) {
+        if(start > end) {
+            return null;
+        }
+        int mid = array[(start + end)/2];
+        TreeNode node = new TreeNode(array[mid]);
+        node.leftChild = doHeightBalance(array, start, mid - 1);
+        node.rightChild = doHeightBalance(array, mid + 1, end);
+
+        return node;
+    }
+
+
+    public TreeNode listToBST(LinkNode head) {
+        return convertToBST(head, null);
+    }
+
+    public TreeNode convertToBST(LinkNode head, LinkNode tail){
+        if(head == tail) {
+            return  null;
+        }
+        int n = 0;
+        LinkNode temp = head;
+        while(temp != tail) {
+            n++;
+            temp = temp.next;
+        }
+        n = n/2;
+        while(n != 0) {
+            temp = temp.next;
+        }
+        TreeNode node = new TreeNode(temp.data);
+        node.leftChild = convertToBST(head, temp);
+        node.rightChild = convertToBST(temp.next, tail);
+        return node;
+    }
+
+
+    public int firstMissingInteger(int[] array) {
+        if(array.length < 1) {
+            return 1;
+        }
+        // how to ignore the sorting part to come to a solution
+        // can we minimize the time compexity to ignore the O(nlogn solution ?)
+        Arrays.sort(array);
+        HashSet<Integer> hset = new HashSet<>();
+        int count = 1;
+        for(int i = 0; i < array.length; i++) {
+            if(array[i] < 0) {
+                continue;
+            }else if(array[i] > 0) {
+                if(array[i] == count && !hset.contains(array[i])) {
+                    count++;
+                    hset.add(array[i]);
+                }else if(hset.contains(array[i])) {
+                    continue;
+                }else {
+                     break;
+                }
+
+            }
+        }
+        return count;
+    }
+
+    // start = "hit"
+    // end = "cog"
+    // dict = ["hot","dot","dog","lot","log"]
+
+    int counter = 0;
+    public ArrayList<String> wordLadderOne(ArrayList<String> dictionary, ArrayList<String> res, String start, String end) {
+        // now find the route from the starting position to the end position ?
+        // how do i select which word to pick next
+        if(dictionary.size() == 0){
+            return res;
+        }
+        // one way is to check the start sequence and then check the end sequence and from there
+        // add both the sequences
+        String str = dictionary.get(0);
+        boolean check = isEditable(start, str);
+        if(check == true) {
+            dictionary.remove(0);
+            res.add(str);
+            counter++;
+            if(dictionary.size() == 0) {
+                if(isEditable(res.get(res.size() - 1), end)) {
+                    res.add(end);
+                }
+            }
+            wordLadderOne(dictionary,res, str, end);
+        }
+        return  res;
+    }
+
+    // how about implementing it in a an iterative way?
+    public ArrayList<String> wordLadderOneIterative(ArrayList<String> dictionary, String start, String end) {
+        ArrayList<String> result = new ArrayList<>();
+        int counter = 0;
+        result.add(start);
+        for(String str:dictionary) {
+            boolean check = isEditable(start, str);
+            if(check) {
+                result.add(str);
+                start = str;
+            }else{
+                break;
+            }
+        }
+
+        if(isEditable(result.get(result.size() - 1), end)) {
+            result.add(end);
+        }
+        return result;
+    }
+
+    // how to check if two string are actually editable by one distance
+    public boolean isEditable(String one, String two) {
+        if(one.length() != two.length()) {
+            return false;
+        }
+        HashSet<Character> hset = new HashSet<>();
+        int count = 0;
+        for(int i = 0; i < one.length(); i++) {
+            if(!hset.contains(one.charAt(i))) {
+                hset.add(one.charAt(i));
+            }
+        }
+
+        for(int i = 0 ; i < two.length(); i++) {
+            if(!hset.contains(two.charAt(i))) {
+                count++;
+            }
+        }
+        return count == 1;
+    }
+
+
+    public int finalWordLadderEfficient(ArrayList<String> dictionary, String start, String end) {
+        if(start.equals(end)) {
+            return 1;
+        }
+        ArrayList<String> result = new ArrayList<>(); // i still need to figure out a way to capture all the details
+        Deque<String> queue = new ArrayDeque<>();
+        HashSet<String> visited = new HashSet<>();
+        int counter = 1;
+        visited.add(start);
+        queue.add(start);
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            counter++;
+
+            for(int i = 0; i < size; i++) {
+                String n = queue.removeFirst();
+                for(String w:dictionary) {
+                    if(!visited.contains(w) && isEditable(n, w)) {
+                        if(w.equals(end)) {
+                            return counter;
+                        }
+                        visited.add(w);
+                        queue.add(w);
+                    }
+                }
+            }
+        }
+        return counter;
+    }
+
+    // idea is to save the next pointer in some variable and reverse
+    public LinkNode reverseKList(LinkNode head, int k) {
+        LinkNode cur = head;
+        LinkNode dummyHead = null;
+        LinkNode newHead = null;
+        if(head == null || head.next == null || k <= 1) {
+            return cur;
+        }
+        while(cur != null) {
+            LinkNode nxt = cur;
+            int temp = k;
+            while(temp != 0 && nxt != null) {
+                nxt = nxt.next;
+                temp--;
+            }
+            if(temp != 0) {
+                LinkNode join = newHead;
+                while(join.next != null) {
+                    join = join.next;
+                }
+                join.next = cur;
+                linkDisplay(newHead);
+                return newHead;
+            }
+            dummyHead = reverse(cur, k);
+            if(newHead == null) {
+                newHead = dummyHead;
+            }else {
+                LinkNode join = newHead;
+                while(join.next != null) {
+                    join = join.next;
+                }
+                join.next = dummyHead;
+            }
+            cur = nxt;
+        }
+        linkDisplay(newHead);
+        return newHead;
+    }
+
+    public LinkNode reverse(LinkNode head, int k) {
+        LinkNode cur = head;
+        LinkNode prev = null;
+        LinkNode nxt = null;
+        while(cur != null && k != 0) {
+            nxt = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = nxt;
+            k--;
+        }
+        return prev;
+    }
+
+    public LinkNode reverseKGroups(LinkNode head, int k) {
+        LinkNode current = head;
+        LinkNode next = null;
+        LinkNode prev = null;
+
+        int count = 0;
+        while(count < k && current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+            count++;
+        }
+        // prev is the new head now.
+        // and next is the next linknode
+        if(next != null) {
+            head.next = reverseKGroups(next, k);
+        }
+        return prev;
+    }
+
+
+
+    public void linkDisplay(LinkNode head) {
+        while(head != null) {
+            System.out.println(head.data);
+            head = head.next;
+        }
+    }
+
+
+    public LinkNode reverseListMtoN(LinkNode head, int a, int b) {
+        LinkNode cur = head;
+        LinkNode prev = null;
+        int count = b-a;
+
+        LinkNode end = cur;
+        while(b != 0) {
+            end = end.next;
+            b--;
+        }
+
+        while(cur != null && a != 0) {
+            a--;
+            prev = cur;// node before the reversing
+            cur  = cur.next; // start to reverse node
+        }
+
+        LinkNode temp = reverse(cur, count);
+        prev.next = temp; //  attach previous node to new reverse list
+
+        LinkNode nxt = prev;
+        while(count != 0) {
+            nxt = nxt.next;
+            count--;
+        }
+
+        nxt.next = end;
+        linkDisplay(head);
+        return head;
+    }
+
+
+    public LinkNode doMtoNreverse(LinkNode head, int m, int n) {
+        LinkNode cur = head;
+        LinkNode prev = null;
+        LinkNode nxt = null;
+        int start = 0;
+        n = m + (m - n);
+        int end = m + (m - n);
+        while(cur != null) {
+            nxt = cur.next;
+            start++;
+            if(start == m) {
+                prev = cur;
+            }
+        }
+        return head;
+    }
+
+
+    public LinkNode removeDuplicate(LinkNode head) {
+        HashSet<Integer> hset = new HashSet<>();
+
+        hset.add(head.data);
+        LinkNode newHead = new LinkNode(head.data);
+        LinkNode dummy = newHead;
+        LinkNode cur = head;
+
+        while(cur != null) {
+            if(!hset.contains(cur.data)) {
+                newHead.next = new LinkNode(cur.data);
+                newHead = newHead.next;
+                hset.add(cur.data);
+                cur = cur.next;
+            }else {
+                cur = cur.next;
+            }
+        }
+
+        linkDisplay(dummy);
+        return dummy;
+    }
+
+    public LinkNode removeDuplicateMethod2(LinkNode head) {
+        LinkNode cur = head;
+        LinkNode newHead = new LinkNode(0);
+        newHead.next = head;
+        while(cur.next != null && cur.next.next != null) {
+            if(cur.next.data == cur.next.next.data) {
+                int dup = cur.next.data;
+                while(cur.next != null && cur.next.data == dup) {
+                    cur.next = cur.next.next;
+                }
+            }else {
+                cur = cur.next;
+            }
+        }
+
+        linkDisplay(newHead);
+        return newHead;
+    }
+
+    public LinkNode removeDuplicateMethod3(LinkNode head) {
+        LinkNode cur = head;
+        LinkNode newHead = new LinkNode(0);
+        newHead.next = head;
+        LinkNode prev = newHead;
+        newHead.next = head;
+        while(cur != null) {
+            while (cur.next != null && prev.next.data == cur.next.data) {
+                cur = cur.next;
+            }
+
+            if(prev.next == cur) {
+                prev = prev.next;
+            }else {
+                prev.next = cur.next;
+            }
+            cur = cur.next;
+        }
+
+        linkDisplay(newHead);
+        return newHead.next;
+    }
+
+    public LinkNode removeDups(LinkNode head) {
+        LinkNode dummy = new LinkNode(0);
+        LinkNode cur = head;
+        while(cur.next != null) {
+            if(cur.data == cur.next.data) {
+                cur.next = cur.next.next;
+            }else {
+                cur = cur.next;
+            }
+        }
+        linkDisplay(head);
+        return head;
+    }
+
+
+    public LinkNode reOrderList(LinkNode head) {
+        LinkNode cur =head;
+        List<Integer> list = new ArrayList<>();
+        while(cur != null) {
+            list.add(cur.data);
+            cur = cur.next;
+        }
+        int pointer1 = 0;
+        int pointer2 = list.size() - 1;
+        LinkNode dummy = new LinkNode(0);
+        LinkNode result = dummy;
+        while(pointer1 < pointer2) {
+            dummy.next = new LinkNode(list.get(pointer1));
+            dummy = dummy.next;
+            dummy.next = new LinkNode(list.get(pointer2));
+            pointer1++;
+            pointer2--;
+            dummy = dummy.next;
+        }
+        if(list.size()% 2 == 0) {
+            linkDisplay(result.next);
+            return result;
+        }
+        return result.next;
+    }
+
+    public LinkNode reOrderMethod1(LinkNode head) {
+        if(head == null || head.next == null) {
+            return  head;
+        }
+        LinkNode slow = null, fast = null;
+        fast = slow = head;
+        LinkNode pre = null;
+        while(fast != null && fast.next != null) {
+            fast = fast.next.next;
+            pre = slow;
+            slow = slow.next;
+        }
+
+        // pre is middle element. Reverse the next element;
+        pre.next = null;
+        LinkNode newHead = new LinkNode(0);
+        LinkNode temp = newHead, next;
+        pre = null;
+
+        while(slow != null) {
+            next = slow.next;
+            slow.next = pre;
+            pre = slow;
+            slow = next;
+        }
+
+        while(head != null && pre != null) {
+            temp.next = head;
+            temp = head;
+            head = head.next;
+
+            temp.next = pre;
+            temp = pre;
+            pre = pre.next;
+        }
+
+        if(head != null) {
+            temp.next = head;
+        }else {
+            temp.next = pre;
+        }
+
+        return head.next;
+    }
+
+    // permute the array based on various character
+    // 12
+    // 1 2
+    // 2 1
+    public ArrayList<ArrayList<Integer>> permute(ArrayList<Integer> array) {
+
+        ArrayList<ArrayList<Integer>> output = new ArrayList<>();
+        doPermute(0, array, output);
+        return output;
+    }
+
+    private void doPermute(int start, ArrayList<Integer> nums, ArrayList<ArrayList<Integer>> result){
+        if(start==nums.size() - 1){
+            ArrayList<Integer> list = new ArrayList<>();
+            for(int num: nums){
+                list.add(num);
+            }
+            result.add(list);
+            return;
+        }
+
+        HashSet<Integer> set = new HashSet<>();
+
+        for(int i = start; i < nums.size(); i++){
+            if(set.contains(nums.get(i))){
+                continue;
+            }
+            set.add(nums.get(i));
+
+            swap(nums, i, start);
+            doPermute(start+1, nums, result);
+            swap(nums, i, start);
+        }
+    }
+
+    public ArrayList<String> generateParanthesis(int number) {
+        ArrayList<String> list = new ArrayList<>();
+        generateParans("", list, number, number);
+        Collections.sort(list);
+        return list;
+    }
+
+    public void generateParans(String str, ArrayList<String> list, int openBracks, int closeBracks) {
+        if(openBracks == 0 && closeBracks == 0) {
+            list.add(str);
+        }
+        if(openBracks > 0) {
+            str += '(';
+            generateParans(str, list,openBracks - 1, closeBracks);
+        }
+        if(openBracks < closeBracks) {
+            str += ')';
+            generateParans(str,list, openBracks, closeBracks - 1);
+        }
+    }
+
+    private void swap(ArrayList<Integer> nums, int i, int j){
+        int temp = nums.get(i);
+        nums.set(i, nums.get(j));
+        nums.set(j, temp);
+    }
+
+    int numOfPalindromes = 0;
+    ArrayList<ArrayList<String>> pal = new ArrayList<>();
+    public ArrayList<ArrayList<String>> palindromicPartition(String str) {
+        ArrayList<String> list = new ArrayList<>();
+        generatePalindromes(list, str, 0);
+        return pal;
+    }
+
+    public void generatePalindromes(ArrayList<String> list, String str, int index) {
+        if(index == str.length()) {
+            pal.add(new ArrayList<>(list));
+            return;
+        }
+        for(int i = index; i < str.length(); i++) {
+            String sub = str.substring(index, i + 1);
+            if(isPaldinrome(sub)) {
+                list.add(sub);
+                generatePalindromes(list, str, i + 1);
+                list.remove(list.size() - 1);
+            }
+        }
+
+    }
+
+    public boolean isPaldinrome(String str) {
+        StringBuilder sb = new StringBuilder(str);
+        return sb.reverse().toString().equalsIgnoreCase(str);
+    }
+
+    public int numberOfPaths(int m, int n) {
+        // Create a 2D table to store results
+        // of subproblems
+        int count[][] = new int[m][n];
+
+        // Count of paths to reach any cell in
+        // first column is 1
+        for (int i = 0; i < m; i++)
+            count[i][0] = 1;
+
+        // Count of paths to reach any cell in
+        // first column is 1
+        for (int j = 0; j < n; j++)
+            count[0][j] = 1;
+
+        // Calculate count of paths for other
+        // cells in bottom-up manner using
+        // the recursive solution
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++)
+
+                // By uncommenting the last part the
+                // code calculatest he total possible paths
+                // if the diagonal Movements are allowed
+                count[i][j] = count[i-1][j] + count[i][j-1]; //+ count[i-1][j-1];
+
+        }
+        return count[m-1][n-1];
+    }
+
+    static class TreeLinkNode{
+        TreeLinkNode left;
+        TreeLinkNode right;
+        TreeLinkNode next;
+        int val;
+
+        public TreeLinkNode(int data) {
+            val = data;
+        }
+    }
+
+    public void connect(TreeLinkNode root) {
+        root.next = null;
+        Queue<TreeLinkNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            TreeLinkNode cur = null, next = null;
+            for(int i = 0; i < size; i++) {
+                cur = queue.poll();
+                if(i < size - 1) {
+                    next = queue.peek();
+                    cur.next = next;
+                }
+                if(cur.left != null) {
+                    queue.offer(cur.left);
+                }
+                if(cur.right != null) {
+                    queue.offer(cur.right);
+                }
+            }
+        }
+
+    }
+
+    public TreeLinkNode connectNodes(TreeLinkNode root) {
+        TreeLinkNode levelStart = root;
+        while (levelStart != null) {
+            TreeLinkNode cur = levelStart;
+            while(cur != null) {
+                if(cur.left != null) {
+                    cur.left.next = cur.right;
+                }
+                if(cur.right != null && cur.next != null) {
+                    cur.right.next = cur.next.left;
+                }
+                cur = cur.next;
+            }
+            levelStart = levelStart.left;
+        }
+        return root;
+    }
+
+    ArrayList<ArrayList<Integer>> sumList = new ArrayList<>();
+    public ArrayList<ArrayList<Integer>> pathSum(TreeNode root, int number) {
+        pathSum(root, number, new ArrayList<>(), 0);
+        return sumList;
+    }
+
+    public void pathSum(TreeNode root, int number, ArrayList<Integer> list, int sum) {
+        if(root == null) {
+            return;
+        }
+        sum += root.data;
+        list.add(root.data);
+        if(sum == number) {
+            ArrayList<Integer> t = new ArrayList<>(list);
+            sumList.add(t);
+        }
+        pathSum(root.leftChild, number, list, sum);
+        pathSum(root.rightChild, number, list, sum);
+        list.remove(list.size() - 1);
+        return ;
+    }
+
+
     public static void main(String[] args) {
         TreeProblems ts = new TreeProblems();
-        TreeNode root = new TreeNode(1);
-        root.leftChild = new TreeNode(2);
-        root.rightChild = new TreeNode(3);
-        root.rightChild.leftChild = new TreeNode(4);
-        root.rightChild.rightChild = new TreeNode(5);
+        TreeNode root = new TreeNode(5);
+        root.leftChild = new TreeNode(4);
+        root.rightChild = new TreeNode(8);
+        root.rightChild.leftChild = new TreeNode(13);
+        root.rightChild.rightChild = new TreeNode(4);
+        root.rightChild.rightChild.leftChild = new TreeNode(5);
+        root.rightChild.rightChild.rightChild = new TreeNode(1);
+
+        root.leftChild.leftChild = new TreeNode(11);
+        root.leftChild.leftChild.leftChild = new TreeNode(7);
+        root.leftChild.leftChild.rightChild = new TreeNode(2);
+
 
         LinkNode l1 = new LinkNode(1);
         LinkNode l2 = new LinkNode(2);
         LinkNode l3 = new LinkNode(3);
         LinkNode l4 = new LinkNode(4);
         LinkNode l5 = new LinkNode(5);
+        LinkNode l6 = new LinkNode(6);
         l1.next = l2;
         l2.next = l3;
         l3.next = l4;
         l4.next = l5;
+        l5.next = l6;
 
-        int[][] grid = {{1, 0, 0, 0}, {0,0,0,0}, {0,0,0,0}, {0,0,0,1}};
-        int[] array = {3,4,5,1,2};
-        String str = "thequickdsdd brown fox jumps over the lazy dog";
-        System.out.println(ts.stringBreakup(str, 10));
+
+        TreeLinkNode r = new TreeLinkNode(1);
+        r.right = new TreeLinkNode(3);
+        r.left = new TreeLinkNode(2);
+        r.left.left = new TreeLinkNode(4);
+        r.left.right = new TreeLinkNode(5);
+        r.right.left = new TreeLinkNode(6);
+        r.right.right = new TreeLinkNode(7);
+
+
+        ArrayList<Integer> list1 = new ArrayList<>();
+        list1.add(1);
+        list1.add(1);
+        list1.add(3);
+        System.out.println(ts.findRoutePath(root, 22));
     }
 }
