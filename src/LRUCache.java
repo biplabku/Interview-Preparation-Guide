@@ -175,8 +175,8 @@ public class LRUCache {
         }
     }
 
-    int row = 5;
-    int col = 5;
+    int row = 3;
+    int col = 3;
     public void dfs(int[][] grid, boolean[][] visited, int i, int j) {
         Stack<Points> thestack = new Stack<>();
         thestack.push(new Points(i, j));
@@ -189,15 +189,18 @@ public class LRUCache {
             if(checkValidity(r - 1, c) == true && visited[r - 1][c] == false && grid[r - 1][c] == 1) {
                 visited[r - 1][c] = true;
                 thestack.push(new Points(r - 1, c));
-            }else if(checkValidity(r + 1, c) == true && visited[r + 1][c] == false && grid[r + 1][c] == 1) {
+            }
+            if(checkValidity(r + 1, c) == true && visited[r + 1][c] == false && grid[r + 1][c] == 1) {
                 visited[r + 1][c] = true;
                 thestack.push(new Points(r + 1, c));
-            }else if(checkValidity(r, c + 1) == true && visited[r][c + 1] == false && grid[r][c + 1] == 1) {
-                visited[r][c + 1] = true;
-                thestack.push(new Points(r, c + 1));
-            }else if(checkValidity(r, c - 1) == true && visited[r][c - 1] == false && grid[r][c - 1] == 1) {
+            }
+            if(checkValidity(r, c - 1) == true && visited[r][c - 1] == false && grid[r][c - 1] == 1) {
                 visited[r][c - 1] = true;
                 thestack.push(new Points(r, c - 1));
+            }
+            if(checkValidity(r, c + 1) == true && visited[r][c + 1] == false && grid[r][c + 1] == 1) {
+                visited[r][c + 1] = true;
+                thestack.push(new Points(r, c + 1));
             }
         }
     }
@@ -266,7 +269,7 @@ public class LRUCache {
         ls.set(2,4);
         ls.set(3, 5);
         int[] array = {10, 3, 5, 6, 20};
-        int[][] arr = {{1,1,0,0,0}, {1,1,0,0,0},{0,0,1,0,0},{0,0,0,1,1},{0,0,0,1,1}};
+        int[][] arr = {{1,1,1}, {0,1,0},{0,1,0}};
         System.out.println(ls.numOfIslands(arr));
     }
 }
