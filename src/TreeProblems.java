@@ -1409,6 +1409,5 @@ public class TreeProblems {
         list1.add(1);
         list1.add(1);
         list1.add(3);
-        System.out.println(ts.findRoutePath(root, 22));
     }
 }
