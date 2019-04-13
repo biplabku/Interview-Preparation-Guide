@@ -72,6 +72,76 @@ public class linkListPalindrome {
         return result;
     }
 
+    public int add2Numbers(LinkNode head1, LinkNode head2) {
+        int first = 0;
+        int temp = 1;
+        while(head1 != null) {
+            first += temp * head1.data;
+            temp = temp * 10;
+            head1 = head1.next;
+        }
+
+        int second = 0;
+        temp = 1;
+        while(head2 != null) {
+            second += temp * head2.data;
+            temp = temp * 10;
+            head2 = head2.next;
+        }
+
+        return first + second;
+    }
+
+    public LinkNode reverse(LinkNode head) {
+        LinkNode cur = head;
+        LinkNode nxt = null;
+        LinkNode prev = null;
+
+        while(cur != null) {
+            nxt = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = nxt;
+        }
+        return prev;
+    }
+
+    public LinkNode add2NumLink(LinkNode head1, LinkNode head2) {
+        LinkNode res = new LinkNode(0);
+        res.next = head1;
+        int carry = 0;
+        while(head1 != null && head2 != null) {
+            int val = head1.data + head2.data + carry;
+            if(val > 9) {
+                carry = val / 10;
+                val = val%10;
+            }
+            head1.data = val;
+            head1 = head1.next;
+            head2 = head2.next;
+        }
+        while(head1 != null) {
+            int val = head1.data + carry;
+            if(val > 9) {
+                carry = val / 10;
+                val = val%10;
+            }
+            head1.data = val;
+            head1 = head1.next;
+        }
+        while(head2 != null) {
+            int val = head2.data + carry;
+            if(val > 9) {
+                carry = val / 10;
+                val = val%10;
+            }
+            head2.data = val;
+            head2 = head2.next;
+        }
+        LinkNode result = reverse(res);
+        return result;
+    }
+
 
     public static void main(String[] args) {
         LinkList list = new LinkList();
@@ -91,7 +161,14 @@ public class linkListPalindrome {
         arr.add(6);
         arr.add(7);
 
-        System.out.print(ls.slidingMaximum(arr, 3));
+        LinkNode l1 = new LinkNode(9);
+        l1.next = new LinkNode(9);
+        l1.next.next = new LinkNode(1);
+
+        LinkNode l2 = new LinkNode(1);
+        //l2.next = new LinkNode(6);
+        //l2.next.next = new LinkNode(4);
+        System.out.print(ls.add2NumLink(l1, l2));
     }
 
 }
