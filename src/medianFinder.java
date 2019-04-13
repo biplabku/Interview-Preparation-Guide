@@ -9,6 +9,8 @@ public class medianFinder {
         queue = new ArrayList<>();
         size = 0;
         array = new int[10];
+        minHeap = new PriorityQueue<>();
+        maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
     }
 
     public void addNum(int num) {
@@ -66,15 +68,74 @@ public class medianFinder {
         return (double) (left + right)/2;
     }
 
+    PriorityQueue<Integer> minHeap = null;
+    PriorityQueue<Integer> maxHeap = null;
+
+
+
+    public void addNum1(int num) {
+        minHeap.offer(num);
+        maxHeap.offer(minHeap.poll());
+
+        if(minHeap.size() < maxHeap.size()){
+            minHeap.offer(maxHeap.poll());
+        }
+    }
+
+    public double findMedian1() {
+        if(minHeap.size() > maxHeap.size()){
+            return minHeap.peek();
+        }else {
+            return (minHeap.peek()+maxHeap.peek())/2.0;
+        }
+    }
+
+
+    PriorityQueue<Integer> lowers = new PriorityQueue<>();
+    PriorityQueue<Integer> higher = new PriorityQueue<>(new Comparator<Integer>() {
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            return o2.compareTo(o1);
+        }
+    });
+
+    public void addValue(int num) {
+        if(lowers.size() == 0 || num < lowers.peek()) {
+            lowers.add(num);
+        }else {
+            higher.add(num);
+        }
+        balance(lowers, higher);
+    }
+
+    public void balance(PriorityQueue<Integer> lowers, PriorityQueue<Integer> higher) {
+        PriorityQueue<Integer> bigger = lowers.size() > higher.size() ? lowers:higher;
+        PriorityQueue<Integer> smaller = lowers.size() > higher.size() ? higher:lowers;
+
+        if(bigger.size() - smaller.size() >= 2) {
+            smaller.add(bigger.poll());
+        }
+    }
+
+    public double getMedianUsingHeap() {
+        PriorityQueue<Integer> small = lowers.size() < higher.size() ? higher:lowers;
+        PriorityQueue<Integer> large = lowers.size() > higher.size() ? lowers:higher;
+
+        if(small.size() == large.size()) {
+            return (double) (small.peek() + large.peek())/2;
+        }else {
+            return (double) large.peek();
+        }
+    }
 
     public static void main(String[] args) {
         medianFinder ms = new medianFinder();
-        ms.insertNum(7);
-        System.out.println(ms.findMedianFast());
-        ms.insertNum(6);
-        System.out.println(ms.findMedianFast());
-        ms.insertNum(4);
-        System.out.println(ms.findMedianFast());
+        ms.addValue(7);
+        System.out.println(ms.getMedianUsingHeap());
+        ms.addValue(6);
+        System.out.println(ms.getMedianUsingHeap());
+        ms.addValue(4);
+        System.out.println(ms.getMedianUsingHeap());
     }
 
 }
