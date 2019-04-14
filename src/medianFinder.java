@@ -128,14 +128,119 @@ public class medianFinder {
         }
     }
 
+
+    public TrieNode root = new TrieNode();
+
+    public boolean wordBreak(String str, List<String> wordDict) {
+        HashMap<Character, TrieNode> hmap = root.children;
+        for(String s: wordDict) {
+            insertWord(s, hmap);
+        }
+        HashMap<Character, TrieNode> temp = root.children;
+        int count = 0;
+        for(int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            TrieNode t;
+            if(hmap.containsKey(ch)) {
+                t = hmap.get(ch);
+                hmap = t.children;
+                if(t.isEnd == true) {
+                    hmap = temp;
+                    hmap.remove(count);
+                    count = i + 1;
+                }
+            }else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean searchWord(String str, List<String> list) {
+        return lookup_word(str, new HashSet<>(list), 0, new Boolean[str.length()]);
+    }
+
+    public boolean lookup_word(String str, HashSet<String> wordDict, int start, Boolean[] memo) {
+        if(start == str.length()) {
+            return true;
+        }
+        if(memo[start] != null) {
+            return memo[start];
+        }
+        for(int i = start + 1; i <= str.length(); i++) {
+            if(wordDict.contains(str.substring(start, i)) && lookup_word(str, wordDict, i, memo)) {
+                return memo[start] = true;
+            }
+        }
+        return memo[start] = false;
+    }
+
+    public void insertWord(String word, HashMap<Character, TrieNode> hmap) {
+        for(int i = 0; i < word.length(); i++) {
+            char ch = word.charAt(i);
+            TrieNode t;
+            if(!hmap.containsKey(ch)) {
+                t = new TrieNode(ch);
+                hmap.put(ch, t);
+            }else {
+                t = hmap.get(ch);
+            }
+            hmap = t.children;
+            if(i == word.length() - 1) {
+                    t.isEnd = true;
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static void main(String[] args) {
         medianFinder ms = new medianFinder();
-        ms.addValue(7);
-        System.out.println(ms.getMedianUsingHeap());
-        ms.addValue(6);
-        System.out.println(ms.getMedianUsingHeap());
-        ms.addValue(4);
-        System.out.println(ms.getMedianUsingHeap());
+        List<String> list = new ArrayList<>();
+        list.add("aaaa");
+        list.add("aa");
+        String str = "aaaaaaa";
+        System.out.println(ms.searchWord(str, list));
     }
 
 }

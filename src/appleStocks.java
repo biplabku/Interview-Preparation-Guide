@@ -58,12 +58,25 @@ public class appleStocks {
     }
 
 
+
+    public static int maxProfit(int[] prices) {
+        if(prices.length <= 1) {
+            return -1;
+        }
+        int maxProfit = 0;
+        for(int i = 0; i < prices.length - 1; i++) {
+            if(prices[i] < prices[i + 1]) {
+                maxProfit += prices[i + 1] - prices[i];
+                i = i + 2;
+            }
+        }
+        return maxProfit;
+    }
+
+
     public static void main(String[] args) {
-        int[] stockPricesYesterday = new int[] {10, 7, 5, 8, 11, 9};
-        System.out.println(getMaxProfitMethod1(stockPricesYesterday));
-        System.out.println(getMaxProfitMethod2(stockPricesYesterday));
-        System.out.println(getMaxProfitMethod3(stockPricesYesterday));
-        System.out.println(getMaxProfitMethod4(stockPricesYesterday));
+        int[] stockPricesYesterday = new int[] {1,2,3,0,2};
+        System.out.println(maxProfit(stockPricesYesterday));
     }
 }
 
