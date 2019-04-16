@@ -111,6 +111,43 @@ public class Trie {
         nums[j] = temp;
     }
 
+    static class BSNode {
+        int size;
+        int val;
+        BSNode right;
+        BSNode left;
+
+        public BSNode(int siz, int va) {
+            size = siz;
+            val = va;
+        }
+    }
+
+    public BSNode kthNode(BSNode root, int k) {
+        if(root != null) {
+            int val = Math.abs(root.size - k);
+            if(root.left != null) {
+                int temp = root.left.size;
+                if(temp + 1 == val) {
+                    return root;
+                }else if(temp > val) {
+                    kthNode(root.left, val);
+                }else {
+                    kthNode(root.right, val);
+                }
+            }else if(root.right != null) {
+                int temp = root.right.size;
+                if(temp - 1 == val) {
+                    return root;
+                }else if(temp < val) {
+                    kthNode(root.right, val);
+                }else {
+                    kthNode(root.left, val);
+                }
+            }
+        }
+        return null;
+    }
 
 
     public static void main(String[] args) {
@@ -124,8 +161,15 @@ public class Trie {
         t.rightChild.leftChild = new TreeNode(9);
         t.rightChild.rightChild = new TreeNode(20);
 
-        int[] nums = {1,2,3};
-        ts.nextPermutation(nums);
+
+        BSNode root = new BSNode(6, 4);
+        root.left = new BSNode(3, 2);
+        root.left.left = new BSNode(1, 0);
+        root.left.right = new BSNode(1, 3);
+        root.right = new BSNode(2, 8);
+        root.right.right = new BSNode(1, 9);
+
+        System.out.println(ts.kthNode(root, 3));
     }
 
 }
