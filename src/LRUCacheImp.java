@@ -11,14 +11,13 @@ public class LRUCacheImp {
     public LRUCacheImp(int val) {
         capacity = val;
         count = 0;
-        head = new Node(-1,-1);
         head.pre = null;
         head.next = null;
         tail = head;
 
     }
 
-    public static void putElements(int number, int value) {
+    public static void put(int number, int value) {
         Node n = hmap.get(number);
         if(n == null) {
             n = new Node(number, value);
@@ -49,12 +48,12 @@ public class LRUCacheImp {
         after.pre = before;
     }
 
-    public static void add(Node n) {
-        Node after = head.next;
-        head.next = n;
-        n.pre = head;
-        n.next = after;
-        after.pre = n;
+    public static void add(Node node) {
+        node.pre = head;
+        node.next = head.next;
+
+        head.next.pre = node;
+        head.next = node;
     }
 
     /*

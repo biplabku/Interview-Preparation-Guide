@@ -139,19 +139,41 @@ public class repeatedString {
     }
 
     public void getSubstrings(String str, int index) {
-        if(index == str.length()) {
-            return;
-        }
-        for(int j = 0; j < str.length(); j++) {
-            int end = j + index + 1;
-            if(end <= str.length()) {
-                String temp = str.substring(j, end);
-                if(checkPalindrome(temp)) {
-                    count++;
+        for(int i = 0; i < str.length(); i++) {
+            for(int j = 0; j < str.length(); j++) {
+                int end = j + i + 1;
+                if(end <= str.length()) {
+                    String temp = str.substring(j, end);
+                    if(checkPalindrome(temp)) {
+                        count++;
+                    }
                 }
             }
         }
-        getSubstrings(str, index + 1);
+    }
+
+    public String longestPalindrome(String s) {
+        if (s == null || s.length() < 1) return "";
+        int start = 0, end = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int len1 = expandAroundCenter(s, i, i);
+            int len2 = expandAroundCenter(s, i, i + 1);
+            int len = Math.max(len1, len2);
+            if (len > end - start) {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
+            }
+        }
+        return s.substring(start, end + 1);
+    }
+
+    private int expandAroundCenter(String s, int left, int right) {
+        int L = left, R = right;
+        while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
+            L--;
+            R++;
+        }
+        return R - L - 1;
     }
 
     public boolean checkPalindrome(String str) {
@@ -167,11 +189,28 @@ public class repeatedString {
         return true;
     }
 
+
+    class Node {
+        int key;
+        int value;
+        Node next;
+        Node prev;
+
+        public Node(int key, int value) {
+            this.key = key;
+            this.value = value;
+            next = null;
+            prev = null;
+        }
+
+    }
+
+
+
+
     public static void main(String[] args) {
-        String str1 = "abcd";
-        String str2 = "cdabcdab";
         repeatedString rs = new repeatedString();
-        int[] array = {0,2,4,5,7};
-        System.out.println(rs.countSubStrings("aaa"));
+
+
     }
 }
