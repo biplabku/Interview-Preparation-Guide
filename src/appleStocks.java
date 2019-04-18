@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+
+
 public class appleStocks {
 
 
@@ -154,8 +157,8 @@ public class appleStocks {
         return counter <= 1;
     }
 
+   
     public static void main(String[] args) {
-
         BSTNode root = new BSTNode(6, 4);
         root.left = new BSTNode(3, 2);
         root.left.left = new BSTNode(1, 0);
@@ -163,7 +166,8 @@ public class appleStocks {
         root.right = new BSTNode(2, 8);
         root.right.right = new BSTNode(1, 9);
         int[] array = {3,4,2,3};
-        System.out.println(isNonIncreasing(array));
+        String str = "hello";
+        System.out.println((str));
     }
 }
 
