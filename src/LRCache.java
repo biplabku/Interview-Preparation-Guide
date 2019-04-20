@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -103,6 +104,8 @@ public class LRCache {
 
     public ListNode reverseKGroups(ListNode head, int k) {
         ListNode cur = head;
+        ListNode newHead = null;
+
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode prev = dummy;
@@ -110,15 +113,16 @@ public class LRCache {
         while(cur != null) {
             ++counter;
             if(counter % k == 0) {
-                prev = revese(prev, cur.next);
+                prev = revese(k, prev, cur.next);
             }
         }
         return newHead;
     }
 
-    public ListNode revese(ListNode prev, ListNode end) {
+    public ListNode revese(int k, ListNode prev, ListNode end) {
         ListNode head = prev;
         ListNode cur = head.next;
+        ListNode nxt = null;
         while(cur != end) {
             ListNode temp = cur.next;
             nxt = cur.next;
@@ -133,6 +137,68 @@ public class LRCache {
         return prev;
     }
 
+
+    public int[] prodOfSelf(int[] array) {
+        int[] newArray = new int[array.length];
+        newArray[0]  = array[0];
+        for(int i = 1; i < array.length; i++) {
+            newArray[i] = array[i - 1] * newArray[i - 1];
+        }
+        int num = 1;
+        for(int i = array.length - 1; i >= 0; i--) {
+            newArray[i] = num * newArray[i];
+            num = num * array[i];
+        }
+        return newArray;
+    }
+
+    public List<Integer> locateSmallest(int[] array) {
+        int left = 0;
+        int right = 0;
+        boolean isSeen = false;
+        for(int i = 0; i < array.length; i++) {
+            if((i + 1) < array.length && array[i] > array[i + 1] && isSeen == false) {
+                left = i;
+                isSeen = true;
+            }
+            if(isSeen == true && array[left] - array[i] < 0) {
+                right = i - 1;
+                break;
+            }
+        }
+        List<Integer> list= new ArrayList<>();
+        list.add(left);
+        list.add(right);
+        return list;
+
+    }
+
+    public int maxSubArraySum(int[] array) {
+        int sum = 0;
+        for(int i = 0; i < array.length; i++) {
+            int val = array[i];
+            for(int j = i + 1; j < array.length; j++) {
+                val += array[j];
+                if(val > sum) {
+                    sum = val;
+                }
+            }
+        }
+        return sum;
+    }
+    // what if you need to find the arraylist from the array instead of getting the sum
+    public int maxSubArraySumImprove(int[] array) {
+        int currentMax = 0;
+        int maxFinal = 0;
+        for(int i = 0; i < array.length; i++) {
+            currentMax = Math.max(array[i], currentMax + array[i]); // computer both maximums o, one including the current max and the other not including the current max
+            maxFinal = Math.max(currentMax, maxFinal);
+        }
+        return maxFinal;
+    }
+
+
+
     public static void main(String[] args) {
         LRCache ls = new LRCache(2);
         ListNode l1 = new ListNode(1);
@@ -144,8 +210,8 @@ public class LRCache {
         l2.next = l3;
         l3.next = l4;
         l4.next = l5;
-
-        System.out.println(ls.reverseKGroups(l1, 2));
+        int[] arr = {34, -50, 42, 14, -5, 86};
+        System.out.println(ls.maxSubArraySumImprove(arr));
 
 
     }
