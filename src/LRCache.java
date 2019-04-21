@@ -206,20 +206,23 @@ public class LRCache {
         int currentMax = 0;
         int finalMax = 0;
         for(int i = 0; i < array.length; i++) {
-            int val = currentMax + array[i];
-            if(array[i] > currentMax) {
-                currentMax = val;
-                leftIndex = i;
-            }
-            if(currentMax > finalMax) {
+            currentMax = currentMax + array[i];
+            if(finalMax < currentMax) {
                 finalMax = currentMax;
                 rightIndex = i;
             }
+            if(currentMax < 0) {
+                currentMax = 0;
+                leftIndex = i + 1;
+            }
         }
-
         List<Integer> list = Arrays.asList(leftIndex, rightIndex);
         return list;
     }
+
+
+
+
 
 
 
@@ -234,7 +237,7 @@ public class LRCache {
         l2.next = l3;
         l3.next = l4;
         l4.next = l5;
-        int[] arr = {34, -50, 42, 14, -5, 86};
+        int[] arr = {-2, -3, 4, -1, -2, 1, 5, -3};
         System.out.println(ls.getMaxSubarray(arr));
 
 
