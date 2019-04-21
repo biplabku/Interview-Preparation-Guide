@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -190,11 +191,34 @@ public class LRCache {
     public int maxSubArraySumImprove(int[] array) {
         int currentMax = 0;
         int maxFinal = 0;
+        // computer both maximums o, one including the current max and the other not including the current max
         for(int i = 0; i < array.length; i++) {
-            currentMax = Math.max(array[i], currentMax + array[i]); // computer both maximums o, one including the current max and the other not including the current max
+            currentMax = Math.max(array[i], currentMax + array[i]);
             maxFinal = Math.max(currentMax, maxFinal);
         }
         return maxFinal;
+    }
+
+    // 34, -50, 42, 14, -5, 86
+    public List<Integer> getMaxSubarray(int[] array) {
+        int leftIndex = 0;
+        int rightIndex = 0;
+        int currentMax = 0;
+        int finalMax = 0;
+        for(int i = 0; i < array.length; i++) {
+            int val = currentMax + array[i];
+            if(array[i] > currentMax) {
+                currentMax = val;
+                leftIndex = i;
+            }
+            if(currentMax > finalMax) {
+                finalMax = currentMax;
+                rightIndex = i;
+            }
+        }
+
+        List<Integer> list = Arrays.asList(leftIndex, rightIndex);
+        return list;
     }
 
 
@@ -211,7 +235,7 @@ public class LRCache {
         l3.next = l4;
         l4.next = l5;
         int[] arr = {34, -50, 42, 14, -5, 86};
-        System.out.println(ls.maxSubArraySumImprove(arr));
+        System.out.println(ls.getMaxSubarray(arr));
 
 
     }
