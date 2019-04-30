@@ -220,7 +220,68 @@ public class LRCache {
         return list;
     }
 
+    public boolean searchTarget(int[][] array, int target) {
+        if(array == null || array.length == 0 || array[0].length == 0 || array[0] == null) {
+            return false;
+        }
+        int row = 0;
+        int col = 0;
+        boolean seen = false;
+        if(array.length == 1) {
+            int[] ar = new int[array[0].length];
+            for(int i = 0; i <  array[0].length; i++) {
+                ar[i] = array[0][i];
+            }
+            return binarySearch(ar, 0,array.length, target);
+        }
+        if(array[0].length == 1) {
+            int[] ar = new int[array.length];
+            for(int i = 0; i <  array.length; i++) {
+                ar[i] = array[i][0];
+            }
+            return binarySearch(ar, 0,array.length, target);
+        }
+        for(int i = 0; i < array.length; i++) {
+            for(int j = 0; j < array[0].length; j++) {
 
+            }
+        }
+        int[] rowArray = new int[row + 1];
+        int[] colArray = new int[col + 1];
+
+        for(int i = 0; i <=  col; i++) {
+            rowArray[i] = array[row][i];
+        }
+
+        for(int i = 0; i <= row; i++) {
+            colArray[i] = array[i][col];
+        }
+        return binarySearch(rowArray, 0, row, target) == true || binarySearch(colArray, 0, col, target) == true;
+    }
+
+    public boolean binarySearch(int[] array, int start, int end, int target) {
+        if(array.length == 1) {
+            return target == array[0];
+        }
+        while(start <= end) {
+            int mid = (start + end )/2;
+            if(array[mid] == target) {
+                return true;
+            }
+            if(target > array[mid]) {
+                start = mid + 1;
+            }else if(target < array[mid]) {
+                end = mid -1;
+            }
+        }
+        return false;
+    }
+
+
+    public int[] dailyTemperatures(int[] temperature) {
+        int[] result = new int[temperature.length];
+
+    }
 
 
 
@@ -238,7 +299,8 @@ public class LRCache {
         l3.next = l4;
         l4.next = l5;
         int[] arr = {-2, -3, 4, -1, -2, 1, 5, -3};
-        System.out.println(ls.getMaxSubarray(arr));
+        int[][] array = {{-1},{-1}};
+        System.out.println(ls.searchTarget(array, 0));
 
 
     }
