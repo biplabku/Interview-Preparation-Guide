@@ -280,7 +280,34 @@ public class LRCache {
 
     public int[] dailyTemperatures(int[] temperature) {
         int[] result = new int[temperature.length];
+        for(int i = 0; i < temperature.length; i++) {
+            for(int j = i + 1; j < temperature.length; j++) {
+                if(temperature[j] > temperature[i]) {
+                    result[i] = j - i;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
 
+    public int[] dailyTempCal(int[] temperature) {
+        int[] result = new int[temperature.length];
+        countLoop:
+        for(int i = temperature.length - 2; i >= 0; i--) {
+            int j = i + 1;
+            while(j < temperature.length) {
+                if(temperature[i] < temperature[j]) {
+                    result[i] = j - i;
+                    continue countLoop;
+                }else if(result[j] == 0) {
+                    continue countLoop;
+                }else {
+                    j = j + result[j];
+                }
+            }
+        }
+        return result;
     }
 
 
@@ -298,9 +325,9 @@ public class LRCache {
         l2.next = l3;
         l3.next = l4;
         l4.next = l5;
-        int[] arr = {-2, -3, 4, -1, -2, 1, 5, -3};
+        int[] arr = {73, 74, 75, 71, 69, 72, 76, 73};
         int[][] array = {{-1},{-1}};
-        System.out.println(ls.searchTarget(array, 0));
+        System.out.println(ls.dailyTempCal(arr));
 
 
     }
