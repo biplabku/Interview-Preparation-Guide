@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class LRCache {
 
@@ -310,7 +307,132 @@ public class LRCache {
         return result;
     }
 
+    public int[][] reconstructionQueue(int[][] people) {
+        int[][] result = new int[people.length][2];
+        Arrays.sort(people, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[1] - o2[1];
+            }
+        });
 
+        for(int i = 0; i < people.length; i++) {
+            int x = people[i][0];
+            int y = people[i][1];
+            for(int j = 0; j < people.length; j++) {
+                if(i != j) {
+                    int x1 = people[j][0];
+                    int y1 = people[j][1];
+                    if(y == y1) {
+                        x = Math.min(x, x1);
+                    }else {
+                        // check if there is anything that is greater
+                    }
+                }
+            }
+            result[i][0] = x;
+            result[i][1] = y;
+        }
+        return result;
+    }
+
+
+    public String removeDuplicates(String str) {
+        HashMap<Character, Integer> hmap = new HashMap<>();
+        for(int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if(hmap.containsKey(ch)) {
+                hmap.put(ch, hmap.get(ch) + 1);
+            }else {
+                hmap.put(ch, 1);
+            }
+        }
+
+        return str;
+    }
+
+    public List<String> generateParanthesis(int number) {
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < number; i++) {
+            sb.append('(');
+        }
+        for(int j = 0; j < number; j++) {
+            sb.append(')');
+        }
+        char[] ar = sb.toString().toCharArray();
+        List<String> permutations= new ArrayList<>();
+        generateParanthesis(ar, 0, permutations);
+        List<String> res = new ArrayList<>();
+        for(int i = 0; i < permutations.size(); i++) {
+            String str = permutations.get(i);
+            if(checkParanth(str) && !res.contains(str)) {
+                res.add(str);
+            }
+        }
+
+        return res;
+    }
+
+    public boolean checkParanth(String str) {
+        Stack<Character> theStack = new Stack<>();
+        for(int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if(ch == ')') {
+                if(theStack.isEmpty()) {
+                    return false;
+                }else {
+                    theStack.pop();
+                }
+            }else if(ch == '(') {
+                theStack.push('(');
+            }
+        }
+        return theStack.isEmpty();
+    }
+
+    public void generateParanthesis(char[] str, int start, List<String> permutations) {
+        if(start == str.length - 1) {
+            StringBuilder sb = new StringBuilder();
+            for(char ch : str) {
+                sb.append(ch);
+            }
+            permutations.add(sb.toString());
+            return;
+        }
+        for(int i = start; i < str.length; i++) {
+            swap(str, i, start);
+            generateParanthesis(str, start + 1, permutations);
+            swap(str, i, start);
+        }
+    }
+
+    public void swap(char[] ar, int i, int j) {
+        char tem= ar[i];
+        ar[i] = ar[j];
+        ar[j] = tem;
+    }
+
+    public List<String> generateOpenCloseParanthesis(int number) {
+        List<String> output = new ArrayList<>();
+        construct("", output, number, number);
+        return output;
+    }
+
+    public void construct(String cur, List<String> output, int left, int right) {
+        if(left > right) {
+            return;
+        }
+        if(left == 0 && right == 0) {
+            output.add(cur);
+            return;
+        }
+        if(left > 0) {
+            construct(cur + "(", output, left - 1, right);
+        }
+        if(right > 0) {
+            construct(cur + ")", output, left, right - 1);
+        }
+    }
 
 
 
@@ -326,8 +448,8 @@ public class LRCache {
         l3.next = l4;
         l4.next = l5;
         int[] arr = {73, 74, 75, 71, 69, 72, 76, 73};
-        int[][] array = {{-1},{-1}};
-        System.out.println(ls.dailyTempCal(arr));
+        int[][] array = {{7,0},{4,4},{7,1},{5,0},{6,1},{5,2}};
+        System.out.println(ls.generateOpenCloseParanthesis(3));
 
 
     }
