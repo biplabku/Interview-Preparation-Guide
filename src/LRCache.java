@@ -434,6 +434,47 @@ public class LRCache {
         }
     }
 
+    // 1,2,1,3,2,5
+    // missing number - 3,5
+    public int[] singleNumber(int[] nums) {
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+        for(int i = 0; i < nums.length; i++) {
+            if(!hmap.containsKey(nums[i])) {
+                hmap.put(nums[i], 1);
+            }else {
+                hmap.remove(nums[i]);
+            }
+        }
+        Iterator iter = hmap.entrySet().iterator();
+        int[] res = new int[hmap.size()];
+        int count = 0;
+        while(iter.hasNext()) {
+            Map.Entry pair = (Map.Entry)iter.next();
+            res[count++] = (int)pair.getKey();
+        }
+        return res;
+    }
+
+    public int singleNumber2(int[] nums){
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+        for(int i =0; i < nums.length; i++) {
+            if(!hmap.containsKey(nums[i])) {
+                hmap.put(nums[i], 1);
+            }else {
+                hmap.put(nums[i], hmap.get(nums[i]) + 1);
+            }
+            if(hmap.get(nums[i]) == 3) {
+                hmap.remove(nums[i]);
+            }
+        }
+        Iterator iter = hmap.entrySet().iterator();
+        while(iter.hasNext()) {
+            Map.Entry pair = (Map.Entry)iter.next();
+            return (int)pair.getKey();
+        }
+        return -1;
+    }
+
 
 
     public static void main(String[] args) {
@@ -447,9 +488,9 @@ public class LRCache {
         l2.next = l3;
         l3.next = l4;
         l4.next = l5;
-        int[] arr = {73, 74, 75, 71, 69, 72, 76, 73};
+        int[] arr = {2,2,3,2};
         int[][] array = {{7,0},{4,4},{7,1},{5,0},{6,1},{5,2}};
-        System.out.println(ls.generateOpenCloseParanthesis(3));
+        System.out.println(ls.singleNumber2(arr));
 
 
     }
