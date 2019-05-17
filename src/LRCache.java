@@ -467,13 +467,58 @@ public class LRCache {
                 hmap.remove(nums[i]);
             }
         }
-        Iterator iter = hmap.entrySet().iterator();
-        while(iter.hasNext()) {
-            Map.Entry pair = (Map.Entry)iter.next();
-            return (int)pair.getKey();
-        }
-        return -1;
+        return 1;
     }
+
+    public String addStrings(String num1, String num2) {
+        StringBuilder sb = new StringBuilder();
+        int len1 = num1.length() - 1;
+        int len2 = num2.length() - 1;
+        int carry =0;
+        while(len1 >= 0 && len2 >= 0) {
+            int d1 = Character.getNumericValue(num1.charAt(len1));
+            int d2 = Character.getNumericValue(num2.charAt(len2));
+            int tot = d1 + d2 + carry;
+            if(tot > 9) {
+                carry = tot/10;
+                tot = tot%10;
+            }else {
+                carry = 0;
+            }
+            sb.append(tot);
+            len1--;
+            len2--;
+        }
+        while(len1 >= 0) {
+            int d1 = Character.getNumericValue(num1.charAt(len1));
+            int tot = carry + d1;
+            if(tot > 9) {
+                carry = tot/10;
+                tot = tot%10;
+            }else{
+                carry = 0;
+            }
+            sb.append(tot);
+            len1--;
+        }
+        while(len2 >= 0) {
+            int d1 = Character.getNumericValue(num2.charAt(len2));
+            int tot = carry + d1;
+            if(tot > 9) {
+                carry = tot/10;
+                tot = tot%10;
+            }else {
+                carry = 0;
+            }
+            sb.append(tot);
+            len2--;
+        }
+        if(carry > 0) {
+            sb.append(carry);
+        }
+        return sb.reverse().toString();
+    }
+
 
 
 
@@ -490,7 +535,7 @@ public class LRCache {
         l4.next = l5;
         int[] arr = {2,2,3,2};
         int[][] array = {{7,0},{4,4},{7,1},{5,0},{6,1},{5,2}};
-        System.out.println(ls.singleNumber2(arr));
+        System.out.println(ls.addStrings("408", "5"));
 
 
     }
