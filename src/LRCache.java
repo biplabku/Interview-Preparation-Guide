@@ -519,7 +519,52 @@ public class LRCache {
         return sb.reverse().toString();
     }
 
+    public boolean isPowerOfThree(int n) {
+        int count = 3;
+        while(count > 0) {
+            if(n % 3 != 0) {
+                break;
+            }
+            n = n / 3;
+            count--;
+        }
+        return count == 0 ? true:false;
+    }
 
+    int paths = 0;
+    public int uniquePaths(int[][] grid) {
+        int zeroCount = 0;
+        for(int i = 0; i < grid.length; i++) {
+            for(int j = 0; j < grid[0].length; j++) {
+                if(grid[i][j] == 0) {
+                    zeroCount += 1;
+                }
+            }
+        }
+        return paths;
+    }
+
+    public void DFSearch(int[][] grid, int zeroCount, int r, int c) {
+        if(r < 0 || c < 0 || r > grid.length - 1 || c > grid[0].length) {
+            return;
+        }
+    }
+
+    public int[] twoSum(int[] nums, int target) {
+        int[] arr = new int[2];
+        HashMap<Integer, Integer> hset = new HashMap<>();
+        for(int i = 0; i < nums.length; i++) {
+            int val = target - nums[i];
+            if(!hset.containsKey(val)){
+                hset.put(nums[i], i);
+            }else {
+                arr[0] = hset.get(val);
+                arr[1] = i;
+                break;
+            }
+        }
+        return arr;
+    }
 
 
     public static void main(String[] args) {
@@ -535,7 +580,7 @@ public class LRCache {
         l4.next = l5;
         int[] arr = {2,2,3,2};
         int[][] array = {{7,0},{4,4},{7,1},{5,0},{6,1},{5,2}};
-        System.out.println(ls.addStrings("408", "5"));
+        System.out.println(ls.isPowerOfThree(8));
 
 
     }

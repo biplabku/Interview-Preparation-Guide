@@ -43,6 +43,23 @@ public class TreeProblems {
     }
 
 
+    List<List<Integer>> totPaths = new ArrayList<>();
+    List<Integer> listIn = new ArrayList<>();
+    public List<List<Integer>> allPaths(TreeNode root) {
+        inOrder2(root);
+        System.out.println(listIn);
+        return totPaths;
+    }
+
+    public void inOrder2(TreeNode root) {
+        if(root == null) {
+            listIn.add(0);
+        }
+        listIn.add(root.data);
+        inOrder2(root.leftChild);
+        inOrder2(root.rightChild);
+    }
+
     public boolean isUnivalued(TreeNode root) {
         boolean left = (root.leftChild == null || (root.data == root.leftChild.data
         && isUnivalued(root.leftChild)));
@@ -1368,6 +1385,8 @@ public class TreeProblems {
     }
 
 
+
+
     public static void main(String[] args) {
         TreeProblems ts = new TreeProblems();
         TreeNode root = new TreeNode(5);
@@ -1409,5 +1428,7 @@ public class TreeProblems {
         list1.add(1);
         list1.add(1);
         list1.add(3);
+
+        System.out.println(ts.allPaths(root));
     }
 }
