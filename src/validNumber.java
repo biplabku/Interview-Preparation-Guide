@@ -185,6 +185,7 @@ public class validNumber {
 
     // This solution will experience runtime error for larger values
     public int compareVersionNumbers(String str1, String str2) {
+        System.gc();
         String[] arr1 = str1.split("\\.");
         String[] arr2 = str2.split("\\.");
         int len = Math.min(arr1.length, arr2.length);
