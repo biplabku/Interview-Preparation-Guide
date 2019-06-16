@@ -21,6 +21,29 @@ public class firstUnrepeated {
         return -1;
     }
 
+    // count primes problem
+    public int countPrimes(int number) {
+        if(number <= 2) {
+            return 0;
+        }
+        int res = 0;
+        for(int i = 2; i < number; i++) {
+            if(checkPrime(i)) {
+                res++;
+            }
+        }
+        return res;
+    }
+
+    public boolean checkPrime(int number) {
+        for(int i = 2; i < number; i++) {
+            if(number%i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     public void iterateHashMap() {
         HashMap<Integer, String> hmap = new HashMap<>();
@@ -28,6 +51,7 @@ public class firstUnrepeated {
         hmap.put(1, "Apple");
         hmap.put(2, "Mango");
         hmap.put(3, "Pineapple");
+
 
         // what does iterator means ?
         // Its like a pointer that can refer to a data structure and iterate over it
@@ -68,5 +92,6 @@ public class firstUnrepeated {
         //System.out.println(findUnrepeatedChar(str));
         firstUnrepeated gs = new firstUnrepeated();
         gs.iterateHashMap();
+        System.out.println(gs.countPrimes(5));
     }
 }
