@@ -1,8 +1,49 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
-public class firstMissingInteger {
+public class firstMissingInteger{
+
+    public List<Integer> pivotList(List<Integer> list, int pivot) {
+        /*
+        List<Integer> smaller = new ArrayList<>();
+        List<Integer> middle = new ArrayList<>();
+        List<Integer> larger = new ArrayList<>();
+
+        for(int i = 0; i < list.size(); i++) {
+            int val = list.get(i);
+            if(val < pivot) {
+                smaller.add(val);
+            }else if(val == pivot) {
+                middle.add(val);
+            }else {
+                larger.add(val);
+            }
+        }
+
+         smaller.addAll(middle);
+        smaller.addAll(larger);
+        return smaller;
+         */
+        int index = 0;
+        int last = list.size() - 1;
+        for(int i = 0; i < list.size(); i++) {
+            int val = list.get(i);
+            if(val < pivot) {
+                int temp = list.get(index);
+                list.set(index, val);
+                list.set(i, temp);
+                index++;
+            }else if(val > pivot && index < last-1) {
+                int temp = list.get(last);
+                list.set(last, val);
+                list.set(i, temp);
+                last--;
+            }
+        }
+       return list;
+    }
 
 
 
@@ -87,17 +128,59 @@ public class firstMissingInteger {
         list.set(j, temp);
     }
 
+    Stack<Character> thestack = new Stack<>();
+    public boolean isBalanced(String str, int index) {
+        if(index == str.length() - 1) {
+            if(thestack.isEmpty()) {
+                return true;
+            }
+            return false;
+        }
+
+        if(str.charAt(index) == '(') {
+            thestack.push('(');
+        }else if(str.charAt(index) == ')') {
+            if(thestack.isEmpty()) {
+                return false;
+            }
+            thestack.pop();
+        }else if(str.charAt(index) == '*') {
+            if(!thestack.isEmpty()) {
+                thestack.pop();
+                boolean result1 = isBalanced(str, index + 1);
+                thestack.push('(');
+                boolean result2 = isBalanced(str, index + 1);
+                return result1 || result2;
+            }else if(thestack.isEmpty()) {
+                
+            }
+        }
+        return true;
+    }
+    class A {
+        A other;
+        void fun() {
+            A a= new A();
+            A b = new A();
+            a.other = b;
+            b.other = a;
+        }
+    }
+
+
     public static void main(String[] args) {
+
+
+
         firstMissingInteger ms= new firstMissingInteger();
-        List<Integer> list = Arrays.asList(3,4,-1,1);
+        List<Integer> list = Arrays.asList(9,12,3,5,14,10,10);
+        System.out.println(ms.pivotList(list, 10));
         ms.stack3insert(1);
         ms.stack3insert(2);
         ms.stack3insert(3);
         ms.stack3insert(4);
         ms.stack3insert(5);
         ms.stack3insert(6);
-        for(int i = 0; i < 8; i++) {
-            System.out.println(ms.stack3remove());
-        }
+
     }
 }
