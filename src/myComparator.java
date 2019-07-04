@@ -1,8 +1,24 @@
 import java.util.Comparator;
 
-public class myComparator implements Comparator<Integer> {
+public abstract class myComparator implements Comparator<Object> {
 
-    public int compare(Integer x, Integer y) {
-        return y-x;
+    public boolean compare(Integer x, Integer y) {
+        if(y == x) {
+            return true;
+        }
+        return false;
     }
+
+    public boolean compare(String x, String y) {
+        return x.equals(y);
+    }
+
+    public boolean compare(int[] a, int[] b) {
+        if(a.length != b.length) {
+            return false;
+        }
+        return a.toString().equals(b.toString());
+    }
+
 }
+

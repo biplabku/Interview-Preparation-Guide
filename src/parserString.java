@@ -1,6 +1,8 @@
 import java.util.*;
 
 public class parserString {
+    private static volatile parserString instance = new parserString();
+    private final parserString instance2 = new parserString();
 
     TreeMap<String, String> hmap = new TreeMap<>();
     List<String> result = new ArrayList<>();
@@ -73,6 +75,10 @@ public class parserString {
         }
     }
 
+    public static String parseIt(String str) {
+        return "1";
+    }
+
     public static void main(String[] args){
         parserString ps = new parserString();
         String[] array = new String[19];
@@ -96,6 +102,7 @@ public class parserString {
         array[16] = "REMOVE BROWSER";
         array[17] = "LIST";
         array[18] = "END";
-        ps.parseTheString(array);
+        //ps.parseTheString(array);
+        System.out.println(parseIt("hello"));
     }
 }
