@@ -190,6 +190,51 @@ public class srcToDestination {
         return (int)result * sign;
     }
 
+    public boolean containsNearByAlmostDuplicates(int[] nums, int k, int t) {
+        return false;
+    }
+
+    public void merge(int[] nums1, int[] nums2, int m, int n) {
+        int[] res = new int[m + n];
+        doMerge(res, 0, nums1, nums2, 0, 0);
+        display(res);
+    }
+
+    public void display(int[] res) {
+        for(int i = 0; i < res.length; i++) {
+            System.out.println(res[i]);
+        }
+    }
+
+    public void doMerge(int[] res, int count, int[] nums1, int[] nums2, int m, int n) {
+        if(count > res.length) {
+            return ;
+        }
+        while(m < nums1.length && n < nums2.length) {
+            if(nums1[m] >= nums2[n]) {
+                res[count] = nums2[n];
+                n++;
+            }else {
+                res[count] = nums1[m];
+                m++;
+            }
+            count++;
+        }
+        while(n < nums1.length) {
+            res[count] = nums2[n];
+            n++;
+            count++;
+        }
+        while(m < nums2.length){
+            res[count] = nums1[m];
+            m++;
+            count++;
+        }
+
+    }
+
+
+
     public static void main(String[] args) {
         int[][] grid ={{ 1, 0, 1},
                         {1, 0, 1 },
@@ -199,7 +244,8 @@ public class srcToDestination {
         list.add("apple");
         list.add("pen");
         String str = "appletagpena";
-        //System.out.println(wordBreak(str, list));
-        System.out.println(ss.atoi("-91283472332"));
+        int[] one = {1,2,3};
+        int[] two = {2,5,6};
+        ss.merge(one, two, 3, 3);
     }
 }
