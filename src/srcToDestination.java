@@ -166,6 +166,30 @@ public class srcToDestination {
         return true;
     }
 
+    public int atoi(String str) {
+        str = str.trim();
+        long result = 0;
+        int sign = 1;
+        int index = 0;
+        if(str.length() == 0) {
+            return 0;
+        }
+        if(str.charAt(0) == '+' || str.charAt(0) =='-') {
+            sign = str.charAt(0) == 1? 1: -1;
+        }
+        for(int i = index;i < str.length(); i++) {
+            int digit = str.charAt(i) - '0';
+            if(digit >= 0 && digit <= 9) {
+                result = result * 10 + digit;
+                if(result > Integer.MAX_VALUE) {
+                    return sign == 1? Integer.MAX_VALUE:Integer.MIN_VALUE;
+                }
+            }
+
+        }
+        return (int)result * sign;
+    }
+
     public static void main(String[] args) {
         int[][] grid ={{ 1, 0, 1},
                         {1, 0, 1 },
@@ -176,6 +200,6 @@ public class srcToDestination {
         list.add("pen");
         String str = "appletagpena";
         //System.out.println(wordBreak(str, list));
-        System.out.println(ss.combineString(str, list));
+        System.out.println(ss.atoi("-91283472332"));
     }
 }
