@@ -49,8 +49,12 @@ public class srcToDestination {
                 sb.append(s);
                 sb.append(closeBr);
             }else {
-                String s = str.substring(prev.y + 1, next.x - 1);
+                String s = str.substring(prev.y, next.x);
                 sb.append(s);
+                String s1 = str.substring(next.x, next.y);
+                sb.append(openBr);
+                sb.append(s1);
+                sb.append(closeBr);
             }
         }
         if(list.get(list.size() -1).y != str.length()) {
@@ -170,7 +174,7 @@ public class srcToDestination {
         List<String> list = new ArrayList<>();
         list.add("apple");
         list.add("pen");
-        String str = "applepena";
+        String str = "appletagpena";
         //System.out.println(wordBreak(str, list));
         System.out.println(ss.combineString(str, list));
     }
