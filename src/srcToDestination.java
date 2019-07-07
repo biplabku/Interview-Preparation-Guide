@@ -233,6 +233,47 @@ public class srcToDestination {
 
     }
 
+    // nums1 = {1,2,3,0,0,0}
+    // nums2 = {2,5,6}
+    // m = 3
+    // n = 3
+    public void doFastMerge(int[] nums1, int[] nums2, int m, int n) {
+        int count1 = m - 1;
+        int count2 = n - 1;
+
+        int movingCounter = m + n - 1;
+
+        while(count1 >= 0 && count2 >= 0) {
+            nums1[movingCounter--] = nums1[count1] > nums2[count2] ? nums1[count1--]:nums2[count2--];
+        }
+        System.arraycopy(nums2, 0, nums1, 0, count2 + 1);
+        display(nums1);
+    }
+
+    public List<List<Integer>> intervalIntersection(int[][] a, int[][] b) {
+        List<List<Integer>> result = new ArrayList<>();
+        int j = 0;
+        int i = 0;
+        while(i < a.length && j < b.length) {
+            int start = Math.max(a[i][0], b[j][0]);
+            int end = Math.min(a[i][1], b[j][1]);
+
+            if(start <= end) {
+                List<Integer> temp = new ArrayList<>();
+                temp.add(start);
+                temp.add(end);
+                result.add(temp);
+            }
+
+            if(a[i][1] < b[j][1]) {
+                i++;
+            }else {
+                j++;
+            }
+        }
+        return result;
+    }
+
 
 
     public static void main(String[] args) {
@@ -244,8 +285,11 @@ public class srcToDestination {
         list.add("apple");
         list.add("pen");
         String str = "appletagpena";
-        int[] one = {1,2,3};
-        int[] two = {2,5,6};
-        ss.merge(one, two, 3, 3);
+        int[] one = {2,5,6, 0, 0, 0};
+        int[] two = {4,5,5};
+        int[][] a = {{0,2},{5,10},{13,23},{24,25}};
+        int[][] b = {{1,5},{8,12},{15,24},{25,26}};
+        System.out.println(ss.intervalIntersection(a, b));
+
     }
 }
