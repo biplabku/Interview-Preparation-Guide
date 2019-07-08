@@ -57,7 +57,7 @@ public class BinarySearchTree {
 
     public static void main(String[] args) {
         BinarySearchTree bs = new BinarySearchTree();
-        bs.insertNode(12);
+        bs.insertNode(1);
         bs.insertNode(8);
         bs.insertNode(7);
         bs.insertNode(9);

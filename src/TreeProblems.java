@@ -1386,21 +1386,108 @@ public class TreeProblems {
 
 
 
+    public String serialize(TreeLinkNode root) {
+        List<String> list = new ArrayList<>();
+        traverse(root, list);
+        return list.toString();
+    }
+
+    public void traverse(TreeLinkNode root, List<String> sb) {
+        if(root == null) {
+            sb.add("null");
+            return;
+        }
+        sb.add(Integer.toString(root.val));
+        traverse(root.left, sb);
+        traverse(root.right, sb);
+    }
+
+    public void deserializeTheTree(String str) {
+        str = str.substring(1, str.length() - 1);
+        String[] data = str.split(",");
+        int count = 0;
+        for(String s : data) {
+            data[count++] = s.trim();
+        }
+        List<String> strarray = new ArrayList<>(Arrays.asList(data));
+
+        // first do left and then right;
+        TreeLinkNode root = traverseDeserialize(strarray);
+    }
+
+    public TreeLinkNode traverseDeserialize(List<String> data) {
+        if(data.get(0).equals("null")){
+            data.remove(0);
+            return null;
+        }
+        int value = Integer.valueOf(data.get(0));
+        TreeLinkNode root = new TreeLinkNode(value);
+        data.remove(0);
+        root.left = traverseDeserialize(data);
+        root.right = traverseDeserialize(data);
+        return root;
+    }
+
+
+    public List<Integer> inOrderIterative(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> theStack = new Stack<>();
+        TreeNode cur = root;
+        while(cur != null || !theStack.isEmpty()) {
+            while(cur != null) {
+                theStack.push(cur);
+                cur = cur.leftChild;
+            }
+            cur = theStack.pop();
+            list.add(cur.data);
+            cur = cur.rightChild;
+        }
+        return list;
+    }
+
+
+    public List<List<Integer>> zigzagTraversal(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        temp.add(root.data);
+        result.add(temp);
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int j = 1;
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> t = new ArrayList<>();
+            for(int i =0; i < size; i++) {
+                TreeNode cur = queue.poll();
+                if(cur.leftChild != null) {
+                    t.add(cur.leftChild.data);
+                    queue.add(cur.leftChild);
+                }
+                if(cur.rightChild != null) {
+                    t.add(cur.rightChild.data);
+                    queue.add(cur.rightChild);
+                }
+            }
+            if(j % 2 == 1) {
+                Collections.reverse(t);
+            }
+            result.add(t);
+            j++;
+        }
+        result.remove(result.size() - 1);
+
+        return result;
+    }
 
     public static void main(String[] args) {
         TreeProblems ts = new TreeProblems();
-        TreeNode root = new TreeNode(5);
-        root.leftChild = new TreeNode(4);
-        root.rightChild = new TreeNode(8);
-        root.rightChild.leftChild = new TreeNode(13);
-        root.rightChild.rightChild = new TreeNode(4);
-        root.rightChild.rightChild.leftChild = new TreeNode(5);
-        root.rightChild.rightChild.rightChild = new TreeNode(1);
+        TreeNode root = new TreeNode(3);
+        root.leftChild = new TreeNode(9);
+        root.rightChild = new TreeNode(20);
+        root.rightChild.leftChild = new TreeNode(15);
+        // root.rightChild.rightChild = new TreeNode(7);
 
-        root.leftChild.leftChild = new TreeNode(11);
-        root.leftChild.leftChild.leftChild = new TreeNode(7);
-        root.leftChild.leftChild.rightChild = new TreeNode(2);
-
+        /*
 
         LinkNode l1 = new LinkNode(1);
         LinkNode l2 = new LinkNode(2);
@@ -1413,22 +1500,19 @@ public class TreeProblems {
         l3.next = l4;
         l4.next = l5;
         l5.next = l6;
-
+        */
 
         TreeLinkNode r = new TreeLinkNode(1);
         r.right = new TreeLinkNode(3);
         r.left = new TreeLinkNode(2);
-        r.left.left = new TreeLinkNode(4);
-        r.left.right = new TreeLinkNode(5);
-        r.right.left = new TreeLinkNode(6);
-        r.right.right = new TreeLinkNode(7);
+        r.right.left = new TreeLinkNode(4);
+        r.right.right = new TreeLinkNode(5);
 
 
         ArrayList<Integer> list1 = new ArrayList<>();
         list1.add(1);
         list1.add(1);
         list1.add(3);
-
-        System.out.println(ts.allPaths(root));
+        System.out.println(ts.zigzagTraversal(root));
     }
 }

@@ -274,6 +274,48 @@ public class srcToDestination {
         return result;
     }
 
+    public int compareVersion(String str1, String str2) {
+        str1 = str1.trim();
+        str2 = str2.trim();
+
+        String[] ar1 = str1.split("\\.");
+        String[] ar2 = str2.split("\\.");
+
+        int len = ar1.length > ar2.length ? ar1.length:ar2.length;
+        for(int i = 0; i < len; i++) {
+            // select value based on the length. if the array ends before the other then choose zero.
+            int v1 = ar1.length > i ? Integer.valueOf(ar1[i]) : 0;
+            int v2 = ar2.length > i ? Integer.valueOf(ar2[i]) : 0;
+            if(v1 > v2) {
+                return 1;
+            }
+            if(v1 < v2) {
+                return -1;
+            }
+        }
+        return 0;
+    }
+
+    public void reverseWords(char[] s) {
+        reverse(s, 0, s.length - 1);
+        for(int i =0; i < s.length; i++) {
+            int count = i;
+            while(i < s.length && s[i] != ' ') {
+                i++;
+            }
+            reverse(s, count, i-1);
+        }
+    }
+
+    public void reverse(char[] s, int start, int end) {
+        while(start < end) {
+            char temp = s[start];
+            s[start] = s[end];
+            s[end] = temp;
+            start++;
+            end--;
+        }
+    }
 
 
     public static void main(String[] args) {
@@ -289,7 +331,10 @@ public class srcToDestination {
         int[] two = {4,5,5};
         int[][] a = {{0,2},{5,10},{13,23},{24,25}};
         int[][] b = {{1,5},{8,12},{15,24},{25,26}};
-        System.out.println(ss.intervalIntersection(a, b));
+        String str1 = "1.0";
+        String str2 = "1.0";
+        char[] s = {'t','h','e',' ','s','k','y',' ','i','s',' ','b','l','u','e'};
+        ss.reverseWords(s);
 
     }
 }
