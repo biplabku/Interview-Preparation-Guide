@@ -1,11 +1,11 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class DailyCodingProblem {
-
+    List<Integer> list;
+    int count = 0;
+    public DailyCodingProblem() {
+        list = new ArrayList<>();
+    }
     public int numberOfArithematicSlices(int[] array) {
         int res = 0;
         for(int i = 0; i < array.length - 2; i++) {
@@ -199,7 +199,46 @@ public class DailyCodingProblem {
         return true;
     }
 
+    public boolean isStringMatch(String str, String pattern) {
+        if(str.length() == 0 || pattern.length() == 0 || pattern == null || str == null) {
+            return false;
+        }
+        str = str.toLowerCase();
+        pattern = pattern.toLowerCase();
 
+        int count1 = 0;
+        int count2 = 0;
+        char ch = str.charAt(count1);
+        while(count2 < pattern.length() && count1 < str.length()) {
+            if(pattern.charAt(count2) == '.' && pattern.charAt(count2 + 1) == '*') {
+                if(count2 + 1 < pattern.length() )
+                count1++;
+                count2 = count2 + 1;
+                count2++;
+                break;
+            }else if(pattern.charAt(count2) == '.' && pattern.charAt(count2 + 1) != '*') {
+                count2++;
+                count1++;
+                break;
+            }else if(pattern.charAt(count2) != '.' && pattern.charAt(count2) == '*' ) {
+                count1++;
+                break;
+            }else if(pattern.charAt(count2) == ch && pattern.charAt(count2 + 1) != '*'){
+                count1++;
+                count2++;
+                break;
+            }else if(ch != pattern.charAt(count2) && pattern.charAt(count2 + 1) != '*') {
+                return false;
+            }else if(pattern.charAt(count2) != ch && pattern.charAt(count2 + 1) == '*') {
+                count1++;
+                count2 = count2 + 1;
+                count2++;
+                break;
+            }
+        }
+        return true;
+
+    }
 
     public void generateRandNumbers(int k) {
         Random rand = new Random();
@@ -216,10 +255,350 @@ public class DailyCodingProblem {
         }
     }
 
+    public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
+        HashMap<String, List<String>> hmap = new HashMap<>();
+        if(!wordList.contains(endWord)) {
+            return null;
+        }
+        wordList.add(0, beginWord);
+        List<List<String>> result = new ArrayList<>();
+        for(int i =0; i < wordList.size(); i++) {
+            beginWord = wordList.get(i);
+            for(int j = i + 1; j < wordList.size(); j++) {
+                String value = wordList.get(j);
+                if(compare2Strings(beginWord, value)) {
+                    List<String> temp ;
+                    if(!hmap.containsKey(beginWord)) {
+                        temp = new ArrayList<>();
+                        temp.add(value);
+                        hmap.put(beginWord, temp);
+                    }else {
+                        temp = hmap.get(beginWord) ;
+                        temp.add(value);
+                        hmap.put(beginWord, temp);
+                    }
+                }
+            }
+        }
+        // now i have to read the map to get the shortest path
+        beginWord = wordList.get(0);
+        for(int i = 1; i < wordList.size(); i++) {
+            if(hmap.containsKey(beginWord)) {
+                List<String> temp = hmap.get(beginWord);
+            }
+        }
+        return result;
+    }
+
+
+    public boolean compare2Strings(String beginWord, String compareWord) {
+        int count = 0;
+        for(int i = 0; i < beginWord.length(); i++) {
+            char ch1 = beginWord.charAt(i);
+            char ch2 = compareWord.charAt(i);
+            if(ch1 != ch2) {
+                count++;
+            }
+        }
+        return count <= 1? true:false;
+    }
+
+    public int numIslands(char[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        int res = 0;
+        for(int i =0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                if(grid[i][j] == '1') {
+                    dfs(grid, i, j);
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+
+    public void dfs(char[][] grid, int i, int j) {
+        if(i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] == '0') {
+            return;
+        }
+        grid[i][j] = '0';
+        dfs(grid, i + 1, j);
+        dfs(grid, i - 1, j);
+        dfs(grid, i, j + 1);
+        dfs(grid, i, j - 1);
+    }
+
+
+    public List<String> wordBreak(String s, List<String> wordDict) {
+        return word_Break(s, wordDict, 0);
+    }
+    public List<String> word_Break(String s, List<String> wordDict, int start) {
+        LinkedList<String> res = new LinkedList<>();
+        if (start == s.length()) {
+            res.add("");
+        }
+        for (int end = start + 1; end <= s.length(); end++) {
+            if (wordDict.contains(s.substring(start, end))) {
+                List<String> list = word_Break(s, wordDict, end);
+                for (String l : list) {
+                    res.add(s.substring(start, end) + (l.equals("") ? "" : " ") + l);
+                }
+            }
+        }
+        return res;
+    }
+
+    List<List<Integer>> result = new ArrayList<>();
+    List<Integer> temp = new ArrayList<>();
+    public List<List<Integer>> combinationSum(List<Integer> list, int target) {
+        combineSum(list, 0, target);
+        return result;
+    }
+
+    public void combineSum(List<Integer> list, int start, int target) {
+        if(target == 0 && !result.contains(temp)) {
+            result.add(new ArrayList<>(temp));
+            return;
+        }
+        if(target < 0) {
+            return;
+        }
+        for(int i = start; i < list.size(); i++) {
+            temp.add(list.get(i));
+            combineSum(list, i, target - list.get(i));
+            temp.remove(temp.size() - 1);
+        }
+    }
+
+
+    public int ladderToLength(String start, String end, List<String> dict) {
+        if(start.equals(end)) {
+            return 1;
+        }
+
+        boolean[] visited = new boolean[dict.size()];
+        Pair p = new Pair(start, 1);
+
+        Queue<Pair> queue = new LinkedList<>();
+        queue.add(p);
+        while(!queue.isEmpty()) {
+            String cur = queue.peek().word;
+            int len = queue.poll().length;
+            int index = 0;
+
+            for(String s : dict) {
+                if(visited[index] == false && compare2Strings(cur, s)) {
+                    Pair pnew = new Pair(s, len + 1);
+                    queue.add(pnew);
+                    visited[index] = true;
+                    if(s.equals(end)) {
+                        return len + 1;
+                    }
+                }
+                index++;
+            }
+        }
+        return 0;
+    }
+
+    class Pair{
+        String word;
+        int length;
+
+        public Pair(String w, int i) {
+            word = w;
+            length = i;
+        }
+    }
+
+    // 4,5,6,7,0,1,2
+    // 3
+    public int search(int[] array, int target) {
+        return searchSortedArray(array, target, 0,array.length - 1);
+    }
+
+    public int searchSortedArray(int[] array, int target, int left, int right) {
+        while(left <= right) {
+            int mid = (left + right)/2;
+            if(array[mid] == target) {
+                return mid;
+            }
+            if(array[mid] > array[right]) {
+                if(target > array[mid] || target <= array[right]) {
+                    left = mid + 1;
+                }else {
+                    right = mid;
+                }
+            }else if(array[mid] < array[left]) {
+                if(target > array[mid] && target <= array[right]) {
+                    left = mid + 1;
+                }else {
+                    right = mid;
+                }
+            }else if(array[mid] == array[left]) {
+                left++;
+            }else if(array[mid] == array[right]) {
+                right--;
+            }
+            if(left == right && target != array[left]) {
+                return -1;
+            }
+        }
+        return -1;
+    }
+
+
+    public int uniquePaths(int[][] obstacleGrid) {
+        // it starts from 0,0 to  the bottom right corner
+        if(obstacleGrid[0][0] == 1) {
+            return 0;
+        }
+        obstacleGrid[0][0] = 1;
+        for(int i = 1; i < obstacleGrid.length; i++) {
+            if(obstacleGrid[0][i] == 0 && obstacleGrid[0][i - 1] == 1) {
+                obstacleGrid[0][i] = 1;
+            }else {
+                obstacleGrid[0][i] = 0;
+            }
+        }
+
+        for(int i = 1; i < obstacleGrid.length; i++) {
+            if(obstacleGrid[i][0] == 0) {
+                obstacleGrid[i][0] = 1;
+            }else {
+                obstacleGrid[i][0] = 0;
+            }
+        }
+        for(int i = 1;i < obstacleGrid.length; i++) {
+            for(int j = 1; j <obstacleGrid[0].length; j++) {
+                if(obstacleGrid[i][j] == 0) {
+                    obstacleGrid[i][j] = obstacleGrid[i][j - 1] + obstacleGrid[i - 1][j];
+                }else {
+                    obstacleGrid[i][j] = 0;
+                }
+            }
+        }
+        return obstacleGrid[obstacleGrid.length - 1][obstacleGrid.length - 1];
+    }
+
+
+    public int calculate(int[][] grid, int i, int j) {
+        if(i == grid.length || j == grid[0].length) {
+            return Integer.MAX_VALUE;
+        }
+        if(i == grid.length - 1 && j == grid[0].length - 1) {
+            return grid[i][j];
+        }
+        return grid[i][j] + Math.min(calculate(grid, i + 1, j), calculate(grid, i, j + 1));
+    }
+
+    public int minPathSum(int[][] grid) {
+        return calculate(grid, 0, 0);
+    }
+
+
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2 - o1;
+            }
+        });
+        for(int i = 0; i < nums.length; i++) {
+            queue.add(nums[i]);
+        }
+        for(int i = 0; i < k - 1; i++) {
+            queue.poll();
+        }
+        return  queue.poll();
+    }
+
+
+    public boolean insert(int val){
+        if(!list.contains(val)) {
+            list.add(val);
+            count++;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean remove(int val) {
+        if(list.contains(val)) {
+            list.remove(val);
+            count--;
+            return true;
+        }
+        return false;
+    }
+
+    public int getRandom() {
+        if(count <= 0) {
+            return -1;
+        }
+        Random rand = new Random();
+        int randint = rand.nextInt(count);
+        while(!list.contains(randint)) {
+            randint = rand.nextInt(count);
+        }
+        return list.get(randint);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public static void main(String[] args) {
         DailyCodingProblem ds = new DailyCodingProblem();
-        int[] array = {2,3,1,4};
-        System.out.println(ds.maxProductMethod2(array));
+        int[] array = {1,1,3,1};
+        String str1 = "hit";
+        String str2 = "cog";
+        List<String> t = new ArrayList<>();
+        t.add("hot");
+        t.add("dot");
+        t.add("dog");
+        t.add("lot");
+        t.add("log");
+        t.add("cog");
+        char[][] grid = {{'1','1','0','0','0'},{'1','1','0','1','0'},{'1','1','0','0','0'},{'0','0','0','1','1'}};
+        List<Integer> temp = new ArrayList<>();
+        temp.add(2);
+        temp.add(3);
+        temp.add(5);
+        temp.add(7);
+
+        int[][] arr = {{0,0,0},{0,1,0},{0,0,0}};
+        System.out.println(ds.insert(1));
+        System.out.println(ds.remove(2));
+        System.out.println(ds.insert(2));
+        System.out.println(ds.getRandom());
+        System.out.println(ds.remove(1));
+        System.out.println(ds.insert(2));
+        System.out.println(ds.getRandom());
     }
 }
