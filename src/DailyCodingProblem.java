@@ -547,13 +547,93 @@ public class DailyCodingProblem {
 
 
 
+    public void swap2(int number1, int number2) {
+        System.out.println(number1 + " - " + number2);
+        number1 = number2  + number1;
+        number2 = number1 - number2;
+        number1 = number1 - number2;
+        System.out.println(number1 + " - " + number2);
+    }
 
 
 
+    public boolean searchWord(char[][] grid, String str) {
+        for(int i = 0; i < grid.length; i++) {
+            for(int j = 0; j < grid[0].length; j++) {
+                if(dfs(grid, str, i, j, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
+    public boolean dfs(char[][] grid, String str, int row, int col, int count) {
+        if(row < 0 || row >= grid.length || col < 0 || col >= grid[0].length){
+            return false;
+        }
+        if(grid[row][col] == str.charAt(count)) {
+            char temp = grid[row][col];
+            grid[row][col] = '*';
+            if(count == str.length() - 1) {
+                return true;
+            }else if(dfs(grid, str, row, col + 1, count+1) ||
+            dfs(grid, str, row, col - 1, count + 1) ||
+            dfs(grid, str,row + 1,col, count + 1) ||
+            dfs(grid, str, row - 1,col, count  +1)) {
+                return true;
+            }
+            grid[row][col] = temp;
+        }
 
+        return false;
+    }
 
+    // {2,0,2,1,1,0, 4,9,8,9,8,4};
+    public void sortInPlace(int[] array) {
+        int count = 1;
+        int index = 0;
+        while (index < array.length && count < array.length){
+            if(array[index] == array[count] && index + 1 == count) {
+                index = count + 1;
+                count = index + 1;
+            }else if(array[index] != array[count]){
+                count++;
+            }else if(array[index] == array[count] && index + 1 != count) {
+                int temp = array[index + 1];
+                array[index + 1] = array[count];
+                array[count] = temp;
+                index = index + 2;
+                count = index + 1;
+            }
+        }
+        for(int i = 0; i < array.length; i++) {
+            System.out.println(array[i]);
+        }
+    }
+    public void sortColors(int[] array) {
+        int index = 0;
+        int index1 = 0;
+        int index2 = array.length - 1;
+        while(index <= index2) {
+            if(array[index] == 0) {
+                swap(array, index1, index);
+                index1++;
+                index++;
+            }else if(array[index] == 2) {
+                swap(array, index2, index);
+                index2--;
+            }else {
+                index++;
+            }
+        }
+    }
 
+    public void swap(int[] array, int i, int j) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
 
 
 
@@ -575,7 +655,7 @@ public class DailyCodingProblem {
 
     public static void main(String[] args) {
         DailyCodingProblem ds = new DailyCodingProblem();
-        int[] array = {1,1,3,1};
+        int[] array = {2,0,2,1,1,0};
         String str1 = "hit";
         String str2 = "cog";
         List<String> t = new ArrayList<>();
@@ -585,13 +665,14 @@ public class DailyCodingProblem {
         t.add("lot");
         t.add("log");
         t.add("cog");
-        char[][] grid = {{'1','1','0','0','0'},{'1','1','0','1','0'},{'1','1','0','0','0'},{'0','0','0','1','1'}};
+        char[][] grid = {{'a','x','m','y'},{'b','g','d','f'},
+                {'x','e','e','t'},{'r','a','k','s'}};
         List<Integer> temp = new ArrayList<>();
         temp.add(2);
         temp.add(3);
         temp.add(5);
         temp.add(7);
-
+        /*
         int[][] arr = {{0,0,0},{0,1,0},{0,0,0}};
         System.out.println(ds.insert(1));
         System.out.println(ds.remove(2));
@@ -600,5 +681,8 @@ public class DailyCodingProblem {
         System.out.println(ds.remove(1));
         System.out.println(ds.insert(2));
         System.out.println(ds.getRandom());
+        */
+
+        ds.sortColors(array);
     }
 }
