@@ -28,6 +28,8 @@ public class BNode {
             return checkBST(node.leftChild, min, node.data) && checkBST(node.rightChild, node.data, max);
         }
 
+        // implementation
+        
         public static void main(String[] args) {
             BinaryST bst = new BinaryST();
             BNode b1 = new BNode(7);
