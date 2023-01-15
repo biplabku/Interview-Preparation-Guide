@@ -25,7 +25,7 @@ public class SlidingWindowMaximum {
         int index1 = 0;
         int index2 = k;
         while(index1 < index2 && index2 < nums.length) {
-            PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<>(){
+            PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>(){
                 public int compare(Integer a1, Integer a2){
                     return a2 - a1;
                 }
@@ -104,6 +104,26 @@ public class SlidingWindowMaximum {
         }
 
         return -1;
+    }
+
+    // 1, 2, 3, 4, 5, 6, 7
+    public static int GetRunningMedian(int[] nums) {
+        PriorityQueue<Integer> max = new PriorityQueue<>(new Comparator<Integer>(){
+            public int compare(Integer a1, Integer a2) {
+                return a2 - a1;
+            }
+        });
+        List<Integer> list = new ArrayList<>();
+        PriorityQueue<Integer> min = new PriorityQueue<>();
+        for(int i =0; i < nums.length; i++) {
+            int value = nums[i];
+            min.add(value);
+            if(max.size() + 1 < min.size()) {
+                max.add(min.poll());
+            }
+        }
+
+        return 1;
     }
 
 

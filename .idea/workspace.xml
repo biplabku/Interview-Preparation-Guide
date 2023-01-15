@@ -2,9 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db546a97-b883-4afe-aed7-df1ae0eab43a" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/SlidingWindowMaximum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/longestSubstring.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CombinationSum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SortingAlgorithms/CountAndSay.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SortingAlgorithms/CountAndSay.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SortingAlgorithms/LRUCache.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SortingAlgorithms/LRUCache.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SortingAlgorithms/LinkList.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SortingAlgorithms/LinkList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SortingAlgorithms/firstUnrepeated.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SortingAlgorithms/firstUnrepeated.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SortingAlgorithms/isMatch.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SortingAlgorithms/isMatch.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SortingAlgorithms/isValidBST.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SortingAlgorithms/isValidBST.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SortingAlgorithms/linkListPalindrome.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SortingAlgorithms/linkListPalindrome.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SortingAlgorithms/minStack.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SortingAlgorithms/minStack.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SortingAlgorithms/removeDuplicates.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SortingAlgorithms/removeDuplicates.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SortingAlgorithms/searchForRange.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SortingAlgorithms/searchForRange.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SortingAlgorithms/subsetsOfSets.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SortingAlgorithms/subsetsOfSets.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SlidingWindowMaximum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SlidingWindowMaximum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TreeProblems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TreeProblems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/addBinaryStrings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/addBinaryStrings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/febCodeImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/febCodeImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/searchForRange.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/searchForRange.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,11 +137,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "last_opened_file_path": "/Users/biplabdas/Interview-Preparation-Guide"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;last_opened_file_path&quot;: &quot;/Users/biplabdas/Interview-Preparation-Guide&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.searchForRange">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
@@ -304,6 +319,11 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/SumOnFind.java</url>
           <line>23</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/searchForRange.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
