@@ -1,7 +1,35 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class searchForRange {
+    static List<List<Integer>> result = new ArrayList<>();
 
+    public static List<List<Integer>> combinationSum(int[] nums, int target) {
+        int index1 = 0;
+        getSum(nums, target,0, new ArrayList<>(), result, 0);
+        return result;
+    }
+
+    public static void getSum(int[] nums, int target, int index, List<Integer> list, List<List<Integer>> result, int sum) {
+         if(sum == target) {
+             result.add(new ArrayList<>(list));
+             return;
+         }
+
+         if(index >= nums.length || sum > target) {
+             return;
+         }
+
+         sum += nums[index];
+         list.add(nums[index]);
+         getSum(nums, target, index, list, result, sum);
+
+         // if summing up makes it greater than target, remove the last value that is added as well as remove it from the sum
+         sum -= nums[index];
+         list.remove(list.size() - 1);
+         getSum(nums, target, index + 1, list, result, sum);
+
+    }
 
     public static ArrayList<Integer> searchRange(int[] nums, int target) {
         ArrayList<Integer> list = new ArrayList<>();
@@ -83,9 +111,9 @@ public class searchForRange {
     }
 
     public static void main(String[] args) {
-       int[] array = new int[] {5, 7, 9, 6, 6, 10} ;
-       int target = 7;
+       int[] array = new int[] {2,3,6,7} ;
+       int target = 8;
 
-       System.out.println(searhRangeMethod2(array, target));
+       System.out.println(combinationSum(array, target));
     }
 }

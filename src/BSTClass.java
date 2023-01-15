@@ -24,6 +24,7 @@ public class BSTClass {
         }
     }
 
+    // Level order traversal.
     public List<List<BSTNode>> levelOrderTraversal(BSTNode node) {
         List<List<BSTNode>> result = new ArrayList<>();
         Queue<BSTNode> queue = new LinkedList<>();
