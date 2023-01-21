@@ -35,6 +35,10 @@ public class CombinationSum {
         GetSum(nums, target, sum, index + 1, list);
     }
 
+    public static int addNumbers(int a, int b) {
+        return a+b;
+    }
+
     public static void main(String[] args) {
         int[] array = new int[] {2,3,5} ;
         int target = 8;
