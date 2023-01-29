@@ -36,6 +36,10 @@ public class CombinationSum {
     }
 
     public static int addNumbers(int a, int b) {
+        // here both a and be are integers. and only positive integers
+        if(a < 0 || b < 0) {
+            return 0;
+        }
         return a+b;
     }
 
