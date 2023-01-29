@@ -37,6 +37,7 @@ public class CombinationSum {
 
     public static int addNumbers(int a, int b) {
         // here both a and be are integers. and only positive integer.
+        // Working on a temp methood.
         return a+b;
     }
 
