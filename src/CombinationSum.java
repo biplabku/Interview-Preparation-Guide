@@ -36,12 +36,15 @@ public class CombinationSum {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public static int addNumbers(int a, int b) {
         // here both a and be are integers. and only positive integer.
         // Working on a temp methood.
         return a+b;
     }
 
+=======
+>>>>>>> parent of b573670 (Method for adding 2 numbers)
 =======
 >>>>>>> parent of b573670 (Method for adding 2 numbers)
     public static void main(String[] args) {
