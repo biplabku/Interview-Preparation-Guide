@@ -4,7 +4,8 @@ import java.util.LinkedList;
 
 public class addBinaryStrings {
 
-
+    // add comments
+    
     public int mthToLast(LinkList list, int m) {
         if(list == null) return -1;
         LinkNode prev = list.head;
